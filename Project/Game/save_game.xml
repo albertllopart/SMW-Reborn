@@ -1,0 +1,15 @@
+<!-- Save game for the game -->
+
+<game_state>
+  <input />
+  <window />
+  <textures />
+  <audio />
+  <map />
+  <scene />
+  <player />
+  <renderer>
+    <camera x="100" y="0"/>
+  </renderer>
+
+</game_state>
