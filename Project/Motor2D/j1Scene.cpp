@@ -8,6 +8,7 @@
 #include "j1Window.h"
 #include "j1Map.h"
 #include "j1Scene.h"
+#include "j1Player.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -30,7 +31,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load("Level_1.tmx");
+	App->map->Load("level_1.tmx");
 	return true;
 }
 
@@ -60,6 +61,27 @@ bool j1Scene::Update(float dt)
 
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x += 1;
+
+	//change map
+	if (App->player->level_complete == true)
+	{
+		App->player->level_complete = false;
+		App->map->WantToChange();
+	}
+
+	if (App->map->want_to_change_map == true)
+	{
+		if (App->map->level_1 == true)
+		{
+			App->map->Load("level_1.tmx");
+			App->map->want_to_change_map = false;
+		}
+		else if (App->map->level_2 == true)
+		{
+			App->map->Load("level_2.tmx");
+			App->map->want_to_change_map = false;
+		}
+	}
 
 	//App->render->Blit(img, 0, 0);
 	App->map->Draw();

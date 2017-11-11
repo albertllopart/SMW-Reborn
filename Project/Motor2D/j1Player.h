@@ -64,6 +64,8 @@ public:
 	iPoint				player_quadrant_1;
 	iPoint				player_quadrant_2;
 
+	bool level_complete = false;
+
 	Direction			dir;
 	bool				dead = false;
 

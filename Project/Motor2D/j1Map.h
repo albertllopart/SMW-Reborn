@@ -93,6 +93,9 @@ public:
 	// Load new map
 	bool Load(const char* path);
 
+	//change maps
+	void WantToChange();
+
 	// TODO 8: Create a method that translates x,y coordinates from map positions to world positions
 	iPoint MapToWorld(int x, int y) const;
 	iPoint WorldToMap(int x, int y) const;
@@ -101,6 +104,7 @@ public:
 	bool IsWalkable();
 	bool level_1 = true;
 	bool level_2 = false;
+	bool want_to_change_map = false;
 	
 private:
 

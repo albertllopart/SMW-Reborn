@@ -40,7 +40,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Player");
 	bool ret = true;
-	position.x = 150;
+	position.x = 10;
 	position.y = 197;
 
 	//player quadrant position
@@ -199,7 +199,7 @@ void j1Player::Input()
 	}
 
 	//Jump
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Falling() == false)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		//App->audio->PlayFx(1);
 		if (dir == LEFT)
@@ -236,7 +236,7 @@ void j1Player::Input()
 		
 	}
 	
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && Falling() == false)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		state = SHORT_HOP_L;
 		c_time = GetCurrentTime();
@@ -251,7 +251,7 @@ void j1Player::Input()
 		}
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && Falling() == false)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		state = SHORT_HOP_R;
 		c_time = GetCurrentTime();
@@ -264,6 +264,26 @@ void j1Player::Input()
 			Jump(dt);
 			Jump_r(dt);
 		}
+	}
+
+	//change map
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	{
+		App->map->want_to_change_map = true;
+		App->map->level_1 = true;
+		App->map->level_2 = false;
+		position.x = 10;
+		position.y = 197;
+		App->render->camera.x = 0;
+		App->render->camera.y = 0;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
+		position.x = 10;
+		position.y = 197;
+		App->render->camera.x = 0;
+		App->render->camera.y = 0;
 	}
 
 }
@@ -316,6 +336,15 @@ bool j1Player::Falling()
 		{
 			dead = true;
 			ret = false;
+		}
+
+		if (*nextGid1 == 28 || *nextGid2 == 28)
+		{
+			level_complete = true;
+			position.x = 50;
+			position.y = 197;
+			App->render->camera.x = 0;
+			App->render->camera.y = 0;
 		}
 
 	}

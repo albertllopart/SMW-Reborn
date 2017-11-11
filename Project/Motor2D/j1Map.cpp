@@ -431,3 +431,19 @@ bool j1Map::IsWalkable()
 
 	return ret;
 }
+
+void j1Map::WantToChange()
+{
+	if (level_1 == true)
+	{
+		level_1 = false;
+		level_2 = true;
+	}
+	else if (level_2 = true)
+	{
+		level_2 = false;
+		level_1 = true;
+	}
+
+	want_to_change_map = true;
+}
