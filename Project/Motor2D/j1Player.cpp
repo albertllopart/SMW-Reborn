@@ -199,7 +199,7 @@ void j1Player::Input()
 	}
 
 	//Jump
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Falling() == false)
 	{
 		//App->audio->PlayFx(1);
 		if (dir == LEFT)
@@ -236,7 +236,7 @@ void j1Player::Input()
 		
 	}
 	
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && Falling() == false)
 	{
 		state = SHORT_HOP_L;
 		c_time = GetCurrentTime();
@@ -251,7 +251,7 @@ void j1Player::Input()
 		}
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && Falling() == false)
 	{
 		state = SHORT_HOP_R;
 		c_time = GetCurrentTime();
