@@ -92,6 +92,7 @@ public:
 
 	// Load new map
 	bool Load(const char* path);
+	void UnloadMap();
 
 	//change maps
 	void WantToChange();

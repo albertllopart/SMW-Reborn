@@ -73,11 +73,13 @@ bool j1Scene::Update(float dt)
 	{
 		if (App->map->level_1 == true)
 		{
+			App->map->UnloadMap();
 			App->map->Load("level_1.tmx");
 			App->map->want_to_change_map = false;
 		}
 		else if (App->map->level_2 == true)
 		{
+			App->map->UnloadMap();
 			App->map->Load("level_2.tmx");
 			App->map->want_to_change_map = false;
 		}

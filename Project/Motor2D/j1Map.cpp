@@ -308,6 +308,12 @@ bool j1Map::LoadMap()
 	return ret;
 }
 
+void j1Map::UnloadMap()
+{
+	data.tilesets.clear();
+	data.layers.clear();
+}
+
 bool j1Map::LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set)
 {
 	bool ret = true;
