@@ -409,7 +409,7 @@ bool j1Map::IsWalkable()
 	}
 
 	//uint nextGid = fakeLayer->data->GetGid(player_x,player_y);
-	uint* nextGid = &fakeLayer->data->gid[player_x + player_y*fakeLayer->data->width];
+	uint* nextGid = &fakeLayer->data->gid[1 + player_x + player_y*fakeLayer->data->width];
 	if (App->player->dir == RIGHT)
 	{
 		nextGid++;

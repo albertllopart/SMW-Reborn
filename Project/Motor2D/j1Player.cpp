@@ -42,6 +42,14 @@ bool j1Player::Awake(pugi::xml_node& config)
 	bool ret = true;
 	position.x = 150;
 	position.y = 197;
+
+	//player quadrant position
+	player_quadrant_1.x = position.x / TILE_WIDTH;
+	player_quadrant_2.x = (position.x + MARIO_WIDTH) / TILE_WIDTH;
+
+	player_quadrant_1.y = position.y / TILE_WIDTH;
+	player_quadrant_2.y = (position.y + MARIO_HIGHT) / TILE_WIDTH;
+
 	velocity.x = 2;
 	velocity.y = 3;
 
@@ -75,6 +83,13 @@ bool j1Player::PostUpdate()
 		{
 			position.y += 1.0f;
 		}
+
+		player_quadrant_1.x = position.x / TILE_WIDTH;
+		player_quadrant_2.x = (position.x + MARIO_WIDTH) / TILE_WIDTH;
+
+		player_quadrant_1.y = position.y / TILE_WIDTH;
+		player_quadrant_2.y = (position.y + MARIO_HIGHT) / TILE_WIDTH;
+
 		Draw();
 	}
 	if (dead)
@@ -284,19 +299,20 @@ bool j1Player::Falling()
 	}
 
 	//uint nextGid = fakeLayer->data->GetGid(player_x,player_y);
-	uint* nextGid = &fakeLayer->data->gid[(int)position.x / 16 + (((int)position.y + MARIO_HIGHT) / 16) * fakeLayer->data->width];
+	uint* nextGid1 = &fakeLayer->data->gid[1 + player_quadrant_1.x + player_quadrant_2.y * fakeLayer->data->width];
+	uint* nextGid2 = &fakeLayer->data->gid[1 + player_quadrant_2.x + player_quadrant_2.y * fakeLayer->data->width];
 
 	if (state != SHORT_HOP_L && state != SHORT_HOP_R)
 	{
-		if (*nextGid == 0)
+		if (*nextGid1 == 0 && *nextGid2 == 0)
 		{
 			ret = true;
 		}
-		else if(*nextGid ==19)
+		else if(*nextGid1 == 19 || *nextGid2 == 19)
 		{
 			ret = false;
 		}
-		else if (*nextGid == 20)
+		else if (*nextGid1 == 20)
 		{
 			dead = true;
 			ret = false;

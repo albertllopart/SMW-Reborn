@@ -11,7 +11,10 @@
 #define		SPEED_X 0.3f
 #define		SPEED_Y 1.0f
 #define		GRAVITY -2.0f
-#define		MARIO_HIGHT 28
+
+#define		TILE_WIDTH	16
+#define		MARIO_WIDTH 12
+#define		MARIO_HIGHT 26
 
 struct SDL_texture;
 struct SDL_Rect;
@@ -58,6 +61,9 @@ public:
 	bool Falling();
 
 	fPoint				position;
+	iPoint				player_quadrant_1;
+	iPoint				player_quadrant_2;
+
 	Direction			dir;
 	bool				dead = false;
 
