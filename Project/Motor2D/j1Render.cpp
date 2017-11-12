@@ -7,6 +7,8 @@
 #include "j1Input.h"
 #include "j1Map.h"
 
+#include "Brofiler\Brofiler.h"
+
 #define VSYNC true
 
 j1Render::j1Render() : j1Module()
@@ -25,6 +27,8 @@ j1Render::~j1Render()
 // Called before render is available
 bool j1Render::Awake(pugi::xml_node& config)
 {
+	BROFILER_CATEGORY("Render Awake", Profiler::Color::Red)
+
 	LOG("Create SDL rendering context");
 	bool ret = true;
 	// load flags
@@ -259,7 +263,7 @@ bool j1Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, U
 void j1Render::Input()
 {
 	//LOGIC LAYER
-	if (App->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
 		if (App->map->logic == false)
 		{
