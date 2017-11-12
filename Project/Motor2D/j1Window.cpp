@@ -5,6 +5,8 @@
 
 #include "SDL/include/SDL.h"
 
+#include "Brofiler\Brofiler.h"
+
 
 j1Window::j1Window() : j1Module()
 {
@@ -77,6 +79,8 @@ bool j1Window::Awake(pugi::xml_node& config)
 	}
 
 	return ret;
+
+	BROFILER_CATEGORY("Window Awake", Profiler::Color::Green)
 }
 
 // Called before quitting
@@ -93,6 +97,8 @@ bool j1Window::CleanUp()
 	//Quit SDL subsystems
 	SDL_Quit();
 	return true;
+
+	BROFILER_CATEGORY("Window Cleanup", Profiler::Color::Green)
 }
 
 // Set new window title

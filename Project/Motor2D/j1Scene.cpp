@@ -10,6 +10,8 @@
 #include "j1Scene.h"
 #include "j1Player.h"
 
+#include "Brofiler\Brofiler.h"
+
 j1Scene::j1Scene() : j1Module()
 {
 	name.create("scene");
@@ -31,6 +33,8 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
+	BROFILER_CATEGORY("Scene Start", Profiler::Color::Brown)
+
 	App->map->Load("level_1.tmx");
 	return true;
 }
@@ -44,6 +48,8 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
+	BROFILER_CATEGORY("Scene Update", Profiler::Color::Brown)
+
 	if(App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		App->LoadGame();
 

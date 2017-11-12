@@ -14,9 +14,13 @@
 #include "j1App.h"
 #include "j1Player.h"
 
+#include "Brofiler\Brofiler.h"
+
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
+	BROFILER_CATEGORY("App constructor", Profiler::Color::AliceBlue)
+
 	PERF_START(ptimer);
 
 	want_to_save = want_to_load = false;
@@ -44,11 +48,15 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(render);
 
 	PERF_PEEK(ptimer);
+
+	
 }
 
 // Destructor
 j1App::~j1App()
 {
+	BROFILER_CATEGORY("App destructor", Profiler::Color::AliceBlue)
+
 	// release modules
 	p2List_item<j1Module*>* item = modules.end;
 
@@ -59,6 +67,8 @@ j1App::~j1App()
 	}
 
 	modules.clear();
+
+	
 }
 
 void j1App::AddModule(j1Module* module)
@@ -70,6 +80,8 @@ void j1App::AddModule(j1Module* module)
 // Called before render is available
 bool j1App::Awake()
 {
+	BROFILER_CATEGORY("App Awake", Profiler::Color::AliceBlue)
+
 	pugi::xml_document	config_file;
 	pugi::xml_node		config;
 	pugi::xml_node		app_config;
@@ -114,6 +126,8 @@ bool j1App::Awake()
 // Called before the first frame
 bool j1App::Start()
 {
+	BROFILER_CATEGORY("App Start", Profiler::Color::AliceBlue)
+
 	PERF_START(ptimer);
 
 	bool ret = true;
@@ -134,6 +148,8 @@ bool j1App::Start()
 // Called each loop iteration
 bool j1App::Update()
 {
+	BROFILER_CATEGORY("App Update", Profiler::Color::AliceBlue)
+
 	bool ret = true;
 	PrepareUpdate();
 
@@ -284,6 +300,8 @@ bool j1App::PostUpdate()
 // Called before quitting
 bool j1App::CleanUp()
 {
+	BROFILER_CATEGORY("App Cleanup", Profiler::Color::AliceBlue)
+
 	PERF_START(ptimer);
 
 	bool ret = true;

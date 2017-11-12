@@ -8,6 +8,8 @@
 #include "j1Map.h"
 #include "j1Audio.h"
 
+#include "Brofiler\Brofiler.h"
+
 #include "SDL_image/include/SDL_image.h"
 #pragma comment( lib, "SDL_image/libx86/SDL2_image.lib" )
 
@@ -76,6 +78,8 @@ bool j1Player::Update()
 
 bool j1Player::PostUpdate()
 {
+	BROFILER_CATEGORY("Player PostUpdate", Profiler::Color::Orange)
+
 	if (dead == false)
 	{
 		Input();
@@ -97,8 +101,6 @@ bool j1Player::PostUpdate()
 		return false;
 		//App->map->restart();
 	}
-	
-	
 	
 	return true;
 }
@@ -156,6 +158,8 @@ void j1Player::Draw()
 
 void j1Player::Input()
 {
+	BROFILER_CATEGORY("Player Input", Profiler::Color::Orange)
+
 	//Right
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
@@ -285,7 +289,6 @@ void j1Player::Input()
 		App->render->camera.x = 0;
 		App->render->camera.y = 0;
 	}
-
 }
 
 void j1Player::Jump(float dt)
@@ -306,6 +309,8 @@ void j1Player::Jump_r(float dt)
 
 bool j1Player::Falling()
 {
+	BROFILER_CATEGORY("Player Falling", Profiler::Color::Orange)
+
 	bool ret = false;
 	p2List_item<MapLayer*>* iterator;
 	p2List_item<MapLayer*>* fakeLayer = nullptr;

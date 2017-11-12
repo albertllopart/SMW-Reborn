@@ -8,6 +8,8 @@
 #include <math.h>
 #include "j1Audio.h"
 
+#include "Brofiler\Brofiler.h"
+
 j1Map::j1Map() : j1Module(), map_loaded(false)
 {
 	name.create("map");
@@ -37,6 +39,8 @@ bool j1Map::Start()
 
 void j1Map::Draw()
 {
+	BROFILER_CATEGORY("Map Draw", Profiler::Color::Yellow)
+
 	if(map_loaded == false)
 		return;
 
@@ -89,7 +93,6 @@ void j1Map::Draw()
 	}
 
 		// TODO 9: Complete the draw function
-
 }
 
 
@@ -127,6 +130,8 @@ SDL_Rect TileSet::GetTileRect(int id) const
 // Called before quitting
 bool j1Map::CleanUp()
 {
+	BROFILER_CATEGORY("Map Cleanup", Profiler::Color::Yellow)
+
 	LOG("Unloading map");
 
 	// Remove all tilesets
@@ -154,6 +159,8 @@ bool j1Map::CleanUp()
 // Load new map
 bool j1Map::Load(const char* file_name)
 {
+	BROFILER_CATEGORY("Map Load", Profiler::Color::Yellow)
+
 	bool ret = true;
 	p2SString tmp("%s%s", folder.GetString(), file_name);
 
@@ -245,6 +252,8 @@ bool j1Map::Load(const char* file_name)
 // Load map general properties
 bool j1Map::LoadMap()
 {
+	BROFILER_CATEGORY("Map LoadMap", Profiler::Color::Yellow)
+
 	bool ret = true;
 	pugi::xml_node map = map_file.child("map");
 
@@ -400,6 +409,8 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 
 bool j1Map::IsWalkable()
 {
+	BROFILER_CATEGORY("Map IsWalkable", Profiler::Color::Yellow)
+
 	bool ret;
 	int player_x	= App->player->position.x / 16 ; //check next tile right
 	int player_y	= (App->player->position.y + 14)/ 16;
