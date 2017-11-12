@@ -101,7 +101,7 @@ bool j1App::Awake()
 		title.create(app_config.child("title").child_value());
 		organization.create(app_config.child("organization").child_value());
 
-		int cap = app_config.attribute("framerate_cap").as_int(-1);
+		int cap = app_config.attribute("framerate_cap").as_int(30);
 
 		if (cap > 0)
 		{
