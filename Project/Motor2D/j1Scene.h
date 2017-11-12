@@ -32,6 +32,8 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	bool title_2 = false;
+
 private:
 };
 

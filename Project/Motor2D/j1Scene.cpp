@@ -62,6 +62,18 @@ bool j1Scene::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x += 1;
 
+	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+	{
+		if (title_2 == true)
+		{
+			title_2 = false;
+		}
+		else if (title_2 == false)
+		{
+			title_2 = true;
+		}
+	}
+
 	//change map
 	if (App->player->level_complete == true)
 	{
@@ -101,7 +113,7 @@ bool j1Scene::Update(float dt)
 		
 
 
-	App->win->SetTitle(title.GetString());
+	if (title_2 == true) App->win->SetTitle(title.GetString());
 	return true;
 }
 
