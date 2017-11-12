@@ -153,6 +153,18 @@ bool j1App::Update()
 {
 	BROFILER_CATEGORY("App Update", Profiler::Color::AliceBlue)
 
+	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
+	{
+		if (capped_ms == -1000)
+		{
+			capped_ms = 1000 / 30;
+		}
+		else
+		{
+			capped_ms = -1000;
+		}
+	}
+
 	bool ret = true;
 	PrepareUpdate();
 
