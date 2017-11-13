@@ -7,7 +7,8 @@
   <audio />
   <map />
   <scene />
-  <player />
+  <player>
+  </player>
   <renderer>
     <camera x="100" y="0"/>
   </renderer>

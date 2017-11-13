@@ -121,13 +121,33 @@ bool j1Player::CleanUp()
 	return ret;
 }
 
+bool j1Player::Save(pugi::xml_node& node) const
+{
+	bool ret = false;
+	if (node.child("position") == NULL) 
+	{
+		node.append_child("position").append_attribute("position.x") = position.x;
+		node.child("position").append_attribute("position.y") = position.y;
+	}
+	else 
+	{
+		node.child("position").attribute("position.x") = position.x;
+		node.child("position").attribute("position.y") = position.y;
+	}
+	ret = true;
+	return ret;
+}
+
 bool j1Player::Load(pugi::xml_node& node)
 {
-	bool ret = true;
-	pugi::xml_node player = node.append_child("position");
-	player.append_attribute("x") = position.x;
-	player.append_attribute("y") = position.y;
+	bool ret = false;
+	if (node.child("position") != NULL) 
+	{
+		position.x = node.child("position").attribute("position.x").as_float();
+		position.y = node.child("position").attribute("position.y").as_float();
+	}
 
+	ret = true;
 	return ret;
 }
 
@@ -243,12 +263,25 @@ void j1Player::Input()
 		App->render->camera.y = 0;
 	}
 
+	//reset the lvl
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
 		position.x = 10;
 		position.y = 197;
 		App->render->camera.x = 0;
 		App->render->camera.y = 0;
+	}
+
+	//save
+	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+	{
+		App->SaveGame();
+	}
+
+	//load
+	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	{
+		App->LoadGame();
 	}
 }
 

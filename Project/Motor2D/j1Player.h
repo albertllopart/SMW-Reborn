@@ -53,6 +53,7 @@ public:
 	bool Update();
 	bool PostUpdate();
 	bool Load(pugi::xml_node&);
+	bool Save(pugi::xml_node&) const;
 	void Input();
 	void Draw();
 	bool Jump();
