@@ -43,7 +43,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 	LOG("Loading Player");
 	bool ret = true;
 	position.x = 10;
-	position.y = 197;
+	position.y = 80;
 
 	//player quadrant position
 	player_quadrant_1.x = position.x / TILE_WIDTH;
@@ -70,49 +70,50 @@ bool j1Player::Start()
 	return ret;
 }
 
-bool j1Player::Update()
+bool j1Player::Update(float dt)
 {
+	BROFILER_CATEGORY("Player PostUpdate", Profiler::Color::Orange)
+
+		if (dead == false)
+		{
+			Input(dt);
+			if (jump)
+			{
+				if (Jump())
+				{
+					position.y -= 150.0f * dt;
+				}
+			}
+			else
+			{
+				if (Falling())
+				{
+					position.y += 150.0f * dt;
+				}
+			}
+
+			player_quadrant_1.x = position.x / TILE_WIDTH;
+			player_quadrant_2.x = (position.x + MARIO_WIDTH) / TILE_WIDTH;
+
+			player_quadrant_1.y = position.y / TILE_WIDTH;
+			player_quadrant_2.y = (position.y + MARIO_HIGHT) / TILE_WIDTH;
+
+			if (jump == true)
+			{
+				if (dir == LEFT)
+					state = SHORT_HOP_L;
+				else if (dir == RIGHT)
+					state = SHORT_HOP_R;
+			}
+
+			Draw();
+		}
+
 	return true;
 }
 
 bool j1Player::PostUpdate()
 {
-	BROFILER_CATEGORY("Player PostUpdate", Profiler::Color::Orange)
-
-	if (dead == false)
-	{
-		Input();
-		if (jump)
-		{
-			if (Jump())
-			{
-				position.y -= 1.0f;
-			}
-		}
-		else
-		{
-			if (Falling())
-			{
-				position.y += 1.0f;
-			}
-		}
-
-		player_quadrant_1.x = position.x / TILE_WIDTH;
-		player_quadrant_2.x = (position.x + MARIO_WIDTH) / TILE_WIDTH;
-
-		player_quadrant_1.y = position.y / TILE_WIDTH;
-		player_quadrant_2.y = (position.y + MARIO_HIGHT) / TILE_WIDTH;
-
-		if (jump == true)
-		{
-			if (dir == LEFT)
-				state = SHORT_HOP_L;
-			else if (dir == RIGHT)
-				state = SHORT_HOP_R;
-		}
-
-		Draw();
-	}
 	if (dead)
 	{
 		return false;
@@ -182,7 +183,7 @@ void j1Player::Draw()
 	App->render->Blit(graphic, position.x, position.y, &r);
 }
 
-void j1Player::Input()
+void j1Player::Input(float dt)
 {
 	BROFILER_CATEGORY("Player Input", Profiler::Color::Orange)
 
@@ -192,7 +193,7 @@ void j1Player::Input()
 		dir = RIGHT;
 		if (App->map->IsWalkable())
 		{
-			position.x += SPEED_X;
+			position.x += SPEED_X * dt;
 		}
 		if (Falling() == false)
 			state = WALK_R;
@@ -203,7 +204,7 @@ void j1Player::Input()
 		dir = RIGHT;
 		if (App->map->IsWalkable())
 		{
-			position.x += SPEED_X;
+			position.x += SPEED_X * dt;
 		}
 		state = IDLE_R;
 	}
@@ -215,7 +216,7 @@ void j1Player::Input()
 		dir = LEFT;
 		if (App->map->IsWalkable())
 		{
-			position.x -= SPEED_X;
+			position.x -= SPEED_X * dt;
 		}
 		if (Falling() == false)
 			state = WALK_L;	
@@ -225,7 +226,7 @@ void j1Player::Input()
 		dir = LEFT;
 		if (App->map->IsWalkable())
 		{
-			position.x -= SPEED_X;
+			position.x -= SPEED_X * dt;
 		}
 		state = IDLE_L;
 	}
@@ -236,7 +237,7 @@ void j1Player::Input()
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
 			jump = true;
-			jump_height = position.y - 60;
+			jump_height = position.y - 30;
 			jump1_on = true;
 		}
 	}
@@ -245,7 +246,7 @@ void j1Player::Input()
  		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
 			jump = true;
-			jump_height = position.y - 60;
+			jump_height = position.y - 30;
 			jump2_on = true;
 		}
 	}
@@ -344,6 +345,10 @@ bool j1Player::Falling()
 			ret = false;
 			jump2_on = false;
 			jump1_on = false;
+		}
+		else
+		{
+			ret = true;
 		}
 
 		if (*nextGid1 == 28 || *nextGid2 == 28)

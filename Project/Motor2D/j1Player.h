@@ -8,7 +8,7 @@
 #include	"j1Textures.h"
 #include	"j1Animation.h"
 
-#define		SPEED_X 0.3f
+#define		SPEED_X 100.0f
 #define		SPEED_Y 1.0f
 #define		GRAVITY -2.0f
 
@@ -50,11 +50,11 @@ public:
 	bool Start();
 	bool CleanUp();
 	bool Awake(pugi::xml_node& config);
-	bool Update();
+	bool Update(float dt);
 	bool PostUpdate();
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
-	void Input();
+	void Input(float dt);
 	void Draw();
 	bool Jump();
 	bool Falling();
