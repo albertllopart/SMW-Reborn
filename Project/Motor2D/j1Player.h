@@ -55,9 +55,7 @@ public:
 	bool Load(pugi::xml_node&);
 	void Input();
 	void Draw();
-	void Jump(float dt);
-	void Jump_l(float dt);
-	void Jump_r(float dt);
+	bool Jump();
 	bool Falling();
 
 	fPoint				position;
@@ -77,9 +75,9 @@ private:
 	SDL_Rect*			test;
 	PLAYER_STATE		state;
 	fPoint				velocity;
-	float				p_time = 0;
-	float				c_time;
 	float				gravity = 9.8;
+	bool				jump;
+	int				jump_height;
 
 	//Animations
 	Animation			idle_left;

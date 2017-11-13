@@ -72,7 +72,6 @@ bool j1Player::Start()
 
 bool j1Player::Update()
 {
-	
 	return true;
 }
 
@@ -83,9 +82,19 @@ bool j1Player::PostUpdate()
 	if (dead == false)
 	{
 		Input();
-		if (Falling())
+		if (jump)
 		{
-			position.y += 1.0f;
+			if (Jump())
+			{
+				position.y -= 1.0f;
+			}
+		}
+		else
+		{
+			if (Falling())
+			{
+				position.y += 1.0f;
+			}
 		}
 
 		player_quadrant_1.x = position.x / TILE_WIDTH;
@@ -203,71 +212,11 @@ void j1Player::Input()
 	}
 
 	//Jump
+	
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-		//App->audio->PlayFx(1);
-		if (dir == LEFT)
-		{
-			state = SHORT_HOP_L;
-			c_time = GetCurrentTime();
-			App->audio->PlayFx(1);
-			while (velocity.y >= 0)				
-			{
-				p_time = c_time;				
-				c_time = GetCurrentTime();		
-				float dt = c_time - p_time;		
-				Jump(dt);		
-			}
-			state = IDLE_L;
-
-		}
-		if (dir == RIGHT)
-		{
-			state = SHORT_HOP_R;
-			c_time = GetCurrentTime();
-			
-			while (velocity.y >= 0)
-			{
-				p_time = c_time;
-				c_time = GetCurrentTime();
-				float dt = c_time - p_time;
-				Jump(dt);
-			}
-			state = IDLE_R;
-		}
-		
-		velocity.y = 3;;
-		
-	}
-	
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-	{
-		state = SHORT_HOP_L;
-		c_time = GetCurrentTime();
-
-		while (velocity.y >= 0)
-		{
-			p_time = c_time;
-			c_time = GetCurrentTime();
-			float dt = c_time - p_time;
-			Jump(dt);
-			Jump_l(dt);	
-		}
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-	{
-		state = SHORT_HOP_R;
-		c_time = GetCurrentTime();
-
-		while (velocity.y >= 0)
-		{
-			p_time = c_time;
-			c_time = GetCurrentTime();
-			float dt = c_time - p_time;
-			Jump(dt);
-			Jump_r(dt);
-		}
+		jump = true;
+		jump_height = position.y - 60;	
 	}
 
 	//change map
@@ -291,21 +240,25 @@ void j1Player::Input()
 	}
 }
 
-void j1Player::Jump(float dt)
+bool j1Player::Jump()
 {
-	position.y -= velocity.y*dt;	
-	velocity.y += GRAVITY*dt;
+	bool ret;
+	if (position.y > jump_height)
+	{
+		ret = true;
+		
+	}
+	else
+	{
+		jump = false;
+		ret = false;
+		jump_height = 0;
+			
+	}
+	return ret;
 }
 
-void j1Player::Jump_l(float dt)
-{
-	position.x -= velocity.x*dt;
-}
 
-void j1Player::Jump_r(float dt)
-{
-	position.x += velocity.x*dt;
-}
 
 bool j1Player::Falling()
 {
