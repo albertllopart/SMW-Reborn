@@ -37,7 +37,7 @@ bool j1Map::Start()
 	return true;
 }
 
-void j1Map::Draw()
+void j1Map::Draw(float dt)
 {
 	BROFILER_CATEGORY("Map Draw", Profiler::Color::Yellow)
 
@@ -79,7 +79,7 @@ void j1Map::Draw()
 							cloud_parallax = 0.0f;
 						}
 						App->render->Blit(fakeTileset->data->texture, position.x - cloud_parallax - fakeTileset->data->tile_width, position.y, &rect);
-						cloud_parallax += 0.00005f;
+						cloud_parallax += (dt * 0.01f);
 					}
 					else if (fakeLayer->data->name == "logica" && logic)
 					{

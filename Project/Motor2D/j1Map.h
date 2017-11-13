@@ -85,7 +85,7 @@ public:
 	bool Start();
 
 	// Called each loop iteration
-	void Draw();
+	void Draw(float dt);
 
 	// Called before quitting
 	bool CleanUp();

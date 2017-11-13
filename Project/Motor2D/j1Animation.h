@@ -2,18 +2,19 @@
 #define _j1ANIMATION_H_
 
 #include "SDL/include/SDL_rect.h"
+#include "j1App.h"
 #define FRAMES 15
 
 class Animation
 {
 public:
 
-	float				speed = 0.15f;
+	float				speed = 10.0f;
 	SDL_Rect			frames[FRAMES];
 
 private:
 
-	float				current_frame;
+	float				current_frame = 1;
 	int					last_frame = 0;
 
 public:
@@ -25,7 +26,7 @@ public:
 
 	SDL_Rect& GetCurrentFrame()
 	{
-		current_frame += speed;
+		current_frame = current_frame + speed * App->GetDT();
 		if (current_frame >= last_frame)
 		{
 			current_frame = 0;

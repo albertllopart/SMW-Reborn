@@ -43,7 +43,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 	LOG("Loading Player");
 	bool ret = true;
 	position.x = 10;
-	position.y = 80;
+	position.y = 130;
 
 	//player quadrant position
 	player_quadrant_1.x = position.x / TILE_WIDTH;

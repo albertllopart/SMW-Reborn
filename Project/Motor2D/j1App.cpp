@@ -457,3 +457,8 @@ bool j1App::SavegameNow() const
 	want_to_save = false;
 	return ret;
 }
+
+float j1App::GetDT() const
+{
+	return dt;
+}
