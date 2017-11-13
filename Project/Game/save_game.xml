@@ -8,9 +8,10 @@
   <map />
   <scene />
   <player>
+    <position position.x ="" position.y =""/>
   </player>
   <renderer>
-    <camera x="100" y="0"/>
+    <camera x="" y=""/>
   </renderer>
 
 </game_state>

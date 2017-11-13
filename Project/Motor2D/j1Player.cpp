@@ -132,29 +132,18 @@ bool j1Player::CleanUp()
 bool j1Player::Save(pugi::xml_node& node) const
 {
 	bool ret = false;
-	if (node.child("position") == NULL) 
-	{
-		node.append_child("position").append_attribute("position.x") = position.x;
-		node.child("position").append_attribute("position.y") = position.y;
-	}
-	else 
-	{
-		node.child("position").attribute("position.x") = position.x;
-		node.child("position").attribute("position.y") = position.y;
-	}
-	ret = true;
+	node.child("player").child("position").attribute("position.x") = position.x;
+	node.child("player").child("position").attribute("position.y") = position.y;
+
 	return ret;
 }
 
 bool j1Player::Load(pugi::xml_node& node)
 {
 	bool ret = false;
-	if (node.child("position") != NULL) 
-	{
-		position.x = node.child("position").attribute("position.x").as_float();
-		position.y = node.child("position").attribute("position.y").as_float();
-	}
-
+	position.x = node.child("player").child("position").attribute("position.x").as_int();
+	position.y = node.child("player").child("position").attribute("position.y").as_int();
+	
 	ret = true;
 	return ret;
 }

@@ -394,7 +394,8 @@ bool j1App::LoadGameNow()
 	pugi::xml_document data;
 	pugi::xml_node root;
 
-	pugi::xml_parse_result result = data.load_file(load_game.GetString());
+	//pugi::xml_parse_result result = data.load_file(load_game.GetString());
+	pugi::xml_parse_result result = data.load_file("save_game.xml");
 
 	if(result != NULL)
 	{
@@ -440,13 +441,13 @@ bool j1App::SavegameNow() const
 
 	while(item != NULL && ret == true)
 	{
-		ret = item->data->Save(root.append_child(item->data->name.GetString()));
+		ret = item->data->Save(root.child(item->data->name.GetString()));
 		item = item->next;
 	}
 
 	if(ret == true)
 	{
-		data.save_file(save_game.GetString());
+		data.save_file("save_game.xml");
 		LOG("... finished saving", );
 	}
 	else
