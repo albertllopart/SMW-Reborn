@@ -103,6 +103,14 @@ bool j1Player::PostUpdate()
 		player_quadrant_1.y = position.y / TILE_WIDTH;
 		player_quadrant_2.y = (position.y + MARIO_HIGHT) / TILE_WIDTH;
 
+		if (jump == true)
+		{
+			if (dir == LEFT)
+				state = SHORT_HOP_L;
+			else if (dir == RIGHT)
+				state = SHORT_HOP_R;
+		}
+
 		Draw();
 	}
 	if (dead)
@@ -197,7 +205,8 @@ void j1Player::Input()
 		{
 			position.x += SPEED_X;
 		}
-		state = WALK_R;
+		if (Falling() == false)
+			state = WALK_R;
 		
 	}
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
@@ -219,7 +228,8 @@ void j1Player::Input()
 		{
 			position.x -= SPEED_X;
 		}
-		state = WALK_L;	
+		if (Falling() == false)
+			state = WALK_L;	
 	}
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
 	{
@@ -286,7 +296,7 @@ void j1Player::Input()
 }
 
 bool j1Player::Jump()
-{
+ {
 	bool ret;
 	if (position.y > jump_height)
 	{
@@ -298,7 +308,9 @@ bool j1Player::Jump()
 		jump = false;
 		ret = false;
 		jump_height = 0;
-			
+		
+		if (dir == LEFT) state = IDLE_L;
+		else if (dir == RIGHT) state = IDLE_R;
 	}
 	return ret;
 }
@@ -325,11 +337,11 @@ bool j1Player::Falling()
 	uint* nextGid1 = &fakeLayer->data->gid[1 + player_quadrant_1.x + player_quadrant_2.y * fakeLayer->data->width];
 	uint* nextGid2 = &fakeLayer->data->gid[1 + player_quadrant_2.x + player_quadrant_2.y * fakeLayer->data->width];
 
-	if (state != SHORT_HOP_L && state != SHORT_HOP_R)
-	{
+
 		if (*nextGid1 == 0 && *nextGid2 == 0)
 		{
-			ret = true;
+			ret = true; 
+			jump1_on = true;
 		}
 		else if(*nextGid1 == 19 || *nextGid2 == 19)
 		{
@@ -353,8 +365,6 @@ bool j1Player::Falling()
 			App->render->camera.x = 0;
 			App->render->camera.y = 0;
 		}
-
-	}
 
 	return ret;
 }
