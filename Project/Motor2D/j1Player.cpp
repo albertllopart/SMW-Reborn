@@ -212,11 +212,23 @@ void j1Player::Input()
 	}
 
 	//Jump
-	
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if (!jump1_on)
 	{
-		jump = true;
-		jump_height = position.y - 60;	
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		{
+			jump = true;
+			jump_height = position.y - 60;
+			jump1_on = true;
+		}
+	}
+	else if (!jump2_on)
+	{
+ 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		{
+			jump = true;
+			jump_height = position.y - 60;
+			jump2_on = true;
+		}
 	}
 
 	//change map
@@ -289,11 +301,15 @@ bool j1Player::Falling()
 		else if(*nextGid1 == 19 || *nextGid2 == 19)
 		{
 			ret = false;
+			jump2_on = false;
+			jump1_on = false;
 		}
 		else if (*nextGid1 == 20)
 		{
 			dead = true;
 			ret = false;
+			jump2_on = false;
+			jump1_on = false;
 		}
 
 		if (*nextGid1 == 28 || *nextGid2 == 28)
