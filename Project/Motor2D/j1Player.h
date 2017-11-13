@@ -14,7 +14,7 @@
 
 #define		TILE_WIDTH	16
 #define		MARIO_WIDTH 12
-#define		MARIO_HIGHT 26
+#define		MARIO_HIGHT 28
 
 struct SDL_texture;
 struct SDL_Rect;

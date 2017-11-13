@@ -43,7 +43,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 	LOG("Loading Player");
 	bool ret = true;
 	position.x = 10;
-	position.y = 130;
+	position.y = 140;
 
 	//player quadrant position
 	player_quadrant_1.x = position.x / TILE_WIDTH;
@@ -72,7 +72,7 @@ bool j1Player::Start()
 
 bool j1Player::Update(float dt)
 {
-	BROFILER_CATEGORY("Player PostUpdate", Profiler::Color::Orange)
+	BROFILER_CATEGORY("Player Update", Profiler::Color::Orange)
 
 		if (dead == false)
 		{
@@ -358,6 +358,7 @@ bool j1Player::Falling()
 			position.y = 197;
 			App->render->camera.x = 0;
 			App->render->camera.y = 0;
+			jump = false;
 		}
 
 	return ret;
