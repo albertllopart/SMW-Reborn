@@ -18,9 +18,17 @@ Chuck::Chuck() : Enemy()
 	idle.PushBack({ 0, 0, 24, CHUCK_HIGHT });
 	idle.PushBack({ 25, 0, 24, CHUCK_HIGHT });
 	idle.PushBack({ 50, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 50, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 50, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 50, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 50, 0, 24, CHUCK_HIGHT });
 	idle.PushBack({ 25, 0, 24, CHUCK_HIGHT });
 	idle.PushBack({ 0, 0, 24, CHUCK_HIGHT });
 	idle.PushBack({ 100, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 75, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 75, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 75, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 75, 0, 24, CHUCK_HIGHT });
 	idle.PushBack({ 75, 0, 24, CHUCK_HIGHT });
 	idle.PushBack({ 100, 0, 24, CHUCK_HIGHT });
 	idle.PushBack({ 0, 0, 24, CHUCK_HIGHT });
@@ -40,9 +48,6 @@ Chuck::Chuck() : Enemy()
 	jump_left.PushBack({ 154, 0, 28, CHUCK_HIGHT });
 
 	jump_right.PushBack({ 125, 0, 28, CHUCK_HIGHT });
-
-
-	
 }
 
 Chuck::~Chuck()

@@ -8,6 +8,7 @@
 #include <math.h>
 #include "j1Audio.h"
 #include "j1Input.h"
+#include "j1EnemyModule.h"
 
 #include "Brofiler\Brofiler.h"
 
@@ -27,8 +28,13 @@ bool j1Map::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	folder.create(config.child("folder").child_value());
-	
 
+	//enemies
+	iPoint pos;
+	pos.create(150, 197);
+
+	App->enemymodule->CreateChuck(pos);
+	
 	return ret;
 }
 

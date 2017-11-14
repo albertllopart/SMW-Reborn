@@ -1,3 +1,4 @@
+#pragma once
 #include "j1Module.h"
 #include "p2Point.h"
 #include "p2DynArray.h"

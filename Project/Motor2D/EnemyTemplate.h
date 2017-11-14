@@ -1,3 +1,4 @@
+#pragma once
 #include "j1App.h"
 #include "p2Point.h"
 

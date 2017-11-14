@@ -3,7 +3,7 @@
 
 #include "SDL/include/SDL_rect.h"
 #include "j1App.h"
-#define FRAMES 15
+#define FRAMES 50
 
 class Animation
 {
