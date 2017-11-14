@@ -86,12 +86,11 @@ public:
 
 public:
 
-	bool active;
-	Type type;
-	p2SString name;
+	bool			active;
+	Type			type;
+	p2SString		name;
+	iPoint			position;
 
-	iPoint position;
-
-	EState state;
-	EDirection direction;
+	EState			state;
+	EDirection		direction;
 };

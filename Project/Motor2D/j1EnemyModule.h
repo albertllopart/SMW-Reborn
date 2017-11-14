@@ -16,32 +16,33 @@ public:
 	virtual ~j1EnemyModule();
 
 	//Called before render is available
-	bool Awake(pugi::xml_node& conf);
+	bool				Awake(pugi::xml_node& conf);
 
 	// Called before the first frame
-	bool Start();
+	bool				Start();
 
 	// Called before all Updates
-	bool PreUpdate();
+	bool				PreUpdate();
 
 	// Called each loop iteration
-	bool Update(float dt);
+	bool				Update(float dt);
 
 	// Called before all Updates
-	bool PostUpdate();
+	bool				PostUpdate();
 
-	void CreateBoo(iPoint position);
-	void CreateChuck(iPoint position);
+	void				CreateBoo(iPoint position);
+	void				CreateChuck(iPoint position);
 
-	void DeleteBoo();
-	void DeleteChuck(Enemy* chuck);
+	void				DeleteBoo();
+	void				DeleteChuck(Enemy* chuck);
 
-	bool Load(pugi::xml_node&);
-	bool Save(pugi::xml_node&)const;
+	bool				Load(pugi::xml_node&);
+	bool				Save(pugi::xml_node&)const;
 
 public:
 
-	p2List<Enemy*> enemies;
+	p2List<Enemy*>		enemies;
+	bool				flies;
 };
 
 #endif
