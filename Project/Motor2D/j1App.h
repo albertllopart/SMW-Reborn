@@ -50,8 +50,8 @@ public:
 	const char* GetOrganization() const;
 	float GetDT() const;
 
-	void LoadGame();
-	void SaveGame() const;
+	bool LoadGame();
+	bool SaveGame();
 	void GetSaveGames(p2List<p2SString>& list_to_fill) const;
 
 private:
@@ -75,8 +75,8 @@ private:
 	bool PostUpdate();
 
 	// Load / Save
-	bool LoadGameNow();
-	bool SavegameNow() const;
+	void LoadGameNow();
+	void SavegameNow();
 
 public:
 
@@ -100,8 +100,16 @@ private:
 	p2SString			title;
 	p2SString			organization;
 
-	mutable bool		want_to_save;
-	bool				want_to_load;
+	bool		        want_to_save = false;
+	bool				want_to_save_audio = false;
+	bool                want_to_save_player = false;
+	bool				want_to_save_enemy = false;
+
+	bool				want_to_load = false;
+	bool				want_to_load_audio = false;
+	bool				want_to_load_player = false;
+	bool				want_to_load_enemy = false;
+
 	p2SString			load_game;
 	mutable p2SString	save_game;
 

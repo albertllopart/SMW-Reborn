@@ -1,17 +1,13 @@
-<!-- Save game for the game -->
-
-<game_state>
-  <input />
-  <window />
-  <textures />
-  <audio />
-  <map />
-  <scene />
-  <player>
-    <position position.x ="" position.y =""/>
-  </player>
-  <renderer>
-    <camera x="" y=""/>
-  </renderer>
-
-</game_state>
+<?xml version="1.0"?>
+<save>
+	<input />
+	<window />
+	<textures />
+	<audio />
+	<map />
+	<scene />
+	<pathfinding />
+	<renderer>
+		<camera x="0" y="0" />
+	</renderer>
+</save>

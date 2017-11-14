@@ -24,7 +24,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 
 	PERF_START(ptimer);
 
-	want_to_save = want_to_load = false;
+
 
 	input =			new j1Input();
 	win =			new j1Window();
@@ -365,20 +365,22 @@ const char* j1App::GetOrganization() const
 }
 
 // Load / Save
-void j1App::LoadGame()
+bool j1App::LoadGame()
 {
 	// we should be checking if that file actually exist
 	// from the "GetSaveGames" list
 	want_to_load = true;
+	return true;
 }
 
 // ---------------------------------------
-void j1App::SaveGame() const
+bool j1App::SaveGame() 
 {
 	// we should be checking if that file actually exist
 	// from the "GetSaveGames" list ... should we overwrite ?
 
 	want_to_save = true;
+	return true;
 }
 
 // ---------------------------------------
@@ -387,75 +389,49 @@ void j1App::GetSaveGames(p2List<p2SString>& list_to_fill) const
 	// need to add functionality to file_system module for this to work
 }
 
-bool j1App::LoadGameNow()
+void j1App::LoadGameNow()
 {
-	bool ret = false;
+	
+	pugi::xml_document document;
+	pugi::xml_node root_node;
 
-	pugi::xml_document data;
-	pugi::xml_node root;
+	pugi::xml_parse_result result = document.load_file("save_game.xml");
 
-	//pugi::xml_parse_result result = data.load_file(load_game.GetString());
-	pugi::xml_parse_result result = data.load_file("save_game.xml");
+	root_node = document.child("save");
 
-	if(result != NULL)
+	for (int i = 0; i < modules.count(); i++)
 	{
-		LOG("Loading new Game State from %s...", load_game.GetString());
-
-		root = data.child("game_state");
-
-		p2List_item<j1Module*>* item = modules.start;
-		ret = true;
-
-		while(item != NULL && ret == true)
-		{
-			ret = item->data->Load(root.child(item->data->name.GetString()));
-			item = item->next;
-		}
-
-		data.reset();
-		if(ret == true)
-			LOG("...finished loading");
-		else
-			LOG("...loading process interrupted with error on module %s", (item != NULL) ? item->data->name.GetString() : "unknown");
+ 		modules[i]->Load(root_node.child(modules[i]->name.GetString()));
 	}
-	else
-		LOG("Could not parse game state xml file %s. pugi error: %s", load_game.GetString(), result.description());
-
 	want_to_load = false;
-	return ret;
+	want_to_load_audio = false;
+	want_to_load_player = false;
+	want_to_load_enemy = false;
+	
 }
 
-bool j1App::SavegameNow() const
+void j1App::SavegameNow() 
 {
-	bool ret = true;
-
 	LOG("Saving Game State to %s...", save_game.GetString());
 
 	// xml object were we will store all data
-	pugi::xml_document data;
-	pugi::xml_node root;
-	
-	root = data.append_child("game_state");
+	pugi::xml_document document;
+	pugi::xml_node root_node;
 
-	p2List_item<j1Module*>* item = modules.start;
 
-	while(item != NULL && ret == true)
+	root_node = document.append_child("save");
+
+	for (int i = 0; i < modules.count(); i++)
 	{
-		ret = item->data->Save(root.child(item->data->name.GetString()));
-		item = item->next;
+		pugi::xml_node save_node;
+		save_node = root_node.append_child(modules[i]->name.GetString());
+		modules[i]->Save(save_node);
 	}
-
-	if(ret == true)
-	{
-		data.save_file("save_game.xml");
-		LOG("... finished saving", );
-	}
-	else
-		LOG("Save process halted from an error in module %s", (item != NULL) ? item->data->name.GetString() : "unknown");
-
-	data.reset();
+	document.save_file("save_game.xml");
 	want_to_save = false;
-	return ret;
+	want_to_save_audio = false;
+	want_to_save_player = false;
+	want_to_save_enemy = false;
 }
 
 float j1App::GetDT() const

@@ -7,6 +7,7 @@
 #include "j1Player.h"
 #include <math.h>
 #include "j1Audio.h"
+#include "j1Input.h"
 
 #include "Brofiler\Brofiler.h"
 
@@ -92,6 +93,10 @@ void j1Map::Draw(float dt)
 	}
 
 		// TODO 9: Complete the draw function
+		int x, y;
+		App->input->GetMousePosition(x, y);
+		iPoint tile = WorldToMap(x, y);
+		LOG("Mouse tile pos: x - %i, y - %i", tile.x, tile.y);
 }
 
 

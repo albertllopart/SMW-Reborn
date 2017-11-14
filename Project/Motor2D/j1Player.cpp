@@ -131,21 +131,19 @@ bool j1Player::CleanUp()
 
 bool j1Player::Save(pugi::xml_node& node) const
 {
-	bool ret = false;
-	node.child("player").child("position").attribute("position.x") = position.x;
-	node.child("player").child("position").attribute("position.y") = position.y;
+	pugi::xml_node root = node.append_child("position");
+	root.append_attribute("x") = position.x;
+	root.append_attribute("y") = position.y;
 
-	return ret;
+	return true;
 }
 
 bool j1Player::Load(pugi::xml_node& node)
 {
-	bool ret = false;
-	position.x = node.child("player").child("position").attribute("position.x").as_int();
-	position.y = node.child("player").child("position").attribute("position.y").as_int();
-	
-	ret = true;
-	return ret;
+	pugi::xml_node root = node.child("position");
+	position.x = root.attribute("x").as_int();
+	position.y = root.attribute("y").as_int();
+	return true;
 }
 
 void j1Player::Draw()
