@@ -15,31 +15,31 @@ Chuck::Chuck() : Enemy()
 	name.create("Chuck");
 
 	// create here all animations
-	idle.PushBack({ 0, 0, 24, 27 });
-	idle.PushBack({ 25, 0, 24, 27 });
-	idle.PushBack({ 50, 0, 24, 27 });
-	idle.PushBack({ 25, 0, 24, 27 });
-	idle.PushBack({ 0, 0, 24, 27 });
-	idle.PushBack({ 100, 0, 24, 27 });
-	idle.PushBack({ 75, 0, 24, 27 });
-	idle.PushBack({ 100, 0, 24, 27 });
-	idle.PushBack({ 0, 0, 24, 27 });
-	idle.PushBack({ 0, 0, 24, 27 });
-	idle.PushBack({ 0, 0, 24, 27 });
-	idle.PushBack({ 0, 0, 24, 27 });
-	idle.PushBack({ 0, 0, 24, 27 });
-	idle.PushBack({ 0, 0, 24, 27 });
-	idle.PushBack({ 0, 0, 24, 27 });
+	idle.PushBack({ 0, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 25, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 50, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 25, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 0, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 100, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 75, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 100, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 0, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 0, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 0, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 0, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 0, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 0, 0, 24, CHUCK_HIGHT });
+	idle.PushBack({ 0, 0, 24, CHUCK_HIGHT });
 
-	walk_left.PushBack({ 264, 0, 26, 27 });
-	walk_left.PushBack({ 237, 0, 26, 27 });
+	walk_left.PushBack({ 264, 0, CHUCK_WIDTH, CHUCK_HIGHT });
+	walk_left.PushBack({ 237, 0, CHUCK_WIDTH, CHUCK_HIGHT });
 
-	walk_right.PushBack({ 183, 0, 26, 27 });
-	walk_right.PushBack({ 210, 0, 26, 27 });
+	walk_right.PushBack({ 183, 0, CHUCK_WIDTH, CHUCK_HIGHT });
+	walk_right.PushBack({ 210, 0, CHUCK_WIDTH, CHUCK_HIGHT });
 
-	jump_left.PushBack({ 154, 0, 28, 27 });
+	jump_left.PushBack({ 154, 0, 28, CHUCK_HIGHT });
 
-	jump_right.PushBack({ 125, 0, 28, 27 });
+	jump_right.PushBack({ 125, 0, 28, CHUCK_HIGHT });
 
 
 	

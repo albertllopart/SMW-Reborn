@@ -4,6 +4,9 @@
 #include "j1Animation.h"
 #include "EnemyTemplate.h"
 
+#define CHUCK_HIGHT 27
+#define CHUCK_WIDTH 26
+
 struct SDL_Texture;
 
 class Chuck : public Enemy
