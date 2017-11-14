@@ -165,11 +165,94 @@ int PathNode::CalculateF(const iPoint& destination)
 // ----------------------------------------------------------------------------------
 // Actual A* algorithm: return number of steps in the creation of the path or -1 ----
 // ----------------------------------------------------------------------------------
+// Usefull link->https://www.youtube.com/watch?v=-L-WgKMFuhE
+
 int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 {
-	int ret = -1;
+	last_path.Clear();
+	int ret = 0;
+	// TODO 1: if origin or destination are not walkable, return -1
+	if (!IsWalkable(origin) || !IsWalkable(destination))
+	{
+		ret = -1;
+	}
 
-	// Nice try :)
+	else
+	{
+		//Open for tiles that have not been evaluated, close fot the evaluated ones
+		PathList open;
+		PathList close;
+
+		// Add the origin tile to open
+		PathNode origin_node(0, origin.DistanceTo(destination), origin, nullptr);
+		open.list.add(origin_node);
+
+		// Iterate while we have tile in the open list
+		while (open.list.count() > NULL)
+		{
+			//we need to find the lowest F score cell and close it
+			p2List_item<PathNode>* current = open.GetNodeLowestScore();
+			close.list.add(current->data);
+			open.list.del(current);
+
+			//creating final path by backtracking
+			// Use the Pathnode::parent and Flip() the path when you are finish
+			if (close.list.end->data.pos == destination)
+			{
+				for (p2List_item<PathNode>* temp = close.list.end; temp->data.parent != nullptr; close.Find(temp->data.parent->pos))
+				{
+					last_path.PushBack(temp->data.pos);
+				}
+				last_path.PushBack(close.list.start->data.pos);
+				last_path.Flip();
+				//return number of steps in the creation of the path
+				ret = last_path.Count();
+			}
+
+			else
+			{
+				//filling a list of the adjacent nodes
+				PathList neighbours;
+				close.list.end->data.FindWalkableAdjacents(neighbours);
+
+				//iterate neighbours
+				p2List_item<PathNode>* temp = neighbours.list.start;
+
+				while (temp != nullptr)
+				{
+					// we ignote the closed nodes
+					if (close.Find(temp->data.pos) != NULL)
+					{
+						temp = temp->next;
+						continue;
+					}
+					temp->data.CalculateF(destination);
+
+					//if the node is in the open list, compare G to see if there is a better path
+					if (open.Find(temp->data.pos) != NULL)
+					{
+						//if we find a better path we update the parent  *(parent is the node where we come form)
+						PathNode update_parent = open.Find(temp->data.pos)->data;
+						if (temp->data.g < update_parent.g)
+						{
+							update_parent.parent = temp->data.parent;
+						}
+					}
+
+					else
+					{
+						//if there is not a better path found, calculate the node F and add it to the open list
+						open.list.add(temp->data);
+					}
+					temp = temp->next;
+				}
+
+				neighbours.list.clear();
+			}
+		}
+
+
+	}
 
 	return ret;
 }
