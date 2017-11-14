@@ -46,11 +46,10 @@ private:
 	SDL_Texture* graphic = nullptr;
 
 	//Animations
-	Animation			idle_left;
-	Animation			idle_right;
+	Animation			idle;
 	Animation			walk_left;
 	Animation			walk_right;
-	Animation			short_hop_left;
-	Animation			short_hop_right;
+	Animation			jump_left;
+	Animation			jump_right;
 	Animation*			current_animation;
 };

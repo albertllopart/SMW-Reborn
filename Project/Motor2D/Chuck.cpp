@@ -15,6 +15,34 @@ Chuck::Chuck() : Enemy()
 	name.create("Chuck");
 
 	// create here all animations
+	idle.PushBack({ 0, 0, 24, 27 });
+	idle.PushBack({ 25, 0, 24, 27 });
+	idle.PushBack({ 50, 0, 24, 27 });
+	idle.PushBack({ 25, 0, 24, 27 });
+	idle.PushBack({ 0, 0, 24, 27 });
+	idle.PushBack({ 100, 0, 24, 27 });
+	idle.PushBack({ 75, 0, 24, 27 });
+	idle.PushBack({ 100, 0, 24, 27 });
+	idle.PushBack({ 0, 0, 24, 27 });
+	idle.PushBack({ 0, 0, 24, 27 });
+	idle.PushBack({ 0, 0, 24, 27 });
+	idle.PushBack({ 0, 0, 24, 27 });
+	idle.PushBack({ 0, 0, 24, 27 });
+	idle.PushBack({ 0, 0, 24, 27 });
+	idle.PushBack({ 0, 0, 24, 27 });
+
+	walk_left.PushBack({ 264, 0, 26, 27 });
+	walk_left.PushBack({ 237, 0, 26, 27 });
+
+	walk_right.PushBack({ 183, 0, 26, 27 });
+	walk_right.PushBack({ 210, 0, 26, 27 });
+
+	jump_left.PushBack({ 154, 0, 28, 27 });
+
+	jump_right.PushBack({ 125, 0, 28, 27 });
+
+
+	
 }
 
 Chuck::~Chuck()
@@ -29,7 +57,7 @@ bool Chuck::Awake()
 bool Chuck::Start()
 {
 	graphic = App->tex->Load("textures/Chuck.png");
-	current_animation = &idle_left;
+	current_animation = &idle;
 	state = IDLE_LEFT;
 
 	return true;
@@ -56,19 +84,19 @@ void Chuck::Draw()
 	switch (state)
 	{
 	case IDLE_RIGHT:
-		current_animation = &idle_right;
+		current_animation = &idle;
 		break;
 
 	case IDLE_LEFT:
-		current_animation = &idle_left;
+		current_animation = &idle;
 		break;
 
 	case SHORT_HOP_LEFT:
-		current_animation = &short_hop_left;
+		current_animation = &jump_left;
 		break;
 
 	case SHORT_HOP_RIGHT:
-		current_animation = &short_hop_right;
+		current_animation = &jump_right;
 		break;
 
 	case WALK_LEFT:
