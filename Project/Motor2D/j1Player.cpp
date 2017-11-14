@@ -43,7 +43,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 	LOG("Loading Player");
 	bool ret = true;
 	position.x = 10;
-	position.y = 197;
+	position.y = 140;
 
 	//player quadrant position
 	player_quadrant_1.x = position.x / TILE_WIDTH;
@@ -325,8 +325,8 @@ bool j1Player::Falling()
 	}
 
 	//uint nextGid = fakeLayer->data->GetGid(player_x,player_y);
-	uint* nextGid1 = &fakeLayer->data->gid[ player_quadrant_1.x + player_quadrant_2.y * fakeLayer->data->width];
-	uint* nextGid2 = &fakeLayer->data->gid[ player_quadrant_2.x + player_quadrant_2.y * fakeLayer->data->width];
+	uint* nextGid1 = &fakeLayer->data->gid[1 + player_quadrant_1.x + player_quadrant_2.y * fakeLayer->data->width];
+	uint* nextGid2 = &fakeLayer->data->gid[1 + player_quadrant_2.x + player_quadrant_2.y * fakeLayer->data->width];
 
 
 		if (*nextGid1 == 0 && *nextGid2 == 0)
@@ -356,12 +356,11 @@ bool j1Player::Falling()
 		{
 			App->audio->PlayFx(3);
 			level_complete = true;
-			position.x = 16;
-			position.y = -48;
+			position.x = 50;
+			position.y = 197;
 			App->render->camera.x = 0;
 			App->render->camera.y = 0;
 			jump = false;
-			active = false;
 		}
 
 	return ret;
