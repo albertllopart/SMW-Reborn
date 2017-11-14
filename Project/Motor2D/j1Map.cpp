@@ -33,7 +33,6 @@ bool j1Map::Awake(pugi::xml_node& config)
 
 bool j1Map::Start()
 {
-	App->audio->PlayMusic("audio/main_music.ogg");
 	return true;
 }
 

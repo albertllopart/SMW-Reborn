@@ -65,7 +65,6 @@ bool j1Player::Start()
 	graphic = App->tex->Load("maps/Mario.png");
 	state = IDLE_R;
 	dir = RIGHT;
-	App->audio->LoadFx("/audio/jump.wav");
 
 	return ret;
 }
@@ -236,6 +235,7 @@ void j1Player::Input(float dt)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
+			App->audio->PlayFx(1);
 			jump = true;
 			jump_height = position.y - 30;
 			jump1_on = true;
@@ -245,6 +245,7 @@ void j1Player::Input(float dt)
 	{
  		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
+			App->audio->PlayFx(2);
 			jump = true;
 			jump_height = position.y - 30;
 			jump2_on = true;
@@ -353,6 +354,7 @@ bool j1Player::Falling()
 
 		if (*nextGid1 == 28 || *nextGid2 == 28)
 		{
+			App->audio->PlayFx(3);
 			level_complete = true;
 			position.x = 50;
 			position.y = 197;

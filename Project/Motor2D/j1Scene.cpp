@@ -35,6 +35,13 @@ bool j1Scene::Start()
 {
 	BROFILER_CATEGORY("Scene Start", Profiler::Color::Brown)
 
+	App->audio->PlayMusic("audio/main_music.ogg");
+
+	//sound fx
+	App->audio->LoadFx("audio/jump.wav"); //1
+	App->audio->LoadFx("audio/double_jump.wav"); //2
+	App->audio->LoadFx("audio/level_complete.wav"); //3
+
 	App->map->Load("level_1.tmx");
 	return true;
 }
