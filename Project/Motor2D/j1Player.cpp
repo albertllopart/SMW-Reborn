@@ -42,8 +42,8 @@ bool j1Player::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Player");
 	bool ret = true;
-	position.x = 10;
-	position.y = 140;
+	position.x = 16;
+	position.y = 197;
 
 	//player quadrant position
 	player_quadrant_1.x = position.x / TILE_WIDTH;
@@ -356,8 +356,8 @@ bool j1Player::Falling()
 		{
 			App->audio->PlayFx(3);
 			level_complete = true;
-			position.x = 50;
-			position.y = 197;
+			position.x = 16;
+			position.y = -48;
 			App->render->camera.x = 0;
 			App->render->camera.y = 0;
 			jump = false;

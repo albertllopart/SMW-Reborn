@@ -13,7 +13,7 @@
 #define		GRAVITY -2.0f
 
 #define		TILE_WIDTH	16
-#define		MARIO_WIDTH 12
+#define		MARIO_WIDTH 14
 #define		MARIO_HIGHT 28
 
 struct SDL_texture;
