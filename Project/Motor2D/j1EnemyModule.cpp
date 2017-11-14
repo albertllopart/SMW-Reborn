@@ -62,7 +62,11 @@ bool j1EnemyModule::PostUpdate()
 
 void j1EnemyModule::CreateBoo(iPoint position)
 {
-
+	Boo* boo = new Boo();
+	boo->Awake();
+	boo->Start();
+	boo->position = position;
+	enemies.add(boo);
 }
 
 void j1EnemyModule::CreateChuck(iPoint position)
@@ -74,7 +78,7 @@ void j1EnemyModule::CreateChuck(iPoint position)
 	enemies.add(chuck);
 }
 
-void j1EnemyModule::DeleteBoo()
+void j1EnemyModule::DeleteBoo(Enemy* boo)
 {
 
 }

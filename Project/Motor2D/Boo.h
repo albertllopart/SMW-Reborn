@@ -11,6 +11,8 @@ struct SDL_Texture;
 
 class Boo : public Enemy
 {
+public:
+
 	Boo();
 	virtual ~Boo();
 

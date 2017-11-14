@@ -33,7 +33,11 @@ bool j1Map::Awake(pugi::xml_node& config)
 	iPoint pos;
 	pos.create(150, 197);
 
+	iPoint pos2;
+	pos2.create(120, 120);
+
 	App->enemymodule->CreateChuck(pos);
+	App->enemymodule->CreateBoo(pos2);
 	
 	return ret;
 }

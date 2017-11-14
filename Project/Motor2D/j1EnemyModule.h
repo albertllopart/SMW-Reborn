@@ -7,6 +7,7 @@
 #include "p2Point.h"
 #include "EnemyTemplate.h"
 #include "Chuck.h"
+#include "Boo.h"
 
 class j1EnemyModule : public j1Module
 {
@@ -33,7 +34,7 @@ public:
 	void				CreateBoo(iPoint position);
 	void				CreateChuck(iPoint position);
 
-	void				DeleteBoo();
+	void				DeleteBoo(Enemy* boo);
 	void				DeleteChuck(Enemy* chuck);
 
 	bool				Load(pugi::xml_node&);
