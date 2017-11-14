@@ -412,7 +412,7 @@ bool j1Map::IsWalkable()
 
 	bool ret;
 	int player_x	= App->player->position.x / 16 ; //check next tile right
-	int player_y	= (App->player->position.y + 14)/ 16;
+	int player_y	= (App->player->position.y + 15)/ 16;
 	p2List_item<MapLayer*>* iterator;
 	p2List_item<MapLayer*>* fakeLayer = nullptr;
 	
@@ -426,20 +426,21 @@ bool j1Map::IsWalkable()
 
 	//uint nextGid = fakeLayer->data->GetGid(player_x,player_y);
 	uint* nextGid = &fakeLayer->data->gid[1 + player_x + player_y*fakeLayer->data->width];
+	uint* nextGid2 = &fakeLayer->data->gid[1 + player_x + (player_y - 1)*fakeLayer->data->width];
 	if (App->player->dir == RIGHT)
 	{
 		nextGid++;
-		if (*nextGid == 19) 
+		nextGid2++;
+		if (*nextGid == 19 || *nextGid2 == 19) 
 			ret = false;
-		else if (*nextGid != 19)
+		else if (*nextGid != 19 && *nextGid2 != 19)
 			ret = true;
 	}
 	else if (App->player->dir == LEFT)
 	{
-		nextGid;
-		if (*nextGid == 19) 
+		if (*nextGid == 19 || *nextGid2 == 19)
 			ret = false;
-		else if (*nextGid != 19) 
+		else if (*nextGid != 19 && *nextGid2 != 19)
 			ret = true;
 	}
 
@@ -462,4 +463,5 @@ void j1Map::WantToChange()
 	}
 
 	want_to_change_map = true;
+	App->player->active = true;
 }
