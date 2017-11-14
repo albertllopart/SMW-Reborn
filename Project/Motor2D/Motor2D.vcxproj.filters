@@ -46,6 +46,12 @@
     <ClCompile Include="j1Pathfinding.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="j1EnemyModule.cpp">
+      <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Chuck.cpp">
+      <Filter>Desenvolupament  ========\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -114,8 +120,14 @@
     <ClInclude Include="j1Pathfinding.h">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
+    <ClInclude Include="j1EnemyModule.h">
       <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyTemplate.h">
+      <Filter>Desenvolupament  ========\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Chuck.h">
+      <Filter>Desenvolupament  ========\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +148,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Tools\PuguiXML">
       <UniqueIdentifier>{7cb78d67-17cc-45eb-af97-e2106becce7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Enemies">
+      <UniqueIdentifier>{8be45837-288e-46c8-9dbb-8a8a957064d6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
