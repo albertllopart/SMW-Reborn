@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Boo.cpp" />
     <ClCompile Include="Chuck.cpp" />
     <ClCompile Include="j1EnemyModule.cpp" />
     <ClCompile Include="j1Main.cpp" />
@@ -95,6 +96,7 @@
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Boo.h" />
     <ClInclude Include="Chuck.h" />
     <ClInclude Include="EnemyTemplate.h" />
     <ClInclude Include="j1EnemyModule.h" />

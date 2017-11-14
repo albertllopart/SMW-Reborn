@@ -52,6 +52,9 @@
     <ClCompile Include="Chuck.cpp">
       <Filter>Desenvolupament  ========\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Boo.cpp">
+      <Filter>Desenvolupament  ========\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -127,6 +130,9 @@
       <Filter>Desenvolupament  ========\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Chuck.h">
+      <Filter>Desenvolupament  ========\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Boo.h">
       <Filter>Desenvolupament  ========\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
