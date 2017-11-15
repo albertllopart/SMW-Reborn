@@ -26,7 +26,7 @@ public:
 	bool PreUpdate();
 
 	// Called each loop iteration
-	bool Update(float dt, Chuck Entity1);
+	bool Update(float dt);
 
 	void Draw();
 
@@ -59,6 +59,4 @@ private:
 	Animation			jump_left;
 	Animation			jump_right;
 	Animation*			current_animation;
-
-public:
 };

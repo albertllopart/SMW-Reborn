@@ -56,9 +56,6 @@ Chuck::~Chuck()
 
 bool Chuck::Awake()
 {
-	Chuck Entity1;
-	Entity1.position.create(50, 197);
-	Entity1.flies = false;
 	return true;
 }
 
@@ -76,9 +73,8 @@ bool Chuck::PreUpdate()
 	return true;
 }
 
-bool Chuck::Update(float dt, Chuck Entity1)
+bool Chuck::Update(float dt)
 {
-	Move(Entity1);
 	return true;
 }
 
@@ -151,6 +147,6 @@ void Chuck::Move(Chuck Entity)
 {
 	if (App->player->position.x > 60)
 	{
-		App->pathfinding->CreatePath(App->player->position, Entity.position, flies);
+		App->pathfinding->CreatePath(App->player->player_quadrant_1, Entity.position, flies);
 	}
 }

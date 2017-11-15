@@ -59,7 +59,7 @@ public:
 	bool Jump();
 	bool Falling();
 
-	iPoint				position;
+	fPoint				position;
 	iPoint				player_quadrant_1;
 	iPoint				player_quadrant_2;
 
