@@ -26,7 +26,7 @@ public:
 	bool PreUpdate();
 
 	// Called each loop iteration
-	bool Update(float dt);
+	bool Update(float dt, Chuck enemy1);
 
 	void Draw();
 
@@ -44,6 +44,9 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	//move when the player is near
+	void Move(Chuck enemy);
+
 private:
 
 	EDirection direction;
@@ -56,4 +59,6 @@ private:
 	Animation			jump_left;
 	Animation			jump_right;
 	Animation*			current_animation;
+
+public:
 };

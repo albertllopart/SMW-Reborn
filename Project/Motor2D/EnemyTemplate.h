@@ -90,6 +90,7 @@ public:
 	Type			type;
 	p2SString		name;
 	iPoint			position;
+	bool			flies;
 
 	EState			state;
 	EDirection		direction;

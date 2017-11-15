@@ -43,7 +43,6 @@ public:
 public:
 
 	p2List<Enemy*>		enemies;
-	bool				flies;
 };
 
 #endif

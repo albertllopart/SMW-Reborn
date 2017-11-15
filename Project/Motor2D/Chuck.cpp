@@ -9,6 +9,7 @@
 #include "j1Player.h"
 #include "j1EnemyModule.h"
 #include "j1Map.h"
+#include "j1Pathfinding.h"
 
 Chuck::Chuck() : Enemy()
 {
@@ -55,7 +56,9 @@ Chuck::~Chuck()
 
 bool Chuck::Awake()
 {
-	position.create(50, 197);
+	Chuck enemy1;
+	enemy1.position.create(50, 197);
+	enemy1.flies = false;
 	return true;
 }
 
@@ -73,8 +76,9 @@ bool Chuck::PreUpdate()
 	return true;
 }
 
-bool Chuck::Update(float dt)
+bool Chuck::Update(float dt, Chuck enemy1)
 {
+	Move(enemy1);
 	return true;
 }
 
@@ -143,3 +147,10 @@ bool Chuck::CleanUp()
 	return true;
 }
 
+void Chuck::Move(Chuck enemy)
+{
+	if (App->player->position.x > 60)
+	{
+		App->pathfinding->CreatePath(App->player->position, enemy.position, flies);
+	}
+}

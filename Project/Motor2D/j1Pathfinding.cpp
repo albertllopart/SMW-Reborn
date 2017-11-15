@@ -116,7 +116,7 @@ PathNode::PathNode(const PathNode& node) : g(node.g), h(node.h), pos(node.pos), 
 // PathNode -------------------------------------------------------------------------
 // Fills a list (PathList) of all valid adjacent pathnodes
 // ----------------------------------------------------------------------------------
-uint PathNode::FindWalkableAdjacents(PathList& list_to_fill) const
+uint PathNode::FindWalkableAdjacents(PathList& list_to_fill, bool flies) const
 {
 	iPoint cell;
 	uint before = list_to_fill.list.count();
@@ -124,7 +124,7 @@ uint PathNode::FindWalkableAdjacents(PathList& list_to_fill) const
 	//if the enemy is flying it can fly in diagonal so we will use all the 8 possible paths
 	//if it can't fly we will only use the x axis
 
-	if (App->enemymodule->flies)
+	if (flies)
 	{
 		// north
 		cell.create(pos.x, pos.y + 1);
@@ -167,7 +167,7 @@ uint PathNode::FindWalkableAdjacents(PathList& list_to_fill) const
 			list_to_fill.list.add(PathNode(-1, -1, cell, this));
 	}
 
-	if (!App->enemymodule->flies)
+	if (!flies)
 	{
 		// east
 		cell.create(pos.x + 1, pos.y);
@@ -209,7 +209,7 @@ int PathNode::CalculateF(const iPoint& destination)
 // ----------------------------------------------------------------------------------
 // Usefull link->https://www.youtube.com/watch?v=-L-WgKMFuhE
 
-int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
+int j1PathFinding::CreatePath(iPoint& origin,iPoint& destination, bool flies)
 {
 	last_path.Clear();
 	int ret = 0;
@@ -255,7 +255,7 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 			{
 				//filling a list of the adjacent nodes
 				PathList neighbours;
-				close.list.end->data.FindWalkableAdjacents(neighbours);
+				close.list.end->data.FindWalkableAdjacents(neighbours, flies);
 
 				//iterate neighbours
 				p2List_item<PathNode>* temp = neighbours.list.start;
