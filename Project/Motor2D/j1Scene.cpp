@@ -42,7 +42,7 @@ bool j1Scene::Start()
 	App->audio->LoadFx("audio/jump.wav"); //1
 	App->audio->LoadFx("audio/double_jump.wav"); //2
 	App->audio->LoadFx("audio/level_complete.wav"); //3
-
+	current_lvl = 1;
 	App->map->Load("level_1.tmx");
 	return true;
 }
@@ -58,12 +58,7 @@ bool j1Scene::Update(float dt)
 {
 	BROFILER_CATEGORY("Scene Update", Profiler::Color::Brown)
 
-	if(App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-		App->LoadGame();
-
-	if(App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-		App->SaveGame();
-
+	
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y -= 10;
 
@@ -89,12 +84,19 @@ bool j1Scene::Update(float dt)
 	}
 
 	//change map
+
 	if (App->player->level_complete == true)
 	{
-		App->player->level_complete = false;
-		App->map->WantToChange();
-	}
+		
+		if (current_lvl == 1)
+			LoadLvl(2, true);
 
+		else if (current_lvl == 2)
+			LoadLvl(1, true);
+		App->player->level_complete = false;
+		//App->map->WantToChange();
+	}
+/*
 	if (App->map->want_to_change_map == true)
 	{
 		if (App->map->level_1 == true)
@@ -109,7 +111,7 @@ bool j1Scene::Update(float dt)
 			App->map->Load("level_2.tmx");
 			App->map->want_to_change_map = false;
 		}
-	}
+	}*/
 
 	//App->render->Blit(img, 0, 0);
 	App->map->Draw(App->GetDT());
@@ -148,4 +150,40 @@ bool j1Scene::CleanUp()
 	LOG("Freeing scene");
 
 	return true;
+}
+bool j1Scene::Save(pugi::xml_node& node)const
+{
+	node.append_attribute("current_lvl") = current_lvl;
+	return true;
+}
+
+bool j1Scene::Load(pugi::xml_node& node)
+{
+	LoadLvl(node.attribute("current_lvl").as_int(), false);
+	return true;
+}
+
+void j1Scene::LoadLvl(int current, bool lvl_start)
+{
+	if (lvl_start == true)
+	{
+		
+		App->render->camera.x = 0;
+		App->render->camera.y = 0;
+		App->player->position.x = 10;
+		App->player->position.y = 197;
+	}
+	if (current == 1)
+	{
+		App->audio->PlayMusic("audio/main_music.ogg");
+		App->map->Load("level_1.tmx");
+		current_lvl = current;
+	}
+	else if (current == 2)
+	{
+		App->audio->PlayMusic("audio/main_music.ogg");
+		App->map->Load("level_2.tmx");
+		current_lvl = current;
+	}
+
 }

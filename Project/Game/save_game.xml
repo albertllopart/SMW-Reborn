@@ -5,14 +5,14 @@
 	<textures />
 	<audio />
 	<map />
-	<scene />
+	<scene current_lvl="2" />
 	<player>
-		<position x="391" y="200" />
+		<position x="82" y="197" />
 	</player>
 	<Entityodule />
 	<pathfinding />
 	<fadetoblack />
 	<renderer>
-		<camera x="-398" y="0" />
+		<camera x="0" y="0" />
 	</renderer>
 </save>

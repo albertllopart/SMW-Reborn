@@ -32,8 +32,13 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	bool Save(pugi::xml_node& node)const;
+	bool Load(pugi::xml_node& node);
 	bool title_2 = false;
 
+	void LoadLvl(int, bool);
+
+	int current_lvl = 0;
 private:
 };
 

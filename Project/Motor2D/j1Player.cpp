@@ -8,6 +8,7 @@
 #include "j1Map.h"
 #include "j1Audio.h"
 #include "j1FadeToBlack.h"
+#include "j1Scene.h"
 
 #include "Brofiler\Brofiler.h"
 
@@ -53,7 +54,7 @@ bool j1Player::Start()
 	bool ret = true;
 	graphic = App->tex->Load("maps/Mario.png");
 
-	position.x = 16;
+	position.x = 10;
 	position.y = 197;
 
 	//player quadrant position
@@ -238,7 +239,7 @@ void j1Player::Input(float dt)
 		{
 			App->audio->PlayFx(1);
 			jump = true;
-			jump_height = position.y - 30;
+			jump_height = position.y - 35;
 			jump1_on = true;
 		}
 	}
@@ -248,7 +249,7 @@ void j1Player::Input(float dt)
 		{
 			App->audio->PlayFx(2);
 			jump = true;
-			jump_height = position.y - 30;
+			jump_height = position.y - 35;
 			jump2_on = true;
 		}
 	}
@@ -259,19 +260,14 @@ void j1Player::Input(float dt)
 		App->map->want_to_change_map = true;
 		App->map->level_1 = true;
 		App->map->level_2 = false;
-		position.x = 10;
-		position.y = 197;
-		App->render->camera.x = 0;
-		App->render->camera.y = 0;
+		App->scene->LoadLvl(1, true);
+	
 	}
 
 	//reset the lvl
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
-		position.x = 10;
-		position.y = 197;
-		App->render->camera.x = 0;
-		App->render->camera.y = 0;
+		App->scene->LoadLvl(App->scene->current_lvl, true);
 	}
 
 	//save
@@ -285,6 +281,17 @@ void j1Player::Input(float dt)
 	{
 		App->LoadGame();
 	}
+	// To lvl1
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{
+		App->scene->LoadLvl(1, true);
+	}
+	// To lvl 2
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	{
+		App->scene->LoadLvl(2, true);
+	}
+
 }
 
 bool j1Player::Jump()
@@ -359,8 +366,6 @@ bool j1Player::Falling()
 			level_complete = true;
 			App->fadetoblack->FadeToBlack(this, this, 2);
 			 
-			App->render->camera.x = 0;
-			App->render->camera.y = 0;
 			jump = false;
 		}
 

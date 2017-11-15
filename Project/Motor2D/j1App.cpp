@@ -376,6 +376,8 @@ bool j1App::LoadGame()
 	// we should be checking if that file actually exist
 	// from the "GetSaveGames" list
 	want_to_load = true;
+	want_to_load_audio = true;
+	want_to_load_Entity = true;
 	return true;
 }
 
@@ -386,8 +388,13 @@ bool j1App::SaveGame()
 	// from the "GetSaveGames" list ... should we overwrite ?
 
 	want_to_save = true;
+	want_to_save_audio = true;
+	want_to_save_Entity = true;
 	return true;
 }
+
+
+
 
 // ---------------------------------------
 void j1App::GetSaveGames(p2List<p2SString>& list_to_fill) const
@@ -411,7 +418,6 @@ void j1App::LoadGameNow()
 	}
 	want_to_load = false;
 	want_to_load_audio = false;
-	want_to_load_player = false;
 	want_to_load_Entity = false;
 	
 }
