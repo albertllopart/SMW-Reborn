@@ -3,14 +3,14 @@
 #include "p2Point.h"
 #include "p2DynArray.h"
 #include "j1Animation.h"
-#include "EnemyTemplate.h"
+#include "Entity.h"
 
 #define CHUCK_HIGHT 27
 #define CHUCK_WIDTH 26
 
 struct SDL_Texture;
 
-class Chuck : public Enemy
+class Chuck : public Entity
 {
 public:
 	Chuck();
@@ -26,7 +26,7 @@ public:
 	bool PreUpdate();
 
 	// Called each loop iteration
-	bool Update(float dt, Chuck enemy1);
+	bool Update(float dt, Chuck Entity1);
 
 	void Draw();
 
@@ -45,7 +45,7 @@ public:
 	bool CleanUp();
 
 	//move when the player is near
-	void Move(Chuck enemy);
+	void Move(Chuck Entity);
 
 private:
 

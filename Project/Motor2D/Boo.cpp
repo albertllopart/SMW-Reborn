@@ -7,10 +7,10 @@
 #include "j1Window.h"
 #include "j1Textures.h"
 #include "j1Player.h"
-#include "j1EnemyModule.h"
+#include "j1EntityModule.h"
 #include "j1Map.h"
 
-Boo::Boo() : Enemy()
+Boo::Boo() : Entity()
 {
 	name.create("Boo");
 

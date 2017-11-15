@@ -2,7 +2,7 @@
 #include "p2Log.h"
 #include "j1App.h"
 #include "j1PathFinding.h"
-#include "j1EnemyModule.h"
+#include "j1EntityModule.h"
 
 j1PathFinding::j1PathFinding() : j1Module(), map(NULL), last_path(DEFAULT_PATH_LENGTH), width(0), height(0)
 {
@@ -121,7 +121,7 @@ uint PathNode::FindWalkableAdjacents(PathList& list_to_fill, bool flies) const
 	iPoint cell;
 	uint before = list_to_fill.list.count();
 
-	//if the enemy is flying it can fly in diagonal so we will use all the 8 possible paths
+	//if the Entity is flying it can fly in diagonal so we will use all the 8 possible paths
 	//if it can't fly we will only use the x axis
 
 	if (flies)

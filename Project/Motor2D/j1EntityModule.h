@@ -1,20 +1,20 @@
 #pragma once
-#ifndef __j1ENEMY_H_
-#define __j1ENEMY_H_
+#ifndef __j1Entity_H_
+#define __j1Entity_H_
 
 #include "j1Module.h"
 #include "p2List.h"
 #include "p2Point.h"
-#include "EnemyTemplate.h"
+#include "Entity.h"
 #include "Chuck.h"
 #include "Boo.h"
 
-class j1EnemyModule : public j1Module
+class j1EntityModule : public j1Module
 {
 public:
 
-	j1EnemyModule();
-	virtual ~j1EnemyModule();
+	j1EntityModule();
+	virtual ~j1EntityModule();
 
 	//Called before render is available
 	bool				Awake(pugi::xml_node& conf);
@@ -34,15 +34,15 @@ public:
 	void				CreateBoo(iPoint position);
 	void				CreateChuck(iPoint position);
 
-	void				DeleteBoo(Enemy* boo);
-	void				DeleteChuck(Enemy* chuck);
+	void				DeleteBoo(Entity* boo);
+	void				DeleteChuck(Entity* chuck);
 
 	bool				Load(pugi::xml_node&);
 	bool				Save(pugi::xml_node&)const;
 
 public:
 
-	p2List<Enemy*>		enemies;
+	p2List<Entity*>		entities;
 };
 
 #endif

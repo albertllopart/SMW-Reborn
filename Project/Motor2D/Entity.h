@@ -30,12 +30,12 @@ enum Type
 	BOO
 };
 
-class Enemy
+class Entity
 {
 public:
 
-	Enemy() {};
-	virtual ~Enemy() {};
+	Entity() {};
+	virtual ~Entity() {};
 
 	// Called before render is available
 	virtual bool Awake()

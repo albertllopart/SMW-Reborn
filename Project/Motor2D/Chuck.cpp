@@ -7,11 +7,11 @@
 #include "j1Window.h"
 #include "j1Textures.h"
 #include "j1Player.h"
-#include "j1EnemyModule.h"
+#include "j1EntityModule.h"
 #include "j1Map.h"
 #include "j1Pathfinding.h"
 
-Chuck::Chuck() : Enemy()
+Chuck::Chuck() : Entity()
 {
 	name.create("Chuck");
 
@@ -56,9 +56,9 @@ Chuck::~Chuck()
 
 bool Chuck::Awake()
 {
-	Chuck enemy1;
-	enemy1.position.create(50, 197);
-	enemy1.flies = false;
+	Chuck Entity1;
+	Entity1.position.create(50, 197);
+	Entity1.flies = false;
 	return true;
 }
 
@@ -76,9 +76,9 @@ bool Chuck::PreUpdate()
 	return true;
 }
 
-bool Chuck::Update(float dt, Chuck enemy1)
+bool Chuck::Update(float dt, Chuck Entity1)
 {
-	Move(enemy1);
+	Move(Entity1);
 	return true;
 }
 
@@ -147,10 +147,10 @@ bool Chuck::CleanUp()
 	return true;
 }
 
-void Chuck::Move(Chuck enemy)
+void Chuck::Move(Chuck Entity)
 {
 	if (App->player->position.x > 60)
 	{
-		App->pathfinding->CreatePath(App->player->position, enemy.position, flies);
+		App->pathfinding->CreatePath(App->player->position, Entity.position, flies);
 	}
 }

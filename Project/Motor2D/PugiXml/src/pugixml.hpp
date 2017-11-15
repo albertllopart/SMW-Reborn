@@ -128,7 +128,7 @@ namespace pugi
 	// This flag is off by default; turning it on usually results in slower parsing and more memory consumption.
 	const unsigned int parse_ws_pcdata = 0x0008;
 
-	// This flag determines if character and entity references are expanded during parsing. This flag is on by default.
+	// This flag determines if character and Entity references are expanded during parsing. This flag is on by default.
 	const unsigned int parse_escapes = 0x0010;
 
 	// This flag determines if EOL characters are normalized (converted to #xA) during parsing. This flag is on by default.

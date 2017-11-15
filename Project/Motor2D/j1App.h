@@ -16,7 +16,7 @@ class j1Audio;
 class j1Scene;
 class j1Map;
 class j1Player;
-class j1EnemyModule;
+class j1EntityModule;
 class j1PathFinding;
 
 class j1App
@@ -90,7 +90,7 @@ public:
 	j1Scene*			scene;
 	j1Map*				map;
 	j1Player*			player;
-	j1EnemyModule*		enemymodule;
+	j1EntityModule*		entitymodule;
 	j1PathFinding*		pathfinding;
 
 private:
@@ -105,12 +105,12 @@ private:
 	bool		        want_to_save = false;
 	bool				want_to_save_audio = false;
 	bool                want_to_save_player = false;
-	bool				want_to_save_enemy = false;
+	bool				want_to_save_Entity = false;
 
 	bool				want_to_load = false;
 	bool				want_to_load_audio = false;
 	bool				want_to_load_player = false;
-	bool				want_to_load_enemy = false;
+	bool				want_to_load_Entity = false;
 
 	p2SString			load_game;
 	mutable p2SString	save_game;

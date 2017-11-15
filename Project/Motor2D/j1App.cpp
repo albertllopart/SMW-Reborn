@@ -13,7 +13,7 @@
 #include "j1Map.h"
 #include "j1App.h"
 #include "j1Player.h"
-#include "j1EnemyModule.h"
+#include "j1EntityModule.h"
 #include "j1Pathfinding.h"
 
 #include "Brofiler\Brofiler.h"
@@ -35,7 +35,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	scene =			new j1Scene();
 	map =			new j1Map();
 	player =		new j1Player();
-	enemymodule =	new j1EnemyModule();
+	entitymodule =	new j1EntityModule();
 	pathfinding =	new j1PathFinding();
 
 	// Ordered for awake / Start / Update
@@ -47,7 +47,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(scene);
 	AddModule(player);
-	AddModule(enemymodule);
+	AddModule(entitymodule);
 	AddModule(pathfinding);
 
 	// render last to swap buffer
@@ -409,7 +409,7 @@ void j1App::LoadGameNow()
 	want_to_load = false;
 	want_to_load_audio = false;
 	want_to_load_player = false;
-	want_to_load_enemy = false;
+	want_to_load_Entity = false;
 	
 }
 
@@ -434,7 +434,7 @@ void j1App::SavegameNow()
 	want_to_save = false;
 	want_to_save_audio = false;
 	want_to_save_player = false;
-	want_to_save_enemy = false;
+	want_to_save_Entity = false;
 }
 
 float j1App::GetDT() const

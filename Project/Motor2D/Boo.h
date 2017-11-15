@@ -3,13 +3,13 @@
 #include "p2Point.h"
 #include "p2DynArray.h"
 #include "j1Animation.h"
-#include "EnemyTemplate.h"
+#include "Entity.h"
 
 #define BOO_SIZE 16 //same hight/width
 
 struct SDL_Texture;
 
-class Boo : public Enemy
+class Boo : public Entity
 {
 public:
 

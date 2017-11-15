@@ -46,14 +46,14 @@
     <ClCompile Include="j1Pathfinding.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="j1EnemyModule.cpp">
-      <Filter>Desenvolupament  ========\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="Chuck.cpp">
       <Filter>Desenvolupament  ========\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Boo.cpp">
       <Filter>Desenvolupament  ========\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="j1EntityModule.cpp">
+      <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -123,17 +123,17 @@
     <ClInclude Include="j1Pathfinding.h">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="j1EnemyModule.h">
-      <Filter>Desenvolupament  ========\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyTemplate.h">
-      <Filter>Desenvolupament  ========\Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="Chuck.h">
       <Filter>Desenvolupament  ========\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Boo.h">
       <Filter>Desenvolupament  ========\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Desenvolupament  ========\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="j1EntityModule.h">
+      <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
