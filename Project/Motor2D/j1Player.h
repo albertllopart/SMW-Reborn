@@ -69,7 +69,6 @@ public:
 	bool				dead = false;
 
 private:
-	p2SString			name = nullptr;
 	unsigned int		width = 0;
 	unsigned int		height = 0;
 	SDL_Texture*		graphic = nullptr;

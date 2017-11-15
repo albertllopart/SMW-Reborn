@@ -6,13 +6,13 @@
 	<audio />
 	<map />
 	<scene />
-	<:anonymous>
-		<position x="249" y="181" />
-	</:anonymous>
+	<player>
+		<position x="391" y="200" />
+	</player>
 	<Entityodule />
 	<pathfinding />
 	<fadetoblack />
 	<renderer>
-		<camera x="-114" y="0" />
+		<camera x="-398" y="0" />
 	</renderer>
 </save>

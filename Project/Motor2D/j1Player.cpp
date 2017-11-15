@@ -19,7 +19,7 @@ j1Player::j1Player() : j1Module()
 	name.create("player");
 
 	//Animations
-
+	
 	idle_right.PushBack({ 0, 2, 15, 28 });
 	idle_left.PushBack({ 140, 2, 15, 28 });
 
