@@ -7,6 +7,7 @@
 #include "j1Input.h"
 #include "j1Map.h"
 #include "j1Audio.h"
+#include "j1FadeToBlack.h"
 
 #include "Brofiler\Brofiler.h"
 
@@ -42,6 +43,16 @@ bool j1Player::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Player");
 	bool ret = true;
+
+	return ret;
+}
+
+bool j1Player::Start()
+{
+	LOG("starting player");
+	bool ret = true;
+	graphic = App->tex->Load("maps/Mario.png");
+
 	position.x = 16;
 	position.y = 197;
 
@@ -55,14 +66,6 @@ bool j1Player::Awake(pugi::xml_node& config)
 	velocity.x = 2;
 	velocity.y = 3;
 
-	return ret;
-}
-
-bool j1Player::Start()
-{
-	LOG("starting player");
-	bool ret = true;
-	graphic = App->tex->Load("maps/Mario.png");
 	state = IDLE_R;
 	dir = RIGHT;
 
@@ -354,8 +357,8 @@ bool j1Player::Falling()
 		{
 			App->audio->PlayFx(3);
 			level_complete = true;
-			position.x = 16;
-			position.y = -48;
+			App->fadetoblack->FadeToBlack(this, this, 2);
+			 
 			App->render->camera.x = 0;
 			App->render->camera.y = 0;
 			jump = false;
