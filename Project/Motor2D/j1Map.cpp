@@ -36,8 +36,12 @@ bool j1Map::Awake(pugi::xml_node& config)
 	iPoint pos2;
 	pos2.create(120, 120);
 
+	fPoint pos3;
+	pos3.create(10,197);
+
 	App->entitymodule->CreateChuck(pos);
 	App->entitymodule->CreateBoo(pos2);
+	App->entitymodule->CreatePlayer(pos3);
 	
 	return ret;
 }
@@ -426,8 +430,8 @@ bool j1Map::IsWalkable()
 	BROFILER_CATEGORY("Map IsWalkable", Profiler::Color::Yellow)
 
 	bool ret;
-	int player_x	= App->player->position.x / 16 ; //check next tile right
-	int player_y	= (App->player->position.y + 14)/ 16;
+	int player_x	= App->entitymodule->player->position.x / 16 ; //check next tile right
+	int player_y	= (App->entitymodule->player->position.y + 14)/ 16;
 	p2List_item<MapLayer*>* iterator;
 	p2List_item<MapLayer*>* fakeLayer = nullptr;
 	
@@ -441,7 +445,7 @@ bool j1Map::IsWalkable()
 
 	//uint nextGid = fakeLayer->data->GetGid(player_x,player_y);
 	uint* nextGid = &fakeLayer->data->gid[1 + player_x + player_y*fakeLayer->data->width];
-	if (App->player->dir == RIGHT)
+	if (App->entitymodule->player->direction == R)
 	{
 		nextGid++;
 		if (*nextGid == 19) 
@@ -449,7 +453,7 @@ bool j1Map::IsWalkable()
 		else if (*nextGid != 19)
 			ret = true;
 	}
-	else if (App->player->dir == LEFT)
+	else if (App->entitymodule->player->direction == L)
 	{
 		nextGid;
 		if (*nextGid == 19) 

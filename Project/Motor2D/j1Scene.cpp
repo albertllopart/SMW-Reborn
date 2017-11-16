@@ -10,6 +10,7 @@
 #include "j1Scene.h"
 #include "j1Player.h"
 #include "j1FadeToBlack.h"
+#include "j1EntityModule.h"
 
 #include "Brofiler\Brofiler.h"
 
@@ -85,7 +86,7 @@ bool j1Scene::Update(float dt)
 
 	//change map
 
-	if (App->player->level_complete == true)
+	if (App->entitymodule->level_complete == true)
 	{
 		
 		if (current_lvl == 1)
@@ -93,7 +94,7 @@ bool j1Scene::Update(float dt)
 
 		else if (current_lvl == 2)
 			LoadLvl(1, true);
-		App->player->level_complete = false;
+		App->entitymodule->level_complete = false;
 		//App->map->WantToChange();
 	}
 /*
@@ -170,8 +171,8 @@ void j1Scene::LoadLvl(int current, bool lvl_start)
 		
 		App->render->camera.x = 0;
 		App->render->camera.y = 0;
-		App->player->position.x = 10;
-		App->player->position.y = 197;
+		App->entitymodule->player->position.x = 10;
+		App->entitymodule->player->position.x = 197;
 	}
 	if (current == 1)
 	{

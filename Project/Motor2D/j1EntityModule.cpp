@@ -78,12 +78,27 @@ void j1EntityModule::CreateChuck(iPoint position)
 	entities.add(chuck);
 }
 
+void j1EntityModule::CreatePlayer(fPoint position)
+{
+	j1Player* player_a = new j1Player();
+	player_a->Awake();
+	player_a->Start();
+	player_a->position = position;
+	entities.add(player_a);
+	player = player_a;
+}
+
 void j1EntityModule::DeleteBoo(Entity* boo)
 {
 
 }
 
 void j1EntityModule::DeleteChuck(Entity* chuck)
+{
+
+}
+
+void j1EntityModule::DeletePlayer(Entity* player)
 {
 
 }

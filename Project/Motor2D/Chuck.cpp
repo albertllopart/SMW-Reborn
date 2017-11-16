@@ -77,7 +77,7 @@ bool Chuck::PreUpdate()
 
 bool Chuck::Update(float dt)
 {
-	if (App->player->position.x > 70 && App->player->position.x < 200)
+	if (App->entitymodule->player->position.x > 70 && App->entitymodule->player->position.x < 200)
 		Move(dt);
 	else
 	{
@@ -165,13 +165,13 @@ void Chuck::Move(float dt)
 	float count_rounded = roundf(count*10) / 10; //rounded to 1 decimal
 	if (count_rounded > 0.199f)
 	{
-		if (position.x > App->player->position.x)
+		if (position.x > App->entitymodule->player->position.x)
 		{
 			position.x -= 1.0f;
 			state = WALK_LEFT;
 		}
 
-		if (position.x < App->player->position.x)
+		if (position.x < App->entitymodule->player->position.x)
 		{
 			position.x += 1.0f;
 			state = WALK_RIGHT;

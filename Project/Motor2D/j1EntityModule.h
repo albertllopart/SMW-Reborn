@@ -8,6 +8,7 @@
 #include "Entity.h"
 #include "Chuck.h"
 #include "Boo.h"
+#include "j1Player.h"
 
 class j1EntityModule : public j1Module
 {
@@ -33,9 +34,11 @@ public:
 
 	void				CreateBoo(iPoint position);
 	void				CreateChuck(iPoint position);
+	void				CreatePlayer(fPoint position);
 
 	void				DeleteBoo(Entity* boo);
 	void				DeleteChuck(Entity* chuck);
+	void				DeletePlayer(Entity* player);
 
 	bool				Load(pugi::xml_node&);
 	bool				Save(pugi::xml_node&)const;
@@ -43,6 +46,8 @@ public:
 public:
 
 	p2List<Entity*>		entities;
+	bool				level_complete = false;
+	Entity*				player;
 };
 
 #endif

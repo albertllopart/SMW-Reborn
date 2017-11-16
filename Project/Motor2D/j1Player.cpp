@@ -9,13 +9,14 @@
 #include "j1Audio.h"
 #include "j1FadeToBlack.h"
 #include "j1Scene.h"
+#include "j1EntityModule.h"
 
 #include "Brofiler\Brofiler.h"
 
 #include "SDL_image/include/SDL_image.h"
 #pragma comment( lib, "SDL_image/libx86/SDL2_image.lib" )
 
-j1Player::j1Player() : j1Module()
+j1Player::j1Player() : Entity()
 {
 	name.create("player");
 
@@ -40,7 +41,7 @@ j1Player::~j1Player()
 {
 }
 
-bool j1Player::Awake(pugi::xml_node& config)
+bool j1Player::Awake()
 {
 	LOG("Loading Player");
 	bool ret = true;
@@ -69,8 +70,8 @@ bool j1Player::Start()
 	velocity.x = 2;
 	velocity.y = 3;
 
-	state = IDLE_R;
-	dir = RIGHT;
+	state = IDLE_RIGHT;
+	direction = R;
 
 	return ret;
 }
@@ -105,10 +106,10 @@ bool j1Player::Update(float dt)
 
 			if (jump == true)
 			{
-				if (dir == LEFT)
-					state = SHORT_HOP_L;
-				else if (dir == RIGHT)
-					state = SHORT_HOP_R;
+				if (direction == L)
+					state = SHORT_HOP_LEFT;
+				else if (direction == R)
+					state = SHORT_HOP_RIGHT;
 			}
 
 			Draw();
@@ -156,27 +157,27 @@ void j1Player::Draw()
 {
 	switch (state)
 	{
-		case IDLE_R:
+		case IDLE_RIGHT:
 			current_animation = &idle_right;
 			break;
 
-		case IDLE_L:
+		case IDLE_LEFT:
 			current_animation = &idle_left;
 			break;
 	
-		case SHORT_HOP_L:
+		case SHORT_HOP_LEFT:
 			current_animation = &short_hop_left;
 			break;
 	
-		case SHORT_HOP_R:
+		case SHORT_HOP_RIGHT:
 			current_animation = &short_hop_right;
 			break;
 		
-		case WALK_L:
+		case WALK_LEFT:
 			current_animation = &walk_left;
 			break;
 		
-		case WALK_R:
+		case WALK_RIGHT:
 			current_animation = &walk_right;
 			break;
 	
@@ -193,45 +194,45 @@ void j1Player::Input(float dt)
 	//Right
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
-		dir = RIGHT;
+		direction = R;
 		if (App->map->IsWalkable())
 		{
 			position.x += SPEED_X * dt;
 		}
 		if (Falling() == false)
-			state = WALK_R;
+			state = WALK_RIGHT;
 		
 	}
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
 	{
-		dir = RIGHT;
+		direction = R;
 		if (App->map->IsWalkable())
 		{
 			position.x += SPEED_X * dt;
 		}
-		state = IDLE_R;
+		state = IDLE_RIGHT;
 	}
 
 
 	//Left
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
-		dir = LEFT;
+		direction = L;
 		if (App->map->IsWalkable())
 		{
 			position.x -= SPEED_X * dt;
 		}
 		if (Falling() == false)
-			state = WALK_L;	
+			state = WALK_LEFT;	
 	}
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
 	{
-		dir = LEFT;
+		direction = L;
 		if (App->map->IsWalkable())
 		{
 			position.x -= SPEED_X * dt;
 		}
-		state = IDLE_L;
+		state = IDLE_LEFT;
 	}
 
 	//Jump
@@ -310,8 +311,8 @@ bool j1Player::Jump()
 		ret = false;
 		jump_height = 0;
 		
-		if (dir == LEFT) state = IDLE_L;
-		else if (dir == RIGHT) state = IDLE_R;
+		if (direction == L) state = IDLE_LEFT;
+		else if (direction == R) state = IDLE_RIGHT;
 	}
 	return ret;
 }
@@ -366,7 +367,7 @@ bool j1Player::Falling()
 		{
 			App->audio->PlayFx(3);
 			level_complete = true;
-			App->fadetoblack->FadeToBlack(this, this, 2);
+			//App->fadetoblack->FadeToBlack(this, this, 2);
 			 
 			jump = false;
 		}

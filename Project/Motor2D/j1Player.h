@@ -1,6 +1,4 @@
-#ifndef _j1PLAYER_H_
-#define _j1PLAYER_H_
-
+#pragma once
 #include	"PugiXml/src/pugixml.hpp"
 #include	"j1Module.h"
 #include	"p2List.h"
@@ -8,6 +6,7 @@
 #include	"j1Textures.h"
 #include	"j1Animation.h"
 #include	"j1Collision.h"
+#include	"Entity.h"
 
 #define		SPEED_X 100.0f
 #define		SPEED_Y 1.0f
@@ -20,37 +19,14 @@
 struct SDL_texture;
 struct SDL_Rect;
 
-enum PLAYER_STATE
-{
-	IDLE_R,
-	IDLE_L,
-	SHORT_HOP_L,
-	SHORT_HOP_R,
-	WALK_L,
-	WALK_R,
-	RUN_L,
-	RUN_R
-
-};
-
-enum Direction
-{
-	NM, //Not moving
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT
-};
-
-
-class j1Player : public j1Module
+class j1Player : public Entity
 {
 public:
 	j1Player();
 	~j1Player();
 	bool Start();
 	bool CleanUp();
-	bool Awake(pugi::xml_node& config);
+	bool Awake();
 	bool Update(float dt);
 	bool PostUpdate();
 	bool Load(pugi::xml_node&);
@@ -64,9 +40,8 @@ public:
 	iPoint				player_quadrant_1;
 	iPoint				player_quadrant_2;
 
-	bool level_complete = false;
+	bool				level_complete = false;
 
-	Direction			dir;
 	bool				dead = false;
 
 private:
@@ -74,7 +49,6 @@ private:
 	unsigned int		height = 0;
 	SDL_Texture*		graphic = nullptr;
 	SDL_Rect*			test;
-	PLAYER_STATE		state;
 	fPoint				velocity;
 	float				gravity = 9.8;
 	bool				jump;
@@ -94,4 +68,3 @@ private:
 	Collider*			collision = nullptr;
 };
 
-#endif
