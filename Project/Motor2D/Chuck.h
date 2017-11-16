@@ -17,40 +17,46 @@ public:
 	virtual ~Chuck();
 
 	// Called before render is available
-	bool Awake();
+	bool				 Awake();
 
 	// Called before the first frame
-	bool Start();
+	bool				Start();
 
 	// Called before all Updates
-	bool PreUpdate();
+	bool				PreUpdate();
 
 	// Called each loop iteration
-	bool Update(float dt);
+	bool				Update(float dt);
 
-	void Draw();
+	void				Draw();
 
 	// Called before all Updates
-	bool PostUpdate();
+	bool				PostUpdate();
 
 	//Save and Load functions
-	bool Load(pugi::xml_node &);
-	bool Save(pugi::xml_node&)const;
+	bool				Load(pugi::xml_node &);
+	bool				Save(pugi::xml_node&)const;
 
-	int GetDirection() const;
+	int					GetDirection() const;
 
-	iPoint Getposition() const;
+	iPoint				Getposition() const;
 
 	// Called before quitting
-	bool CleanUp();
+	bool				CleanUp();
 
 	//move when the player is near
-	void Move(Chuck Entity);
+	void				Move(float dt);
+	iPoint				GetPositionINT() const;
+	void				UpdatePrevDt(float dt);
+
 
 private:
+	//enemy
+	Entity				enemy1;
 
-	EDirection direction;
-	SDL_Texture* graphic = nullptr;
+	//Draw
+	EDirection			direction;
+	SDL_Texture*		graphic = nullptr;
 
 	//Animations
 	Animation			idle;
@@ -59,4 +65,10 @@ private:
 	Animation			jump_left;
 	Animation			jump_right;
 	Animation*			current_animation;
+
+	//Move
+	float				prev_dt;
+	float				fake_dt;
+	float				count;
+
 };

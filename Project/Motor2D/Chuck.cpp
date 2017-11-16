@@ -10,6 +10,7 @@
 #include "j1EntityModule.h"
 #include "j1Map.h"
 #include "j1Pathfinding.h"
+#include <math.h>
 
 Chuck::Chuck() : Entity()
 {
@@ -65,6 +66,10 @@ bool Chuck::Start()
 	current_animation = &idle;
 	state = IDLE_LEFT;
 
+	//Move
+	prev_dt = 0;
+	fake_dt = 0;
+
 	return true;
 }
 
@@ -75,12 +80,16 @@ bool Chuck::PreUpdate()
 
 bool Chuck::Update(float dt)
 {
+	if(App->player->position.x > 60 && App->player->position.x < 150)
+		Move(dt);
+	UpdatePrevDt(dt);
+	Draw();
+
 	return true;
 }
 
 bool Chuck::PostUpdate()
-{
-	Draw();
+{	
 	return true;
 }
 
@@ -143,15 +152,28 @@ bool Chuck::CleanUp()
 	return true;
 }
 
-void Chuck::Move(Chuck Entity)
-{
-	if (App->player->position.x > 60)
-	{
-		App->pathfinding->CreatePath(App->player->player_quadrant_1, Entity.position, flies);
-	}
-}
-
 iPoint Chuck::GetPositionINT() const
 {
-	return iPoint(Entity1.position.x, Entity1.position.y);
+	return iPoint(position.x, position.y);
+}
+
+void Chuck::UpdatePrevDt(float dt)
+{
+	prev_dt = dt;
+}
+
+void Chuck::Move(float dt)
+{
+	fake_dt = dt - prev_dt;
+	count += fake_dt;
+	float count_rounded = roundf(count*10) / 10; //rounded to 1 decimal
+	if (count_rounded > 0.199f && count_rounded < 0.201 || count_rounded > 0.399f && count_rounded < 0.401 || count_rounded > 0.599f && count_rounded < 0.601 || count_rounded > 0.799f && count_rounded < 0.801 || count_rounded > 0.999f && count_rounded < 1.001)
+	{
+		if (enemy1.position.x > App->player->position.x)
+			enemy1.position.x -= 1.0f;
+		if (enemy1.position.x < App->player->position.y)
+			enemy1.position.y += 1.0f;
+	}
+	if (count_rounded == 1)
+		count = 0;
 }
