@@ -66,7 +66,7 @@ bool Chuck::Start()
 	graphic = App->tex->Load("textures/Chuck.png");
 	current_animation = &idle;
 	collision = App->collision->AddCollider({ (int)position.x, (int)position.y, CHUCK_WIDTH, CHUCK_HIGHT }, COLLIDER_CHUCK, this);
-	state = IDLE_LEFT;
+	//state = IDLE_LEFT;
 	return true;
 }
 
@@ -79,7 +79,10 @@ bool Chuck::Update(float dt)
 {
 	if (App->player->position.x > 70 && App->player->position.x < 200)
 		Move(dt);
-
+	else
+	{
+		state = IDLE_LEFT;
+	}
 	collision->SetPos(position.x, position.y);
 	Draw();
 
@@ -163,9 +166,16 @@ void Chuck::Move(float dt)
 	if (count_rounded > 0.199f)
 	{
 		if (position.x > App->player->position.x)
+		{
 			position.x -= 1.0f;
+			state = WALK_LEFT;
+		}
+
 		if (position.x < App->player->position.x)
+		{
 			position.x += 1.0f;
+			state = WALK_RIGHT;
+		}
 	}
 	if (count_rounded > 0.2f)
 		count = 0;
