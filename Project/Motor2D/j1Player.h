@@ -7,6 +7,7 @@
 #include	"p2Point.h"
 #include	"j1Textures.h"
 #include	"j1Animation.h"
+#include	"j1Collision.h"
 
 #define		SPEED_X 100.0f
 #define		SPEED_Y 1.0f
@@ -89,6 +90,8 @@ private:
 	Animation			short_hop_left;
 	Animation			short_hop_right;
 	Animation*			current_animation;
+
+	Collider*			collision = nullptr;
 };
 
 #endif

@@ -1,6 +1,7 @@
 #pragma once
 #include "j1App.h"
 #include "p2Point.h"
+#include "j1Collision.h"
 
 struct SDL_Texture;
 
@@ -84,6 +85,8 @@ public:
 		return true;
 	}
 
+	virtual void OnCollision(Collider*, Collider*){}
+
 public:
 
 	bool			active;
@@ -94,4 +97,6 @@ public:
 
 	EState			state;
 	EDirection		direction;
+
+	Collider*		collision = nullptr;
 };
