@@ -65,11 +65,6 @@ bool Chuck::Start()
 	graphic = App->tex->Load("textures/Chuck.png");
 	current_animation = &idle;
 	state = IDLE_LEFT;
-
-	//Move
-	prev_dt = 0;
-	fake_dt = 0;
-
 	return true;
 }
 
@@ -80,9 +75,8 @@ bool Chuck::PreUpdate()
 
 bool Chuck::Update(float dt)
 {
-	if(App->player->position.x > 60 && App->player->position.x < 150)
+	if(App->player->position.x > 70 && App->player->position.x < 200)
 		Move(dt);
-	UpdatePrevDt(dt);
 	Draw();
 
 	return true;
@@ -157,23 +151,18 @@ iPoint Chuck::GetPositionINT() const
 	return iPoint(position.x, position.y);
 }
 
-void Chuck::UpdatePrevDt(float dt)
-{
-	prev_dt = dt;
-}
 
 void Chuck::Move(float dt)
 {
-	fake_dt = dt - prev_dt;
-	count += fake_dt;
+	count += dt;
 	float count_rounded = roundf(count*10) / 10; //rounded to 1 decimal
-	if (count_rounded > 0.199f && count_rounded < 0.201 || count_rounded > 0.399f && count_rounded < 0.401 || count_rounded > 0.599f && count_rounded < 0.601 || count_rounded > 0.799f && count_rounded < 0.801 || count_rounded > 0.999f && count_rounded < 1.001)
+	if (count_rounded > 0.199f)
 	{
-		if (enemy1.position.x > App->player->position.x)
-			enemy1.position.x -= 1.0f;
-		if (enemy1.position.x < App->player->position.y)
-			enemy1.position.y += 1.0f;
+		if (position.x > App->player->position.x)
+			position.x -= 1.0f;
+		if (position.x < App->player->position.x)
+			position.x += 1.0f;
 	}
-	if (count_rounded == 1)
+	if (count_rounded > 0.2f)
 		count = 0;
 }

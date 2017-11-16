@@ -47,8 +47,6 @@ public:
 	//move when the player is near
 	void				Move(float dt);
 	iPoint				GetPositionINT() const;
-	void				UpdatePrevDt(float dt);
-
 
 private:
 	//enemy
@@ -67,8 +65,6 @@ private:
 	Animation*			current_animation;
 
 	//Move
-	float				prev_dt;
-	float				fake_dt;
 	float				count;
 
 };
