@@ -150,3 +150,8 @@ void Chuck::Move(Chuck Entity)
 		App->pathfinding->CreatePath(App->player->player_quadrant_1, Entity.position, flies);
 	}
 }
+
+iPoint Chuck::GetPositionINT() const
+{
+	return iPoint(Entity1.position.x, Entity1.position.y);
+}
