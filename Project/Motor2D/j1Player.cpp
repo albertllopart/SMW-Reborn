@@ -57,7 +57,7 @@ bool j1Player::Start()
 	position.x = 10;
 	position.y = 197;
 
-	collision = App->collision->AddCollider({ (int)position.x, (int)position.y, MARIO_WIDTH, MARIO_HIGHT }, COLLIDER_PLAYER);
+	//collision = App->collision->AddCollider({ (int)position.x, (int)position.y, MARIO_WIDTH, MARIO_HIGHT }, COLLIDER_PLAYER, this);
 
 	//player quadrant position
 	player_quadrant_1.x = position.x / TILE_WIDTH;

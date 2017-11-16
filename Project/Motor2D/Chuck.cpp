@@ -77,8 +77,10 @@ bool Chuck::PreUpdate()
 
 bool Chuck::Update(float dt)
 {
-	if(App->player->position.x > 70 && App->player->position.x < 200)
+	if (App->player->position.x > 70 && App->player->position.x < 200)
 		Move(dt);
+
+	collision->SetPos(position.x, position.y);
 	Draw();
 
 	return true;

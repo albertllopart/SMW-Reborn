@@ -47,7 +47,7 @@ bool j1Collision::Update(float dt)
 	for (uint i = 0; i < MAX_COLLIDERS; i++)
 	{
 		//skip empty colliders
-		if (colliders[i] = nullptr)
+		if (colliders[i] == nullptr)
 		{
 			continue;
 		}
@@ -92,7 +92,7 @@ void j1Collision::DebugDraw()
 		debug = !debug;
 	}
 
-	if (debug = false)
+	if (debug == false)
 		return;
 
 	Uint8 alpha = 80;
