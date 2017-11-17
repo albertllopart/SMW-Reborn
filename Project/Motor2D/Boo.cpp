@@ -87,12 +87,13 @@ bool Boo::PreUpdate()
 bool Boo::Update(float dt)
 {
 	Move();
+	Draw();
 	return true;
 }
 
 bool Boo::PostUpdate()
 {
-	Draw();
+	
 	return true;
 }
 
