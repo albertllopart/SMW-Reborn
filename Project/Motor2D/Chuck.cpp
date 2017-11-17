@@ -185,7 +185,7 @@ void Chuck::Move(float dt)
 	{
 		if (position.x > App->entitymodule->player->position.x)
 		{
-			position.x -= 50.0f * dt;
+			position.x -= 30.0f * dt;
 			state = WALK_LEFT;
 			direction = L;
 
@@ -198,7 +198,7 @@ void Chuck::Move(float dt)
 
 		if (position.x < App->entitymodule->player->position.x)
 		{
-			position.x += 50.0f * dt;
+			position.x += 30.0f * dt;
 			state = WALK_RIGHT;
 			direction = R;
 
