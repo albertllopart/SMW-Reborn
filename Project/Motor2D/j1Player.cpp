@@ -123,7 +123,12 @@ bool j1Player::PostUpdate()
 {
 	if (dead)
 	{
-		return false;
+		App->audio->PlayFx(5);
+		position.x = 10;
+		position.y = 197;
+		App->render->camera.x = 0;
+		App->render->camera.y = 0;
+		dead = false;
 		//App->map->restart();
 	}
 	
