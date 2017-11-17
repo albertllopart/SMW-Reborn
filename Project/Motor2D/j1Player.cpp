@@ -153,22 +153,7 @@ bool j1Player::CleanUp()
 	return ret;
 }
 
-bool j1Player::Save(pugi::xml_node& node) const
-{
-	pugi::xml_node root = node.append_child("position");
-	root.append_attribute("x") = position.x;
-	root.append_attribute("y") = position.y;
 
-	return true;
-}
-
-bool j1Player::Load(pugi::xml_node& node)
-{
-	pugi::xml_node root = node.child("position");
-	position.x = root.attribute("x").as_int();
-	position.y = root.attribute("y").as_int();
-	return true;
-}
 
 void j1Player::Draw()
 {
@@ -281,7 +266,6 @@ void j1Player::Input(float dt)
 		App->map->level_1 = true;
 		App->map->level_2 = false;
 		App->scene->LoadLvl(1, true);
-	
 	}
 
 	//reset the lvl
@@ -318,14 +302,26 @@ void j1Player::Input(float dt)
 	}
 
 }
+bool j1Player::Save()const
+{
+	return true;
+}
+
+bool j1Player::Load()
+{
+	return true;
+}
 
 bool j1Player::GodMode()
 {
-	if(App->entitymodule->player->god_mode == false)
-		App->entitymodule->player->god_mode = true;
-	else if (App->entitymodule->player->god_mode == true)
+	if (god_mode == false)
 	{
-		App->entitymodule->player->god_mode = false;
+		god_mode = true;
+	}
+		
+	else if (god_mode == true)
+	{
+		god_mode = false;
 	}
 			
 	

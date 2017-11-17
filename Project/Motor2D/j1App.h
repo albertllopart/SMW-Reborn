@@ -91,7 +91,6 @@ public:
 	j1Audio*			audio;
 	j1Scene*			scene;
 	j1Map*				map;
-	j1Player*			player;
 	j1EntityModule*		entitymodule;
 	j1PathFinding*		pathfinding;
 	j1FadeToBlack*		fadetoblack;

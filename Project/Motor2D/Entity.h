@@ -29,7 +29,8 @@ enum EDirection
 enum Type
 {
 	CHUCK,
-	BOO
+	BOO,
+	PLAYER
 };
 
 class Entity
@@ -97,6 +98,7 @@ public:
 	bool						flies;
 	bool						dead = false;
 	bool						god_mode = false;
+
 	EState						state;
 	EDirection					direction;
 

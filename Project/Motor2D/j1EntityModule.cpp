@@ -133,12 +133,70 @@ void j1EntityModule::DeletePlayer(Entity* player)
 
 }
 
-bool j1EntityModule::Load(pugi::xml_node& node)
+bool j1EntityModule::Save(pugi::xml_node& node) const
 {
+	for (int i = 0; i < entities.count(); i++)
+	{
+		if (entities[i]->name == "Boo")
+		{
+			pugi::xml_node root = node.append_child("boo_position");
+			root.append_attribute("x") = entities[i]->position.x;
+			root.append_attribute("y") = entities[i]->position.y;
+
+		}
+		else if (entities[i]->name == "Chuck")
+		{
+			pugi::xml_node root = node.append_child("chuck_position");
+			root.append_attribute("x") = entities[i]->position.x;
+			root.append_attribute("y") = entities[i]->position.y;
+
+		}
+		else if (entities[i]->name == "player")
+		{
+			pugi::xml_node root = node.append_child("player_position");
+			root.append_attribute("x") = entities[i]->position.x;
+			root.append_attribute("y") = entities[i]->position.y;
+
+		}
+	}
+
+
+	//pugi::xml_node root = node.append_child("position");
+	//root.append_attribute("x") = position.x;
+	//root.append_attribute("y") = position.y;
+
 	return true;
 }
 
-bool j1EntityModule::Save(pugi::xml_node& node) const
+bool j1EntityModule::Load(pugi::xml_node& node)
 {
+	for (int i = 0; i < entities.count(); i++)
+	{
+		if (entities[i]->name == "Boo")
+		{
+			pugi::xml_node root = node.child("boo_position");
+			entities[i]->position.x = root.attribute("x").as_int();
+			entities[i]->position.y = root.attribute("y").as_int();
+
+		}
+		else if (entities[i]->name == "Chuck")
+		{
+			pugi::xml_node root = node.child("chuck_position");
+			entities[i]->position.x = root.attribute("x").as_int();
+			entities[i]->position.y = root.attribute("y").as_int();
+
+		}
+		else if (entities[i]->name == "player")
+		{
+			pugi::xml_node root = node.child("player_position");
+			entities[i]->position.x = root.attribute("x").as_int();
+			entities[i]->position.y = root.attribute("y").as_int();
+
+		}
+	}
+	//pugi::xml_node root = node.child("position");
+	//position.x = root.attribute("x").as_int();
+	//position.y = root.attribute("y").as_int();
+
 	return true;
 }

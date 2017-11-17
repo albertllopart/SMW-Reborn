@@ -29,8 +29,8 @@ public:
 	bool Awake();
 	bool Update(float dt);
 	bool PostUpdate();
-	bool Load(pugi::xml_node&);
-	bool Save(pugi::xml_node&) const;
+	bool Load();
+	bool Save() const;
 	void Input(float dt);
 	void Draw();
 	bool Jump();
