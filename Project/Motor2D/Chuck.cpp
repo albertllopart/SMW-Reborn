@@ -58,6 +58,7 @@ Chuck::~Chuck()
 bool Chuck::Awake()
 {
 	position.create(150, 150);
+	collision = App->collision->AddCollider({ (int)position.x, (int)position.y, CHUCK_WIDTH, CHUCK_HIGHT }, COLLIDER_CHUCK, this);
 	return true;
 }
 
@@ -65,7 +66,6 @@ bool Chuck::Start()
 {
 	graphic = App->tex->Load("textures/Chuck.png");
 	current_animation = &idle;
-	collision = App->collision->AddCollider({ (int)position.x, (int)position.y, CHUCK_WIDTH, CHUCK_HIGHT }, COLLIDER_CHUCK, this);
 	state = IDLE_LEFT;
 	direction = R;
 	return true;
