@@ -41,6 +41,7 @@ public:
 	iPoint				player_quadrant_2;
 
 	bool				level_complete = false;
+	float				dead_timer = 0;
 
 private:
 	unsigned int		width = 0;

@@ -4,6 +4,7 @@
 #include "j1Collision.h"
 #include "Entity.h"
 #include "j1EntityModule.h"
+#include "j1Audio.h"
 
 j1Collision::j1Collision()
 {
@@ -72,6 +73,7 @@ bool j1Collision::Update(float dt)
 				{
 					//c1->callback->OnCollision(c1, c2);
 					App->entitymodule->player->dead = true;
+					App->audio->PlayFx(5);
 					
 				}
 					

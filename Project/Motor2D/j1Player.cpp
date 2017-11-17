@@ -80,8 +80,14 @@ bool j1Player::Update(float dt)
 {
 	BROFILER_CATEGORY("Player Update", Profiler::Color::Orange)
 
-		if (dead == false)
+		if (dead_timer == 0 || dead_timer > 1.0f)
 		{
+			if (dead_timer != 0)
+			{
+				dead_timer = 0;
+				dead = false;
+			}
+
 			Input(dt);
 			if (jump)
 			{
@@ -98,12 +104,6 @@ bool j1Player::Update(float dt)
 				}
 			}
 
-			player_quadrant_1.x = position.x / TILE_WIDTH;
-			player_quadrant_2.x = (position.x + MARIO_WIDTH) / TILE_WIDTH;
-
-			player_quadrant_1.y = position.y / TILE_WIDTH;
-			player_quadrant_2.y = (position.y + MARIO_HIGHT) / TILE_WIDTH;
-
 			if (jump == true)
 			{
 				if (direction == L)
@@ -113,8 +113,14 @@ bool j1Player::Update(float dt)
 			}
 
 			collision->SetPos(position.x, position.y);
-			Draw();
 		}
+
+	if (dead)
+	{
+		dead_timer += dt;
+	}
+
+	Draw();
 
 	return true;
 }
@@ -123,14 +129,19 @@ bool j1Player::PostUpdate()
 {
 	if (dead)
 	{
-		App->audio->PlayFx(5);
+		state = IDLE_RIGHT;
 		position.x = 10;
 		position.y = 197;
 		App->render->camera.x = 0;
 		App->render->camera.y = 0;
-		dead = false;
 		//App->map->restart();
 	}
+
+	player_quadrant_1.x = position.x / TILE_WIDTH;
+	player_quadrant_2.x = (position.x + MARIO_WIDTH) / TILE_WIDTH;
+
+	player_quadrant_1.y = position.y / TILE_WIDTH;
+	player_quadrant_2.y = (position.y + MARIO_HIGHT) / TILE_WIDTH;
 	
 	return true;
 }
@@ -359,6 +370,7 @@ bool j1Player::Falling()
 		}
 		else if (*nextGid1 == 20)
 		{
+			App->audio->PlayFx(5);
 			dead = true;
 			ret = false;
 			jump2_on = false;
