@@ -3,6 +3,7 @@
 #include "p2Point.h"
 #include "j1Collision.h"
 
+
 struct SDL_Texture;
 
 enum EState
@@ -89,15 +90,15 @@ public:
 
 public:
 
-	bool			active;
-	Type			type;
-	p2SString		name;
-	fPoint			position;
-	bool			flies;
-	bool			dead = false;
+	bool						active;
+	Type						type;
+	p2SString					name;
+	fPoint						position;
+	bool						flies;
+	bool						dead = false;
 
-	EState			state;
-	EDirection		direction;
+	EState						state;
+	EDirection					direction;
 
-	Collider*		collision = nullptr;
+	Collider*					collision = nullptr;
 };

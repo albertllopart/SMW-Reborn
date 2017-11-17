@@ -17,37 +17,45 @@ public:
 	virtual ~Boo();
 
 	// Called before render is available
-	bool Awake();
+	bool				Awake();
 
 	// Called before the first frame
-	bool Start();
+	bool				Start();
 
 	// Called before all Updates
-	bool PreUpdate();
+	bool				PreUpdate();
 
 	// Called each loop iteration
-	bool Update(float dt);
+	bool				Update(float dt);
 
-	void Draw();
+	void				Draw();
 
 	// Called before all Updates
-	bool PostUpdate();
+	bool				PostUpdate();
 
 	//Save and Load functions
-	bool Load(pugi::xml_node &);
-	bool Save(pugi::xml_node&)const;
+	bool				Load(pugi::xml_node &);
+	bool				Save(pugi::xml_node&)const;
 
-	int GetDirection() const;
+	int					GetDirection() const;
 
-	fPoint Getposition() const;
+	fPoint				Getposition() const;
 
 	// Called before quitting
-	bool CleanUp();
+	bool				CleanUp();
+
+	//move
+	void				Move();
+	void				Pathfinding();
+	bool				CreatePath(fPoint destination);
+	bool				Find_a_Path();
+	void				Movement(iPoint go_to);
+	iPoint				GetPositionINT() const;
 
 private:
 
-	EDirection direction;
-	SDL_Texture* graphic = nullptr;
+	EDirection			direction;
+	SDL_Texture*		graphic = nullptr;
 
 	//Animations
 	Animation			idle;
@@ -56,4 +64,17 @@ private:
 	Animation			stop_left;
 	Animation			stop_right;
 	Animation*			current_animation;
+
+	//pathfinding
+	bool						create_path;
+	bool						path_stopped;
+	bool						pathfinding;
+	bool						find_path;
+	bool						is_path_done;
+	int							path;
+	int							last_path;
+	int							path_size;
+	const p2DynArray<iPoint>*	last_pathfinding;
+	p2DynArray<iPoint>			mlast_pathfinding; //m was Daniel Branicki idea lul
+	
 };

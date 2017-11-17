@@ -213,7 +213,6 @@ int j1PathFinding::CreatePath(iPoint& origin,iPoint& destination, bool flies)
 {
 	last_path.Clear();
 	int ret = 0;
-	// TODO 1: if origin or destination are not walkable, return -1
 	if (!IsWalkable(origin) || !IsWalkable(destination))
 	{
 		ret = -1;

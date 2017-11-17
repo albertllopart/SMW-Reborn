@@ -9,6 +9,7 @@
 #include "j1Player.h"
 #include "j1EntityModule.h"
 #include "j1Map.h"
+#include "j1Pathfinding.h"
 
 Boo::Boo() : Entity()
 {
@@ -64,6 +65,16 @@ bool Boo::Start()
 	current_animation = &idle;
 	state = IDLE_LEFT;
 
+	//pathfinding
+	is_path_done = true;
+	path = 0;
+	last_path = 0;
+	path_size = 0;
+	path_stopped = false;
+	pathfinding = false;
+	find_path = true;
+	create_path = true;
+
 	return true;
 }
 
@@ -74,6 +85,7 @@ bool Boo::PreUpdate()
 
 bool Boo::Update(float dt)
 {
+	Move();
 	return true;
 }
 
@@ -140,4 +152,122 @@ fPoint Boo::Getposition() const
 bool Boo::CleanUp()
 {
 	return true;
+}
+
+void Boo::Move()
+{
+	Pathfinding();
+}
+
+bool Boo::CreatePath(fPoint destination)
+{
+	bool ret = false;
+
+	//we call the pathfinding module and create a path, the bool we send is to know if the enmy can go in diagonal lines
+	if (App->pathfinding->CreatePath(App->map->WorldToMap(position.x, position.y), App->map->WorldToMap(destination.x, destination.y), true)) 
+	{
+		//we save the last path in a variable
+		last_pathfinding = App->pathfinding->GetLastPath();
+		path_size = last_pathfinding->Count();
+		path = 1;
+
+		//we clear the variable before pushing back our points
+		mlast_pathfinding.Clear();
+
+		for (int i = 0; i < path_size; ++i) 
+		{
+			mlast_pathfinding.PushBack(*last_pathfinding->At(i));
+			ret = true;
+		}
+	}
+
+	return ret;
+}
+
+void Boo::Pathfinding()
+{
+
+	if (is_path_done) 
+	{
+		is_path_done = true;
+		path = 0;
+		last_path = 0;
+		path_size = 0;
+		path_stopped = false;
+		pathfinding = false;
+		find_path = true;
+		last_path = path;
+		create_path = true;
+		
+	}
+
+	//create a path
+	if (create_path)
+	{
+		fPoint destination;
+		destination.x = App->entitymodule->player->position.x;
+		destination.y = App->entitymodule->player->position.y;
+
+		//if the path creates->
+		if (CreatePath(destination)) 
+		{
+			pathfinding = true;
+			create_path = false;
+		}
+	}
+
+	if (pathfinding) 
+	{
+		// go to
+		if (!Find_a_Path() && find_path)
+		{
+			find_path = false;
+		}
+		else 
+		{
+			//in case the enemy reaches the final of the path
+			pathfinding = false;
+			is_path_done = true;
+		}
+		
+	}
+}
+
+bool Boo::Find_a_Path()
+{
+	bool ret = true;
+
+	//when boo needs more than one step to reach player, if he doesn't then player probably dead af
+	if (path_size > 1) 
+	{
+		iPoint go_to = App->map->MapToWorld(mlast_pathfinding[path].x, mlast_pathfinding[path].y);
+		//once we know where boo gotta go we send it to the function that moves him
+		Movement(go_to);
+
+		if (GetPositionINT() == go_to)
+		{
+			if (path < path_size - 1)
+				path++;
+		}
+
+		if (GetPositionINT() == App->map->MapToWorld(mlast_pathfinding[path_size - 1].x, mlast_pathfinding[path_size - 1].y))
+			ret = false;
+	}
+	else
+		ret = false;
+
+	return ret;
+}
+
+void Boo::Movement(iPoint go_to)
+{
+	if (position.x < go_to.x)		position.x += 1.0f;
+	else if (position.x > go_to.x)	position.x -= 1.0f;
+	if (position.y < go_to.y)		position.y +=1.0f;
+	else if (position.y > go_to.y)	position.y -= 1.0f;
+}
+
+iPoint Boo::GetPositionINT() const
+{
+	return iPoint(position.x, position.y);
 }
