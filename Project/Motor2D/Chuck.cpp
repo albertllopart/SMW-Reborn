@@ -66,7 +66,8 @@ bool Chuck::Start()
 	graphic = App->tex->Load("textures/Chuck.png");
 	current_animation = &idle;
 	collision = App->collision->AddCollider({ (int)position.x, (int)position.y, CHUCK_WIDTH, CHUCK_HIGHT }, COLLIDER_CHUCK, this);
-	//state = IDLE_LEFT;
+	state = IDLE_LEFT;
+	direction = R;
 	return true;
 }
 
@@ -78,7 +79,18 @@ bool Chuck::PreUpdate()
 bool Chuck::Update(float dt)
 {
 	if ((position.x - CHASE_RANGE < App->entitymodule->player->position.x && position.x > App->entitymodule->player->position.x) || (position.x + CHASE_RANGE > App->entitymodule->player->position.x && position.x < App->entitymodule->player->position.x))
-		Move(dt);
+	{
+		state = IDLE_LEFT;
+		if (App->map->IsWalkable(this) == true && App->map->IsFallable(this) == false)
+		{
+			Move(dt);
+		}
+		if (position.x < App->entitymodule->player->position.x)
+			direction = R;
+		else
+			direction = L;
+	}
+		
 	else
 	{
 		state = IDLE_LEFT;
@@ -170,6 +182,7 @@ void Chuck::Move(float dt)
 		{
 			position.x -= 50.0f * dt;
 			state = WALK_LEFT;
+			direction = L;
 
 			if (walking_sound_timer >= 0.15f)
 			{
@@ -182,6 +195,8 @@ void Chuck::Move(float dt)
 		{
 			position.x += 50.0f * dt;
 			state = WALK_RIGHT;
+			direction = R;
+
 			if (walking_sound_timer >= 0.15f)
 			{
 				walking_sound_timer = 0;

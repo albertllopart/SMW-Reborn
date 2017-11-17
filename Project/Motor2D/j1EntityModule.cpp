@@ -6,7 +6,7 @@
 
 j1EntityModule::j1EntityModule() : j1Module()
 {
-	name = "Entityodule";
+	name = "Entitymodule";
 }
 
 j1EntityModule::~j1EntityModule(){}

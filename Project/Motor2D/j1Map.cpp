@@ -425,13 +425,13 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	return ret;
 }
 
-bool j1Map::IsWalkable()
+bool j1Map::IsWalkable(Entity* entity)
 {
 	BROFILER_CATEGORY("Map IsWalkable", Profiler::Color::Yellow)
 
-	bool ret;
-	int player_x	= App->entitymodule->player->position.x / 16 ; //check next tile right
-	int player_y	= (App->entitymodule->player->position.y + 14)/ 16;
+	bool ret = true;
+	int player_x	= entity->position.x / 16 ; //check next tile right
+	int player_y	= (entity->position.y + 14) / 16;
 	p2List_item<MapLayer*>* iterator;
 	p2List_item<MapLayer*>* fakeLayer = nullptr;
 	
@@ -445,7 +445,7 @@ bool j1Map::IsWalkable()
 
 	//uint nextGid = fakeLayer->data->GetGid(player_x,player_y);
 	uint* nextGid = &fakeLayer->data->gid[1 + player_x + player_y*fakeLayer->data->width];
-	if (App->entitymodule->player->direction == R)
+	if (entity->direction == R)
 	{
 		nextGid++;
 		if (*nextGid == 19) 
@@ -453,7 +453,7 @@ bool j1Map::IsWalkable()
 		else if (*nextGid != 19)
 			ret = true;
 	}
-	else if (App->entitymodule->player->direction == L)
+	else if (entity->direction == L)
 	{
 		nextGid;
 		if (*nextGid == 19) 
@@ -462,7 +462,43 @@ bool j1Map::IsWalkable()
 			ret = true;
 	}
 
-	
+	return ret;
+}
+
+bool j1Map::IsFallable(Entity* entity)
+{
+	bool ret = false;
+	int player_x = entity->position.x / 16; //check next tile right
+	int player_y = ((entity->position.y + 14) / 16) + 1;
+	p2List_item<MapLayer*>* iterator;
+	p2List_item<MapLayer*>* fakeLayer = nullptr;
+
+	for (iterator = data.layers.start; iterator != NULL; iterator = iterator->next)
+	{
+		if (iterator->data->name == "logica")
+		{
+			fakeLayer = iterator;
+		}
+	}
+
+	//uint nextGid = fakeLayer->data->GetGid(player_x,player_y);
+	uint* nextGid = &fakeLayer->data->gid[1 + player_x + player_y*fakeLayer->data->width];
+	if (entity->direction == R)
+	{
+		nextGid++;
+		if (*nextGid == 0)
+			ret = true;
+		else if (*nextGid != 0)
+			ret = false;
+	}
+	else if (entity->direction == L)
+	{
+		nextGid;
+		if (*nextGid == 0)
+			ret = true;
+		else if (*nextGid != 0)
+			ret = false;
+	}
 
 	return ret;
 }

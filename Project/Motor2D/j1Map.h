@@ -6,6 +6,8 @@
 #include "p2Point.h"
 #include "j1Module.h"
 
+class Entity;
+
 // TODO 1: Create a struct for the map layer
 struct MapLayer
 {
@@ -102,7 +104,8 @@ public:
 	iPoint WorldToMap(int x, int y) const;
 
 	//Colisions
-	bool IsWalkable();
+	bool IsWalkable(Entity* entity);
+	bool IsFallable(Entity* entity);
 	bool level_1 = true;
 	bool level_2 = false;
 	bool want_to_change_map = false;

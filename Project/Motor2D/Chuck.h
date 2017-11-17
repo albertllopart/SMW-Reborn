@@ -50,11 +50,8 @@ public:
 	fPoint				GetPositionINT() const;
 
 private:
-	//enemy
-	Entity				enemy1;
 
 	//Draw
-	EDirection			direction;
 	SDL_Texture*		graphic = nullptr;
 
 	//Animations

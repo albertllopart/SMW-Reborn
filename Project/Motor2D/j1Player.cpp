@@ -195,7 +195,7 @@ void j1Player::Input(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		direction = R;
-		if (App->map->IsWalkable())
+		if (App->map->IsWalkable(this))
 		{
 			position.x += (SPEED_X * dt);
 		}
@@ -206,7 +206,7 @@ void j1Player::Input(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
 	{
 		direction = R;
-		if (App->map->IsWalkable())
+		if (App->map->IsWalkable(this))
 		{
 			position.x += (SPEED_X * dt);
 		}
@@ -218,7 +218,7 @@ void j1Player::Input(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		direction = L;
-		if (App->map->IsWalkable())
+		if (App->map->IsWalkable(this))
 		{
 			position.x -= (SPEED_X * dt);
 		}
@@ -228,7 +228,7 @@ void j1Player::Input(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
 	{
 		direction = L;
-		if (App->map->IsWalkable())
+		if (App->map->IsWalkable(this))
 		{
 			position.x -= (SPEED_X * dt);
 		}
