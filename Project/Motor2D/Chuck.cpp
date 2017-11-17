@@ -68,6 +68,13 @@ bool Chuck::Start()
 	current_animation = &idle;
 	state = IDLE_LEFT;
 	direction = R;
+
+	chuck_quadrant_1.x = position.x / TILE_WIDTH;
+	chuck_quadrant_2.x = (position.x + CHUCK_WIDTH) / TILE_WIDTH;
+
+	chuck_quadrant_1.y = position.y / TILE_WIDTH;
+	chuck_quadrant_2.y = (position.y + CHUCK_HIGHT) / TILE_WIDTH;
+
 	return true;
 }
 
@@ -81,7 +88,7 @@ bool Chuck::Update(float dt)
 	if ((position.x - CHASE_RANGE < App->entitymodule->player->position.x && position.x > App->entitymodule->player->position.x) || (position.x + CHASE_RANGE > App->entitymodule->player->position.x && position.x < App->entitymodule->player->position.x))
 	{
 		state = IDLE_LEFT;
-		if (App->map->IsWalkable(this) == true && App->map->IsFallable(this) == false)
+		if (App->map->IsWalkable(this) == true /*&& App->map->IsFallable(this) == false*/)
 		{
 			Move(dt);
 		}
@@ -90,11 +97,16 @@ bool Chuck::Update(float dt)
 		else
 			direction = L;
 	}
-		
 	else
 	{
 		state = IDLE_LEFT;
 	}
+
+	if (Falling())
+	{
+		position.y += 150 * dt;
+	}
+	
 
 	//collision
 	collision->SetPos(position.x, position.y);
@@ -108,6 +120,12 @@ bool Chuck::Update(float dt)
 
 bool Chuck::PostUpdate()
 {	
+	chuck_quadrant_1.x = position.x / TILE_WIDTH;
+	chuck_quadrant_2.x = (position.x + CHUCK_WIDTH) / TILE_WIDTH;
+
+	chuck_quadrant_1.y = position.y / TILE_WIDTH;
+	chuck_quadrant_2.y = (position.y + CHUCK_HIGHT) / TILE_WIDTH;
+
 	return true;
 }
 
@@ -192,7 +210,10 @@ void Chuck::Move(float dt)
 			if (walking_sound_timer >= 0.15f)
 			{
 				walking_sound_timer = 0;
-				App->audio->PlayFx(4);
+				if (Falling() == false)
+				{
+					App->audio->PlayFx(4);
+				}
 			}
 		}
 
@@ -205,10 +226,52 @@ void Chuck::Move(float dt)
 			if (walking_sound_timer >= 0.15f)
 			{
 				walking_sound_timer = 0;
-				App->audio->PlayFx(4);
+				if (Falling() == false)
+				{
+					App->audio->PlayFx(4);
+				}
 			}
 		}
 	}
 	/*if (count_rounded > 0.2f)
 		count = 0;*/
+}
+
+bool Chuck::Falling()
+{
+	bool ret = false;
+	p2List_item<MapLayer*>* iterator;
+	p2List_item<MapLayer*>* fakeLayer = nullptr;
+
+	for (iterator = App->map->data.layers.start; iterator != NULL; iterator = iterator->next)
+	{
+		if (iterator->data->name == "logica")
+		{
+			fakeLayer = iterator;
+		}
+	}
+
+	//uint nextGid = fakeLayer->data->GetGid(player_x,player_y);
+	uint* nextGid1 = &fakeLayer->data->gid[1 + chuck_quadrant_1.x + chuck_quadrant_2.y * fakeLayer->data->width];
+	uint* nextGid2 = &fakeLayer->data->gid[1 + chuck_quadrant_2.x + chuck_quadrant_2.y * fakeLayer->data->width];
+
+
+	if (*nextGid1 == 0 && *nextGid2 == 0)
+	{
+		ret = true;
+	}
+	else if (*nextGid1 == 19 || *nextGid2 == 19)
+	{
+		ret = false;
+	}
+	else if (*nextGid1 == 20)
+	{
+		//destroy chuck
+	}
+	else
+	{
+		ret = true;
+	}
+
+	return ret;
 }

@@ -49,6 +49,11 @@ public:
 	void				Move(float dt);
 	fPoint				GetPositionINT() const;
 
+	bool				Falling();
+
+	iPoint				chuck_quadrant_1;
+	iPoint				chuck_quadrant_2;
+
 
 private:
 
