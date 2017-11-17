@@ -29,19 +29,12 @@ bool j1Map::Awake(pugi::xml_node& config)
 
 	folder.create(config.child("folder").child_value());
 
-	//entities
+	//player
+
 	fPoint pos;
-	pos.create(150, 197);
+	pos.create(10,197);
 
-	fPoint pos2;
-	pos2.create(120, 120);
-
-	fPoint pos3;
-	pos3.create(10,197);
-
-	App->entitymodule->CreateChuck(pos);
-	App->entitymodule->CreateBoo(pos2);
-	App->entitymodule->CreatePlayer(pos3);
+	App->entitymodule->CreatePlayer(pos);
 	
 	return ret;
 }
@@ -111,6 +104,42 @@ void j1Map::Draw(float dt)
 		App->input->GetMousePosition(x, y);
 		iPoint tile = WorldToMap(x, y);
 		LOG("Mouse tile pos: x - %i, y - %i", tile.x, tile.y);
+}
+
+bool j1Map::LoadEnemies()
+{
+	bool ret = false;
+	p2List_item<MapLayer*>* iterator;
+	p2List_item<MapLayer*>* fakeLayer = nullptr;
+
+	for (iterator = App->map->data.layers.start; iterator != NULL; iterator = iterator->next)
+	{
+		if (iterator->data->name == "logica")
+		{
+			fakeLayer = iterator;
+		}
+	}
+
+	for (uint i = 0; i < data.height; i++)
+	{
+		for (uint j = 0; j < data.width; j++)
+		{
+			uint* nextGid = &fakeLayer->data->gid[i * data.width + j];
+			if (*nextGid == 9)
+			{
+				fPoint pos;
+				pos.create((float)j * 16, ((float)i * 16) + 5);
+				App->entitymodule->CreateChuck(pos);
+			}
+			if (*nextGid == 1)
+			{
+				fPoint pos;
+				pos.create((float)j * 16, ((float)i * 16));
+				App->entitymodule->CreateBoo(pos);
+			}
+		}
+	}
+	return ret;
 }
 
 

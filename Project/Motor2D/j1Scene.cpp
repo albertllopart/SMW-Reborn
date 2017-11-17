@@ -47,6 +47,7 @@ bool j1Scene::Start()
 	App->audio->LoadFx("audio/mario_hurt.wav"); //5
 	current_lvl = 1;
 	App->map->Load("level_1.tmx");
+	App->map->LoadEnemies();
 	return true;
 }
 
