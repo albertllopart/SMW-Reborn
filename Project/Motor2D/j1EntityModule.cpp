@@ -60,7 +60,7 @@ bool j1EntityModule::PostUpdate()
 	return true;
 }
 
-void j1EntityModule::CreateBoo(iPoint position)
+void j1EntityModule::CreateBoo(fPoint position)
 {
 	Boo* boo = new Boo();
 	boo->Awake();
@@ -69,7 +69,7 @@ void j1EntityModule::CreateBoo(iPoint position)
 	entities.add(boo);
 }
 
-void j1EntityModule::CreateChuck(iPoint position)
+void j1EntityModule::CreateChuck(fPoint position)
 {
 	Chuck* chuck = new Chuck();
 	chuck->Awake();
@@ -78,7 +78,7 @@ void j1EntityModule::CreateChuck(iPoint position)
 	entities.add(chuck);
 }
 
-void j1EntityModule::CreatePlayer(iPoint position)
+void j1EntityModule::CreatePlayer(fPoint position)
 {
 	j1Player* player_a = new j1Player();
 	player_a->Awake();

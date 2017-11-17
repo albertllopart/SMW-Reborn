@@ -92,7 +92,7 @@ public:
 	bool			active;
 	Type			type;
 	p2SString		name;
-	iPoint			position;
+	fPoint			position;
 	bool			flies;
 
 	EState			state;

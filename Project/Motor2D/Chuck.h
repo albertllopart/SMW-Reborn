@@ -7,6 +7,7 @@
 
 #define CHUCK_HIGHT 27
 #define CHUCK_WIDTH 26
+#define CHASE_RANGE 120
 
 struct SDL_Texture;
 
@@ -39,14 +40,14 @@ public:
 
 	int					GetDirection() const;
 
-	iPoint				Getposition() const;
+	fPoint				Getposition() const;
 
 	// Called before quitting
 	bool				CleanUp();
 
 	//move when the player is near
 	void				Move(float dt);
-	iPoint				GetPositionINT() const;
+	fPoint				GetPositionINT() const;
 
 private:
 	//enemy
@@ -66,5 +67,6 @@ private:
 
 	//Move
 	float				count;
+	float				walking_sound_timer = 0;
 
 };

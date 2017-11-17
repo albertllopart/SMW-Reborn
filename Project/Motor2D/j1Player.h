@@ -8,9 +8,9 @@
 #include	"j1Collision.h"
 #include	"Entity.h"
 
-#define		SPEED_X 100.0f
-#define		SPEED_Y 1.0f
-#define		GRAVITY -2.0f
+#define		SPEED_X 100
+#define		SPEED_Y 1
+#define		GRAVITY -2
 
 #define		TILE_WIDTH	16
 #define		MARIO_WIDTH 14
@@ -65,6 +65,5 @@ private:
 	Animation			short_hop_right;
 	Animation*			current_animation;
 
-	Collider*			collision = nullptr;
 };
 

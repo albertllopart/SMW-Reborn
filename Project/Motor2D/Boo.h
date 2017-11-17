@@ -39,7 +39,7 @@ public:
 
 	int GetDirection() const;
 
-	iPoint Getposition() const;
+	fPoint Getposition() const;
 
 	// Called before quitting
 	bool CleanUp();

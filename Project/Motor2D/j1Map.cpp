@@ -30,13 +30,13 @@ bool j1Map::Awake(pugi::xml_node& config)
 	folder.create(config.child("folder").child_value());
 
 	//entities
-	iPoint pos;
+	fPoint pos;
 	pos.create(150, 197);
 
-	iPoint pos2;
+	fPoint pos2;
 	pos2.create(120, 120);
 
-	iPoint pos3;
+	fPoint pos3;
 	pos3.create(10,197);
 
 	App->entitymodule->CreateChuck(pos);

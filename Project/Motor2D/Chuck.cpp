@@ -77,7 +77,7 @@ bool Chuck::PreUpdate()
 
 bool Chuck::Update(float dt)
 {
-	if (App->entitymodule->player->position.x > 70 && App->entitymodule->player->position.x < 200)
+	if ((position.x - CHASE_RANGE < App->entitymodule->player->position.x && position.x > App->entitymodule->player->position.x) || (position.x + CHASE_RANGE > App->entitymodule->player->position.x && position.x < App->entitymodule->player->position.x))
 		Move(dt);
 	else
 	{
@@ -143,7 +143,7 @@ int Chuck::GetDirection() const
 	return 0;
 }
 
-iPoint Chuck::Getposition() const
+fPoint Chuck::Getposition() const
 {
 	return position;
 }
@@ -153,30 +153,42 @@ bool Chuck::CleanUp()
 	return true;
 }
 
-iPoint Chuck::GetPositionINT() const
+fPoint Chuck::GetPositionINT() const
 {
-	return iPoint(position.x, position.y);
+	return fPoint(position.x, position.y);
 }
 
 
 void Chuck::Move(float dt)
 {
-	count += dt;
-	float count_rounded = roundf(count*10) / 10; //rounded to 1 decimal
-	if (count_rounded > 0.199f)
+	walking_sound_timer += dt;
+	//count += dt;
+	//float count_rounded = roundf(count*10) / 10; //rounded to 1 decimal
+	if (1)
 	{
 		if (position.x > App->entitymodule->player->position.x)
 		{
-			position.x -= 1.0f;
+			position.x -= 50.0f * dt;
 			state = WALK_LEFT;
+
+			if (walking_sound_timer >= 0.15f)
+			{
+				walking_sound_timer = 0;
+				App->audio->PlayFx(4);
+			}
 		}
 
 		if (position.x < App->entitymodule->player->position.x)
 		{
-			position.x += 1.0f;
+			position.x += 50.0f * dt;
 			state = WALK_RIGHT;
+			if (walking_sound_timer >= 0.15f)
+			{
+				walking_sound_timer = 0;
+				App->audio->PlayFx(4);
+			}
 		}
 	}
-	if (count_rounded > 0.2f)
-		count = 0;
+	/*if (count_rounded > 0.2f)
+		count = 0;*/
 }

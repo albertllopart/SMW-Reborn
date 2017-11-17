@@ -32,9 +32,9 @@ public:
 	// Called before all Updates
 	bool				PostUpdate();
 
-	void				CreateBoo(iPoint position);
-	void				CreateChuck(iPoint position);
-	void				CreatePlayer(iPoint position);
+	void				CreateBoo(fPoint position);
+	void				CreateChuck(fPoint position);
+	void				CreatePlayer(fPoint position);
 
 	void				DeleteBoo(Entity* boo);
 	void				DeleteChuck(Entity* chuck);

@@ -58,7 +58,7 @@ bool j1Player::Start()
 	position.x = 10;
 	position.y = 197;
 
-	//collision = App->collision->AddCollider({ (int)position.x, (int)position.y, MARIO_WIDTH, MARIO_HIGHT }, COLLIDER_PLAYER, this);
+	collision = App->collision->AddCollider({ (int)position.x, (int)position.y, MARIO_WIDTH, MARIO_HIGHT }, COLLIDER_PLAYER, this);
 
 	//player quadrant position
 	player_quadrant_1.x = position.x / TILE_WIDTH;
@@ -87,14 +87,14 @@ bool j1Player::Update(float dt)
 			{
 				if (Jump())
 				{
-					position.y -= 150.0f * dt;
+					position.y -= 150 * dt;
 				}
 			}
 			else
 			{
 				if (Falling())
 				{
-					position.y += 150.0f * dt;
+					position.y += 150 * dt;
 				}
 			}
 
@@ -197,7 +197,7 @@ void j1Player::Input(float dt)
 		direction = R;
 		if (App->map->IsWalkable())
 		{
-			position.x += SPEED_X * dt;
+			position.x += (SPEED_X * dt);
 		}
 		if (Falling() == false)
 			state = WALK_RIGHT;
@@ -208,7 +208,7 @@ void j1Player::Input(float dt)
 		direction = R;
 		if (App->map->IsWalkable())
 		{
-			position.x += SPEED_X * dt;
+			position.x += (SPEED_X * dt);
 		}
 		state = IDLE_RIGHT;
 	}
@@ -220,7 +220,7 @@ void j1Player::Input(float dt)
 		direction = L;
 		if (App->map->IsWalkable())
 		{
-			position.x -= SPEED_X * dt;
+			position.x -= (SPEED_X * dt);
 		}
 		if (Falling() == false)
 			state = WALK_LEFT;	
@@ -230,7 +230,7 @@ void j1Player::Input(float dt)
 		direction = L;
 		if (App->map->IsWalkable())
 		{
-			position.x -= SPEED_X * dt;
+			position.x -= (SPEED_X * dt);
 		}
 		state = IDLE_LEFT;
 	}

@@ -132,7 +132,7 @@ int Boo::GetDirection() const
 	return 0;
 }
 
-iPoint Boo::Getposition() const
+fPoint Boo::Getposition() const
 {
 	return position;
 }
