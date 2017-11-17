@@ -78,7 +78,7 @@ void j1EntityModule::CreateChuck(iPoint position)
 	entities.add(chuck);
 }
 
-void j1EntityModule::CreatePlayer(fPoint position)
+void j1EntityModule::CreatePlayer(iPoint position)
 {
 	j1Player* player_a = new j1Player();
 	player_a->Awake();

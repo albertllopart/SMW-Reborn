@@ -36,7 +36,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 	iPoint pos2;
 	pos2.create(120, 120);
 
-	fPoint pos3;
+	iPoint pos3;
 	pos3.create(10,197);
 
 	App->entitymodule->CreateChuck(pos);
