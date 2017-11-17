@@ -301,6 +301,11 @@ void j1Player::Input(float dt)
 	{
 		App->LoadGame();
 	}
+	//GodMode
+	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		GodMode();
+	}
 	// To lvl1
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
@@ -314,6 +319,18 @@ void j1Player::Input(float dt)
 
 }
 
+bool j1Player::GodMode()
+{
+	if(App->entitymodule->player->god_mode == false)
+		App->entitymodule->player->god_mode = true;
+	else if (App->entitymodule->player->god_mode == true)
+	{
+		App->entitymodule->player->god_mode = false;
+	}
+			
+	
+	return true;
+}
 bool j1Player::Jump()
  {
 	bool ret;

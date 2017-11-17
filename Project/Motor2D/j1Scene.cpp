@@ -173,7 +173,7 @@ void j1Scene::LoadLvl(int current, bool lvl_start)
 		
 		App->render->camera.x = 0;
 		App->render->camera.y = 0;
-		App->entitymodule->player->position.x = 10;
+		App->entitymodule->player->position.x = 00;
 		App->entitymodule->player->position.x = 197;
 	}
 	if (current == 1)

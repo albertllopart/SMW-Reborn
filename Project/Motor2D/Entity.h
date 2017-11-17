@@ -96,7 +96,7 @@ public:
 	fPoint						position;
 	bool						flies;
 	bool						dead = false;
-
+	bool						god_mode = false;
 	EState						state;
 	EDirection					direction;
 

@@ -35,7 +35,7 @@ public:
 	void Draw();
 	bool Jump();
 	bool Falling();
-
+	bool GodMode();
 	
 	iPoint				player_quadrant_1;
 	iPoint				player_quadrant_2;

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<save>
+	<input />
+	<window />
+	<textures />
+	<audio />
+	<map />
+	<scene current_lvl="1" />
+	<Entitymodule />
+	<pathfinding />
+	<fadetoblack />
+	<:anonymous />
+	<renderer>
+		<camera x="-478" y="0" />
+	</renderer>
+</save>

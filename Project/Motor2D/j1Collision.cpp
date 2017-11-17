@@ -67,7 +67,7 @@ bool j1Collision::Update(float dt)
 
 			c2 = colliders[j];
 
-			if (c1->CheckCollision(c2->rect) == true)
+			if (c1->CheckCollision(c2->rect) == true && App->entitymodule->player->god_mode == false)
 			{
 				if (matrix[c1->type][c2->type])
 				{
@@ -76,8 +76,14 @@ bool j1Collision::Update(float dt)
 					App->audio->PlayFx(5);
 					
 				}
+				
 					
 			}
+			else
+			{
+
+			}
+			
 		}
 	}
 
@@ -115,10 +121,10 @@ void j1Collision::DebugDraw()
 				App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha); //green
 				break;
 			case COLLIDER_CHUCK:
-				App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha); //red
+				App->render->DrawQuad(colliders[i]->rect, 255, 35, 1, alpha); //red
 				break;
 			case COLLIDER_BOO:
-				App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha); //red
+				App->render->DrawQuad(colliders[i]->rect, 255, 35, 1, alpha); //red
 				break;
 		}
 	}
