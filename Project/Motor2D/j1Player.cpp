@@ -86,6 +86,10 @@ bool j1Player::Update(float dt)
 			{
 				dead_timer = 0;
 				dead = false;
+				position.x = 10;
+				position.y = 197;
+				App->render->camera.x = 0;
+				App->render->camera.y = 0;
 			}
 
 			Input(dt);
@@ -130,10 +134,6 @@ bool j1Player::PostUpdate()
 	if (dead)
 	{
 		state = IDLE_RIGHT;
-		position.x = 10;
-		position.y = 197;
-		App->render->camera.x = 0;
-		App->render->camera.y = 0;
 		//App->map->restart();
 	}
 
@@ -388,6 +388,7 @@ bool j1Player::Falling()
 		else if (*nextGid1 == 20)
 		{
 			App->audio->PlayFx(5);
+			App->fadetoblack->FadeToBlack(App->entitymodule, App->entitymodule, 1.5f);
 			dead = true;
 			ret = false;
 			jump2_on = false;
