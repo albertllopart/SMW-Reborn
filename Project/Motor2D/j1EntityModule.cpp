@@ -90,12 +90,42 @@ void j1EntityModule::CreatePlayer(fPoint position)
 
 void j1EntityModule::DeleteBoo(Entity* boo)
 {
-
+	if (boo != nullptr)
+	{
+		int find = entities.find(boo);
+		int current_position = 0;
+		p2List_item<Entity*>* item = entities.start;
+		while (item != NULL)
+		{
+			if (current_position == find)
+			{
+				entities.del(item);
+				return;
+			}
+			item = item->next;
+			current_position++;
+		}
+	}
 }
 
 void j1EntityModule::DeleteChuck(Entity* chuck)
 {
-
+	if (chuck != nullptr)
+	{
+		int find = entities.find(chuck);
+		int current_position = 0;
+		p2List_item<Entity*>* item = entities.start;
+		while (item != NULL)
+		{
+			if (current_position == find)
+			{
+				entities.del(item);
+				return;
+			}
+			item = item->next;
+			current_position++;
+		}
+	}
 }
 
 void j1EntityModule::DeletePlayer(Entity* player)

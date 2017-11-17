@@ -266,7 +266,7 @@ bool Chuck::Falling()
 	}
 	else if (*nextGid1 == 20)
 	{
-		//destroy chuck
+		App->entitymodule->DeleteChuck(this);
 	}
 	else
 	{
