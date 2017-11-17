@@ -54,7 +54,6 @@ public:
 
 private:
 
-	EDirection			direction;
 	SDL_Texture*		graphic = nullptr;
 
 	//Animations

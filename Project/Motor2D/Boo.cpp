@@ -64,6 +64,7 @@ bool Boo::Start()
 	graphic = App->tex->Load("textures/Boo.png");
 	current_animation = &idle;
 	state = IDLE_LEFT;
+	direction = R;
 
 	//pathfinding
 	is_path_done = true;
@@ -141,7 +142,7 @@ bool Boo::Save(pugi::xml_node &) const
 
 int Boo::GetDirection() const
 {
-	return 0;
+	return direction;
 }
 
 fPoint Boo::Getposition() const
@@ -164,7 +165,7 @@ bool Boo::CreatePath(fPoint destination)
 	bool ret = false;
 
 	//we call the pathfinding module and create a path, the bool we send is to know if the enmy can go in diagonal lines
-	if (App->pathfinding->CreatePath(App->map->WorldToMap(position.x, position.y), App->map->WorldToMap(destination.x, destination.y), true)) 
+	if (App->pathfinding->CreatePath(App->map->WorldToMap(position.x, position.y), App->map->WorldToMap(App->entitymodule->player->position.x, App->entitymodule->player->position.y), true))
 	{
 		//we save the last path in a variable
 		last_pathfinding = App->pathfinding->GetLastPath();
@@ -261,8 +262,8 @@ bool Boo::Find_a_Path()
 
 void Boo::Movement(iPoint go_to)
 {
-	if (position.x < go_to.x)		position.x += 1.0f;
-	else if (position.x > go_to.x)	position.x -= 1.0f;
+	if (position.x < go_to.x)		position.x += 1.0f, direction = R;
+	else if (position.x > go_to.x)	position.x -= 1.0f, direction = L;
 	if (position.y < go_to.y)		position.y +=1.0f;
 	else if (position.y > go_to.y)	position.y -= 1.0f;
 }
