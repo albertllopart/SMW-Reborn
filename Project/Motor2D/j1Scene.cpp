@@ -44,6 +44,7 @@ bool j1Scene::Start()
 	App->audio->LoadFx("audio/double_jump.wav"); //2
 	App->audio->LoadFx("audio/level_complete.wav"); //3
 	App->audio->LoadFx("audio/chuck_walk.wav"); //4
+	App->audio->LoadFx("audio/mario_hurt.wav"); //5
 	current_lvl = 1;
 	App->map->Load("level_1.tmx");
 	return true;
