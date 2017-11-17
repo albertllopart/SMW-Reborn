@@ -94,6 +94,7 @@ public:
 	p2SString		name;
 	fPoint			position;
 	bool			flies;
+	bool			dead = false;
 
 	EState			state;
 	EDirection		direction;

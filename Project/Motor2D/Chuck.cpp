@@ -95,7 +95,12 @@ bool Chuck::Update(float dt)
 	{
 		state = IDLE_LEFT;
 	}
+
+	//collision
 	collision->SetPos(position.x, position.y);
+	OnCollision(collision, App->entitymodule->player->collision);
+	
+
 	Draw();
 
 	return true;

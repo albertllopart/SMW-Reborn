@@ -3,6 +3,7 @@
 #include "j1Render.h"
 #include "j1Collision.h"
 #include "Entity.h"
+#include "j1EntityModule.h"
 
 j1Collision::j1Collision()
 {
@@ -68,10 +69,12 @@ bool j1Collision::Update(float dt)
 			if (c1->CheckCollision(c2->rect) == true)
 			{
 				if (matrix[c1->type][c2->type])
-					c1->callback->OnCollision(c1, c2);
-
-				if (matrix[c2->type][c1->type])
-					c2->callback->OnCollision(c2, c1);
+				{
+					//c1->callback->OnCollision(c1, c2);
+					App->entitymodule->player->dead = true;
+					
+				}
+					
 			}
 		}
 	}

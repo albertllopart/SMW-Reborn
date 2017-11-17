@@ -49,6 +49,7 @@ public:
 	void				Move(float dt);
 	fPoint				GetPositionINT() const;
 
+
 private:
 
 	//Draw

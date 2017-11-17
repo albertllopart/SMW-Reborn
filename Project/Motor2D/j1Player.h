@@ -42,8 +42,6 @@ public:
 
 	bool				level_complete = false;
 
-	bool				dead = false;
-
 private:
 	unsigned int		width = 0;
 	unsigned int		height = 0;
