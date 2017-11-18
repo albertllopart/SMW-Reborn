@@ -123,6 +123,7 @@ public:
 
 	MapData				data;
 	float				cloud_parallax = 0.0f;
+	MapLayer*			pathfinding;
 
 	//LOGIC LAYER
 	bool				logic = false;

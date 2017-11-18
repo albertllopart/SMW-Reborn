@@ -3,8 +3,9 @@
 #include "j1App.h"
 #include "j1PathFinding.h"
 #include "j1EntityModule.h"
+#include "j1Map.h"
 
-j1PathFinding::j1PathFinding() : j1Module(), map(NULL), last_path(DEFAULT_PATH_LENGTH), width(0), height(0)
+j1PathFinding::j1PathFinding() : j1Module(), map(NULL), last_path(DEFAULT_PATH_LENGTH), width(101), height(19)
 {
 	name.create("pathfinding");
 }
@@ -53,8 +54,9 @@ bool j1PathFinding::IsWalkable(const iPoint& pos) const
 // Utility: return the walkability value of a tile
 uchar j1PathFinding::GetTileAt(const iPoint& pos) const
 {
+	uint tile_number = App->map->pathfinding->GetGid(pos.x,pos.y);
 	if (CheckBoundaries(pos))
-		return map[(pos.y*width) + pos.x];
+		return tile_number;
 
 	return INVALID_WALK_CODE;
 }

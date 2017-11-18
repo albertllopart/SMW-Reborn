@@ -450,6 +450,11 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 		layer->gid[i] = Iterator.attribute("gid").as_uint();
 		i++;
 	}
+
+	if (layer->name == "logica")
+	{
+		pathfinding = layer;
+	}
 	
 	return ret;
 }
@@ -490,6 +495,7 @@ bool j1Map::IsWalkable(Entity* entity)
 		else if (*nextGid != 19) 
 			ret = true;
 	}
+
 
 	return ret;
 }
