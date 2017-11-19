@@ -112,21 +112,14 @@ void Boo::Draw()
 		current_animation = &idle;
 		break;
 
-	/*case SHORT_HOP_LEFT:
-		current_animation = &jump_left;
-		break;
-
-	case SHORT_HOP_RIGHT:
-		current_animation = &jump_right;
-		break;
 
 	case WALK_LEFT:
-		current_animation = &walk_left;
+		current_animation = &chase_left;
 		break;
 
 	case WALK_RIGHT:
-		current_animation = &walk_right;
-		break;*/
+		current_animation = &chase_right;
+		break;
 
 
 	}
@@ -266,10 +259,10 @@ bool Boo::Find_a_Path()
 
 void Boo::Movement(iPoint go_to)
 {
-	if (position.x < go_to.x)		position.x += 1.0f, direction = R;
-	else if (position.x > go_to.x)	position.x -= 1.0f, direction = L;
-	if (position.y < go_to.y)		position.y +=1.0f;
-	else if (position.y > go_to.y)	position.y -= 1.0f;
+	if (position.x < go_to.x)		position.x += 2.0f, state = WALK_LEFT;
+	else if (position.x > go_to.x)	position.x -= 2.0f, state = WALK_RIGHT;
+	if (position.y < go_to.y)		position.y +=2.0f;
+	else if (position.y > go_to.y)	position.y -= 2.0f;
 }
 
 iPoint Boo::GetPositionINT() const
