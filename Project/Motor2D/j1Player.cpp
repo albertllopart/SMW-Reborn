@@ -123,7 +123,10 @@ bool j1Player::Update(float dt)
 	{
 		dead_timer += dt;
 	}
-
+	if (position.y > 500 || position.y < -500)
+	{
+		position.y = 147;
+	}
 	Draw();
 
 	return true;

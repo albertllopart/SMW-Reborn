@@ -76,6 +76,8 @@ void j1EntityModule::CreateChuck(fPoint position)
 	chuck->Start();
 	chuck->position = position;
 	entities.add(chuck);
+	
+	
 }
 
 void j1EntityModule::CreatePlayer(fPoint position)
@@ -95,6 +97,7 @@ void j1EntityModule::DeleteBoo(Entity* boo)
 		int find = entities.find(boo);
 		int current_position = 0;
 		p2List_item<Entity*>* item = entities.start;
+		j1Collision* col = new j1Collision();
 		while (item != NULL)
 		{
 			if (current_position == find)
@@ -170,30 +173,110 @@ bool j1EntityModule::Save(pugi::xml_node& node) const
 
 bool j1EntityModule::Load(pugi::xml_node& node)
 {
+	//std::string name = new std::string(root.name());
+	pugi::xml_node root = node.first_child();
+	for (int i = 0; i < entities.count(); i++)
+	{
+		//delete boo
+		if (entities[i]->name == "Boo")
+		{
+			DeleteBoo(entities[i]);
+			i--;
+		}
+		//delete chuck
+		else if (entities[i]->name == "Chuck")
+		{
+			DeleteChuck(entities[i]);
+			i--;
+		}
+			/*if (entities[i]->name == "player")
+			DeletePlayer(entities[i]);*/
+	}
+
+	while (root != NULL)
+	{
+		
+		if (strncmp(root.name(),"boo_position",13)==0)
+		{
+			fPoint point;
+			point.create(root.attribute("x").as_int(), root.attribute("y").as_int());
+			CreateBoo(point);
+
+		}
+		else if (strncmp(root.name(), "chuck_position", 15) == 0)
+		{
+			fPoint point;
+			point.create(root.attribute("x").as_int(), root.attribute("y").as_int());
+			CreateChuck(point);
+
+		}
+		else if (strncmp(root.name(), "player_position", 16) == 0)
+		{
+			
+			App->entitymodule->player->position.x = root.attribute("x").as_int();
+			App->entitymodule->player->position.y = root.attribute("y").as_int();
+
+		}
+		root = root.next_sibling();
+	}
+	
+	//std::string name = new std::string();
+	//char name [] = root.name();
+
+	//strcpy_s(name,,root.name());
+	//char* name = "boo_position";
+	/*
 	for (int i = 0; i < entities.count(); i++)
 	{
 		if (entities[i]->name == "Boo")
 		{
-			pugi::xml_node root = node.child("boo_position");
-			entities[i]->position.x = root.attribute("x").as_int();
-			entities[i]->position.y = root.attribute("y").as_int();
+			root = node;
 
+			for (int j = 0; j < cont; j++)
+			{
+				if (j >= 1)
+					root = root.child("boo_position").next_sibling();
+
+			}
+			if (cont2 == 0)
+			{
+				entities[i]->position.x = root.child("boo_position").attribute("x").as_int();
+				entities[i]->position.y = root.child("boo_position").attribute("y").as_int();
+			}
+			else 
+			{
+				entities[i]->position.x = root.attribute("x").as_int();
+				entities[i]->position.y = root.attribute("y").as_int();
+			}
+			
+			cont2++;
 		}
 		else if (entities[i]->name == "Chuck")
 		{
-			pugi::xml_node root = node.child("chuck_position");
-			entities[i]->position.x = root.attribute("x").as_int();
-			entities[i]->position.y = root.attribute("y").as_int();
+			root = node;
+			for (int j = 0; j < cont; j++)
+			{
+				if (j >= 1)
+				root = root.child("chuck_position").next_sibling();
+			}
+			entities[i]->position.x = root.child("chuck_position").attribute("x").as_int();
+			entities[i]->position.y = root.child("chuck_position").attribute("y").as_int();
 
 		}
-		else if (entities[i]->name == "player")
+		 if (entities[i]->name == "player")
 		{
-			pugi::xml_node root = node.child("player_position");
-			entities[i]->position.x = root.attribute("x").as_int();
-			entities[i]->position.y = root.attribute("y").as_int();
+			root = node;
+			for (int j = 0; j < cont ; j++)
+			{
+				if (j >= 1)
+				root = root.child("player_position").next_sibling();
+			}
+			entities[i]->position.x = root.child("player_position").attribute("x").as_int();
+			entities[i]->position.y = root.child("player_position").attribute("y").as_int();
 
 		}
-	}
+		cont++;
+	}*/
 	//pugi::xml_node root = node.child("position");
 	//position.x = root.attribute("x").as_int();
 	//position.y = root.attribute("y").as_int();

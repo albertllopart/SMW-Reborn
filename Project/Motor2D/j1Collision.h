@@ -57,6 +57,7 @@ public:
 	bool EraseCollider(Collider* collider);
 	void DebugDraw();
 
+	
 private:
 
 	Collider* colliders[MAX_COLLIDERS];

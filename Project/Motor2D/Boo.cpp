@@ -89,8 +89,11 @@ bool Boo::Update(float dt)
 {
 	Move();
 	Draw();
-	collision->SetPos(position.x, position.y);
-	OnCollision(collision, App->entitymodule->player->collision);
+	if (collision != NULL)
+	{
+		collision->SetPos(position.x, position.y);
+		OnCollision(collision, App->entitymodule->player->collision);
+	}
 	return true;
 }
 

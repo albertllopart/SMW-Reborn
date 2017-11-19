@@ -85,6 +85,7 @@ bool Chuck::PreUpdate()
 
 bool Chuck::Update(float dt)
 {
+	
 	if ((position.x - CHASE_RANGE < App->entitymodule->player->position.x && position.x > App->entitymodule->player->position.x) || (position.x + CHASE_RANGE > App->entitymodule->player->position.x && position.x < App->entitymodule->player->position.x))
 	{
 		state = IDLE_LEFT;
@@ -106,14 +107,21 @@ bool Chuck::Update(float dt)
 	{
 		position.y += 150 * dt;
 	}
-	
-
-	//collision
-	collision->SetPos(position.x, position.y);
-	OnCollision(collision, App->entitymodule->player->collision);
-	
-
+	if (position.y > 500 || position.y < -500)
+	{
+		position.y = 197;
+	}
 	Draw();
+	//collision
+	if (collision != NULL)
+	{
+		collision->SetPos(position.x, position.y);
+		OnCollision(collision, App->entitymodule->player->collision);
+	}
+	
+	
+
+	
 
 	return true;
 }
