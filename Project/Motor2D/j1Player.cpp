@@ -90,6 +90,23 @@ bool j1Player::Update(float dt)
 				position.y = 197;
 				App->render->camera.x = 0;
 				App->render->camera.y = 0;
+
+				for (int i = 0; i < App->entitymodule->entities.count(); i++)
+				{
+					//delete boo
+					if (App->entitymodule->entities[i]->name == "Boo" )
+					{
+						App->entitymodule->DeleteBoo(App->entitymodule->entities[i]);
+						i--;
+					}
+					
+				}
+				fPoint pos;
+				pos.create(144, 96);
+				App->entitymodule->CreateBoo(pos);
+				
+
+				
 			}
 
 			Input(dt);

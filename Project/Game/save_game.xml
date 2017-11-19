@@ -6,11 +6,17 @@
 	<audio />
 	<map />
 	<scene current_lvl="1" />
-	<Entitymodule />
+	<Entitymodule>
+		<player_position x="10" y="197" />
+		<boo_position x="144" y="96" />
+		<chuck_position x="688" y="165" />
+		<chuck_position x="176" y="197" />
+		<chuck_position x="464" y="197" />
+	</Entitymodule>
 	<pathfinding />
 	<fadetoblack />
 	<:anonymous />
 	<renderer>
-		<camera x="-188" y="0" />
+		<camera x="0" y="0" />
 	</renderer>
 </save>
