@@ -55,7 +55,7 @@ Boo::~Boo()
 
 bool Boo::Awake()
 {
-	position.create(150, 100);
+	//position.create(150, 100);
 	return true;
 }
 
@@ -166,7 +166,7 @@ bool Boo::CreatePath(fPoint destination)
 	bool ret = false;
 
 	//we call the pathfinding module and create a path, the bool we send is to know if the enmy can go in diagonal lines
-	if (App->pathfinding->CreatePath(App->map->WorldToMap(position.x, position.y), App->map->WorldToMap(destination.x, destination.y), true)) 
+	if (App->pathfinding->CreatePath(App->map->WorldToMap(position.x, position.y), App->map->WorldToMap(destination.x, destination.y), true)> -1)
 	{
 		//we save the last path in a variable
 		last_pathfinding = App->pathfinding->GetLastPath();

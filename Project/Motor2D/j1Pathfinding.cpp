@@ -48,7 +48,7 @@ bool j1PathFinding::CheckBoundaries(const iPoint& pos) const
 bool j1PathFinding::IsWalkable(const iPoint& pos) const
 {
 	uchar t = GetTileAt(pos);
-	return t != INVALID_WALK_CODE && t > 0;
+	return t != 19 && t != 20 && t >= 0 && t != INVALID_WALK_CODE;
 }
 
 // Utility: return the walkability value of a tile
@@ -88,9 +88,9 @@ p2List_item<PathNode>* PathList::Find(const iPoint& point) const
 p2List_item<PathNode>* PathList::GetNodeLowestScore() const
 {
 	p2List_item<PathNode>* ret = NULL;
-	int min = 65535;
+	int min = 80000;
 
-	p2List_item<PathNode>* item = list.end;
+ 	p2List_item<PathNode>* item = list.end;
 	while (item)
 	{
 		if (item->data.Score() < min)
@@ -131,7 +131,7 @@ uint PathNode::FindWalkableAdjacents(PathList& list_to_fill, bool flies) const
 		// north
 		cell.create(pos.x, pos.y + 1);
 		if (App->pathfinding->IsWalkable(cell))
-			list_to_fill.list.add(PathNode(-1, -1, cell, this));
+ 			list_to_fill.list.add(PathNode(-1, -1, cell, this));
 
 		// south
 		cell.create(pos.x, pos.y - 1);
@@ -201,7 +201,7 @@ int PathNode::Score() const
 int PathNode::CalculateF(const iPoint& destination)
 {
 	g = parent->g + 1;
-	h = pos.DistanceTo(destination);
+	h = pos.DistanceManhattan(destination);
 
 	return g + h;
 }
@@ -227,7 +227,7 @@ int j1PathFinding::CreatePath(iPoint& origin,iPoint& destination, bool flies)
 		PathList close;
 
 		// Add the origin tile to open
-		PathNode origin_node(0, origin.DistanceTo(destination), origin, nullptr);
+		PathNode origin_node(0, origin.DistanceManhattan(destination), origin, nullptr);
 		open.list.add(origin_node);
 
 		// Iterate while we have tile in the open list
@@ -242,7 +242,7 @@ int j1PathFinding::CreatePath(iPoint& origin,iPoint& destination, bool flies)
 			// Use the Pathnode::parent and Flip() the path when you are finish
 			if (close.list.end->data.pos == destination)
 			{
-				for (p2List_item<PathNode>* temp = close.list.end; temp->data.parent != nullptr; close.Find(temp->data.parent->pos))
+				for (p2List_item<PathNode>* temp = close.list.end; temp->data.parent != nullptr; temp = close.Find(temp->data.parent->pos))
 				{
 					last_path.PushBack(temp->data.pos);
 				}
