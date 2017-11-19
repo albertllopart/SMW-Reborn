@@ -75,5 +75,9 @@ private:
 	int							path_size;
 	const p2DynArray<iPoint>*	last_pathfinding;
 	p2DynArray<iPoint>			mlast_pathfinding; //m was Daniel Branicki idea lul
+
+	//pathfinding timer
+	float						pathfind_timer = 0;
+	bool						boo_chase = true;
 	
 };

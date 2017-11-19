@@ -10,6 +10,7 @@
 #include "j1EntityModule.h"
 #include "j1Map.h"
 #include "j1Pathfinding.h"
+#include "Brofiler\Brofiler.h"
 
 Boo::Boo() : Entity()
 {
@@ -87,19 +88,45 @@ bool Boo::PreUpdate()
 
 bool Boo::Update(float dt)
 {
-	Move();
+	if (boo_chase)
+	{
+		Move();
+
+		if (pathfinding)
+		{
+			// go to
+			if (!Find_a_Path() && find_path)
+			{
+				find_path = false;
+			}
+			else
+			{
+				//in case the enemy reaches the final of the path
+				pathfinding = false;
+				is_path_done = true;
+			}
+
+		}
+	}
+
 	Draw();
 	if (collision != NULL)
 	{
 		collision->SetPos(position.x, position.y);
 		OnCollision(collision, App->entitymodule->player->collision);
 	}
+
+	pathfind_timer += dt;
 	return true;
 }
 
 bool Boo::PostUpdate()
 {
-	
+	if (App->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
+	{
+		boo_chase = !boo_chase;
+	}
+
 	return true;
 }
 
@@ -162,6 +189,8 @@ void Boo::Move()
 
 bool Boo::CreatePath(fPoint destination)
 {
+	BROFILER_CATEGORY("Boo CreatePath", Profiler::Color::Orange)
+
 	bool ret = false;
 
 	//we call the pathfinding module and create a path, the bool we send is to know if the enmy can go in diagonal lines
@@ -187,10 +216,11 @@ bool Boo::CreatePath(fPoint destination)
 
 void Boo::Pathfinding()
 {
+	BROFILER_CATEGORY("Boo Pathfinding", Profiler::Color::Orange)
 
 	if (is_path_done) 
 	{
-		is_path_done = true;
+		is_path_done = false;
 		path = 0;
 		last_path = 0;
 		path_size = 0;
@@ -203,39 +233,29 @@ void Boo::Pathfinding()
 	}
 
 	//create a path
-	if (create_path)
+	if (pathfind_timer >= 0.2f)
 	{
-		fPoint destination;
-		destination.x = App->entitymodule->player->position.x;
-		destination.y = App->entitymodule->player->position.y;
+		if (create_path)
+		{
+			fPoint destination;
+			destination.x = App->entitymodule->player->position.x;
+			destination.y = App->entitymodule->player->position.y;
 
-		//if the path creates->
-		if (CreatePath(destination)) 
-		{
-			pathfinding = true;
-			create_path = false;
+			//if the path creates->
+			if (CreatePath(destination))
+			{
+				pathfinding = true;
+				create_path = false;
+			}
 		}
-	}
-
-	if (pathfinding) 
-	{
-		// go to
-		if (!Find_a_Path() && find_path)
-		{
-			find_path = false;
-		}
-		else 
-		{
-			//in case the enemy reaches the final of the path
-			pathfinding = false;
-			is_path_done = true;
-		}
-		
+		pathfind_timer = 0;
 	}
 }
 
 bool Boo::Find_a_Path()
 {
+	BROFILER_CATEGORY("Boo Find_a_Path", Profiler::Color::Orange)
+
 	bool ret = true;
 
 	//when boo needs more than one step to reach player, if he doesn't then player probably dead af
@@ -262,10 +282,10 @@ bool Boo::Find_a_Path()
 
 void Boo::Movement(iPoint go_to)
 {
-	if (position.x < go_to.x)		position.x += 2.0f, state = WALK_LEFT;
-	else if (position.x > go_to.x)	position.x -= 2.0f, state = WALK_RIGHT;
-	if (position.y < go_to.y)		position.y +=2.0f;
-	else if (position.y > go_to.y)	position.y -= 2.0f;
+	if (position.x < go_to.x)		position.x += 5.0f, state = WALK_LEFT;
+	else if (position.x > go_to.x)	position.x -= 5.0f, state = WALK_RIGHT;
+	if (position.y < go_to.y)		position.y +=5.0f;
+	else if (position.y > go_to.y)	position.y -= 5.0f;
 }
 
 iPoint Boo::GetPositionINT() const
