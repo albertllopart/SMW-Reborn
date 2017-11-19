@@ -187,12 +187,20 @@ void j1Scene::LoadLvl(int current, bool lvl_start)
 				App->entitymodule->DeleteBoo(App->entitymodule->entities[i]);
 				i--;
 			}
-
 		}
+		//Create_Boo
 		fPoint pos;
 		pos.create(144, 96);
 		App->entitymodule->CreateBoo(pos);
-		for (int i = 0; i < CHUCK_ENEMIES ; i++)
+	
+	}
+	if (current == 1)
+	{
+		App->audio->PlayMusic("audio/main_music.ogg");
+		App->map->Load("level_1.tmx");
+		current_lvl = current;
+		//Create chucks
+		for (int i = 0; i < CHUCK_ENEMIES; i++)
 		{
 			if (i == 0)
 			{
@@ -202,11 +210,11 @@ void j1Scene::LoadLvl(int current, bool lvl_start)
 			}
 			else if (i == 1)
 			{
-				
-					fPoint pos;
-					pos.create(176, 197);
-					App->entitymodule->CreateChuck(pos);
-				
+
+				fPoint pos;
+				pos.create(176, 197);
+				App->entitymodule->CreateChuck(pos);
+
 			}
 			else if (i == 2)
 			{
@@ -216,17 +224,13 @@ void j1Scene::LoadLvl(int current, bool lvl_start)
 			}
 		}
 	}
-	if (current == 1)
-	{
-		App->audio->PlayMusic("audio/main_music.ogg");
-		App->map->Load("level_1.tmx");
-		current_lvl = current;
-	}
 	else if (current == 2)
 	{
 		App->audio->PlayMusic("audio/main_music.ogg");
 		App->map->Load("level_2.tmx");
 		current_lvl = current;
+		App->entitymodule->player->position.x = 10;
+		App->entitymodule->player->position.y = 197;
 	}
 
 }

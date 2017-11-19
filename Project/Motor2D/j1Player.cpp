@@ -401,7 +401,7 @@ bool j1Player::Falling()
 			App->audio->PlayFx(3);
 			level_complete = true;
 			//App->fadetoblack->FadeToBlack(this, this, 2);
-			 
+			App->scene->LoadLvl(2, true);
 			jump = false;
 		}
 
