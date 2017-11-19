@@ -175,7 +175,9 @@ bool j1Collision::EraseCollider(Collider* collider)
 		{
 			if (colliders[i] == collider)
 			{
-				collider->to_delete = true;
+				collider->to_delete = false;
+				delete colliders[i];
+				colliders[i] = nullptr;
 				break;
 			}
 		}

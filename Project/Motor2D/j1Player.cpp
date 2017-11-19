@@ -86,27 +86,8 @@ bool j1Player::Update(float dt)
 			{
 				dead_timer = 0;
 				dead = false;
-				position.x = 10;
-				position.y = 197;
-				App->render->camera.x = 0;
-				App->render->camera.y = 0;
-
-				for (int i = 0; i < App->entitymodule->entities.count(); i++)
-				{
-					//delete boo
-					if (App->entitymodule->entities[i]->name == "Boo" )
-					{
-						App->entitymodule->DeleteBoo(App->entitymodule->entities[i]);
-						i--;
-					}
-					
-				}
-				fPoint pos;
-				pos.create(144, 96);
-				App->entitymodule->CreateBoo(pos);
-				
-
-				
+				App->scene->LoadLvl(App->scene->current_lvl, true);
+								
 			}
 
 			Input(dt);
@@ -140,9 +121,9 @@ bool j1Player::Update(float dt)
 	{
 		dead_timer += dt;
 	}
-	if (position.y > 500 || position.y < -500)
+	if (position.y > 300 || position.y < 0)
 	{
-		position.y = 147;
+		position.y = 167;
 	}
 	Draw();
 

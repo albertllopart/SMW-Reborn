@@ -9,6 +9,7 @@
 #include "Chuck.h"
 #include "Boo.h"
 #include "j1Player.h"
+#include "j1Collision.h"
 
 class j1EntityModule : public j1Module
 {
@@ -48,6 +49,7 @@ public:
 	p2List<Entity*>		entities;
 	bool				level_complete = false;
 	Entity*				player;
+	j1Collision*        col = nullptr;
 };
 
 #endif

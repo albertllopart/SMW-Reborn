@@ -14,6 +14,8 @@
 
 #include "Brofiler\Brofiler.h"
 
+#define CHUCK_ENEMIES  3
+
 j1Scene::j1Scene() : j1Module()
 {
 	name.create("scene");
@@ -177,6 +179,42 @@ void j1Scene::LoadLvl(int current, bool lvl_start)
 		App->entitymodule->player->position.x = 10;
 		App->entitymodule->player->position.y = 197;
 		//App->entitymodule->
+		for (int i = 0; i < App->entitymodule->entities.count(); i++)
+		{
+			//delete boo
+			if (App->entitymodule->entities[i]->name == "Boo" || App->entitymodule->entities[i]->name == "Chuck")
+			{
+				App->entitymodule->DeleteBoo(App->entitymodule->entities[i]);
+				i--;
+			}
+
+		}
+		fPoint pos;
+		pos.create(144, 96);
+		App->entitymodule->CreateBoo(pos);
+		for (int i = 0; i < CHUCK_ENEMIES ; i++)
+		{
+			if (i == 0)
+			{
+				fPoint pos;
+				pos.create(688, 165);
+				App->entitymodule->CreateChuck(pos);
+			}
+			else if (i == 1)
+			{
+				
+					fPoint pos;
+					pos.create(176, 197);
+					App->entitymodule->CreateChuck(pos);
+				
+			}
+			else if (i == 2)
+			{
+				fPoint pos;
+				pos.create(464, 197);
+				App->entitymodule->CreateChuck(pos);
+			}
+		}
 	}
 	if (current == 1)
 	{

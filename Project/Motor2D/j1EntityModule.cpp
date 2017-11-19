@@ -97,12 +97,15 @@ void j1EntityModule::DeleteBoo(Entity* boo)
 		int find = entities.find(boo);
 		int current_position = 0;
 		p2List_item<Entity*>* item = entities.start;
-		j1Collision* col = new j1Collision();
+		
 		while (item != NULL)
 		{
 			if (current_position == find)
 			{
+				entities[current_position]->collision->to_delete = true;
+				
 				entities.del(item);
+				
 				return;
 			}
 			item = item->next;
