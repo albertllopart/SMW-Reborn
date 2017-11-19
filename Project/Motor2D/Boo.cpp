@@ -55,7 +55,8 @@ Boo::~Boo()
 
 bool Boo::Awake()
 {
-	//position.create(150, 100);
+	position.create(144, 96);
+	collision = App->collision->AddCollider({ (int)position.x, (int)position.y, BOO_SIZE, BOO_SIZE }, COLLIDER_BOO, this);
 	return true;
 }
 
@@ -88,6 +89,8 @@ bool Boo::Update(float dt)
 {
 	Move();
 	Draw();
+	collision->SetPos(position.x, position.y);
+	OnCollision(collision, App->entitymodule->player->collision);
 	return true;
 }
 

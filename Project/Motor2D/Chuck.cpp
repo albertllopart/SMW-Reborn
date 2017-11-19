@@ -57,7 +57,7 @@ Chuck::~Chuck()
 
 bool Chuck::Awake()
 {
-	position.create(150, 150);
+	//position.create(150, 150);
 	collision = App->collision->AddCollider({ (int)position.x, (int)position.y, CHUCK_WIDTH, CHUCK_HIGHT }, COLLIDER_CHUCK, this);
 	return true;
 }
