@@ -78,9 +78,13 @@
   <ItemGroup>
     <ClCompile Include="Boo.cpp" />
     <ClCompile Include="Chuck.cpp" />
+    <ClCompile Include="GuiButton.cpp" />
+    <ClCompile Include="GuiElement.cpp" />
+    <ClCompile Include="GuiImage.cpp" />
     <ClCompile Include="j1Collision.cpp" />
     <ClCompile Include="j1EntityModule.cpp" />
     <ClCompile Include="j1FadeToBlack.cpp" />
+    <ClCompile Include="j1Gui.cpp" />
     <ClCompile Include="j1Main.cpp" />
     <ClCompile Include="j1App.cpp" />
     <ClCompile Include="j1Audio.cpp" />
@@ -101,10 +105,14 @@
     <ClInclude Include="Boo.h" />
     <ClInclude Include="Chuck.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="GuiButton.h" />
+    <ClInclude Include="GuiElement.h" />
+    <ClInclude Include="GuiImage.h" />
     <ClInclude Include="j1Collision.h" />
     <ClInclude Include="j1EntityModule.h" />
     <ClInclude Include="j1Animation.h" />
     <ClInclude Include="j1FadeToBlack.h" />
+    <ClInclude Include="j1Gui.h" />
     <ClInclude Include="j1Map.h" />
     <ClInclude Include="j1Pathfinding.h" />
     <ClInclude Include="j1PerfTimer.h" />
