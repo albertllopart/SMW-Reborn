@@ -14,6 +14,7 @@ enum element_type
 {
 	IMAGE,
 	BUTTON,
+	TEXT,
 	EMPTY
 };
 

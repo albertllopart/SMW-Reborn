@@ -4,6 +4,7 @@
 #include "j1App.h"
 #include "j1Module.h"
 #include "p2List.h"
+#include "j1Fonts.h"
 
 #define CURSOR_WIDTH 2
 
@@ -53,6 +54,8 @@ public:
 	GuiElement* CreateImage(int x, int y, SDL_Rect rect);
 
 	GuiElement* CreateButton(int x, int y, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype, j1Module* callback);
+
+	GuiElement* CreateText(int x, int y, char* string, SDL_Color color, _TTF_Font* font);
 
 	void DeleteElement(GuiElement* element);
 

@@ -18,6 +18,7 @@
 #include "j1FadeToBlack.h"
 #include "j1Collision.h"
 #include "j1Gui.h"
+#include "j1Fonts.h"
 
 #include "Brofiler\Brofiler.h"
 
@@ -40,12 +41,14 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	fadetoblack =	new j1FadeToBlack();
 	collision =		new j1Collision();
 	gui =			new j1Gui();
+	fonts =			new j1Fonts();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(input);
 	AddModule(win);
 	AddModule(tex);
+	AddModule(fonts);
 	AddModule(audio);
 	AddModule(map);
 	AddModule(scene);

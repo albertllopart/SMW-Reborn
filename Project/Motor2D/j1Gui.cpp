@@ -11,10 +11,12 @@
 #include "j1Map.h"
 #include "j1Audio.h"
 #include "j1Gui.h"
+#include "j1Fonts.h"
 
 #include "GuiElement.h"
 #include "GuiImage.h"
 #include "GuiButton.h"
+#include "GuiText.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -54,6 +56,10 @@ bool j1Gui::Start()
 	CreateButton(169, 150, { 400, 16, 60, 7 }, { 462, 16, 60, 7 }, { 524, 16, 60, 7 }, SETTINGS, (j1Module*)App->gui);//settings
 	CreateButton(173, 165, { 400, 24, 52, 7 }, { 462, 24, 52, 7 }, { 524, 24, 52, 7 }, CREDITS, (j1Module*)App->gui);//credits
 	CreateButton(186, 180, { 400, 32, 28, 7 }, { 462, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, (j1Module*)App->scene);//exit
+
+	//text
+
+	CreateText(60, 40, "I DID IT LOL", { 50, 50, 255, 255 }, App->fonts->default);
 
 	return true;
 }
@@ -122,6 +128,16 @@ GuiElement* j1Gui::CreateButton(int x, int y, SDL_Rect rect, SDL_Rect mover, SDL
 {
 	iPoint position = { x,y };
 	GuiElement* item = new GuiButton(position, rect, mover, pressed, btype, callback);
+
+	elements.add(item);
+
+	return item;
+}
+
+GuiElement* j1Gui::CreateText(int x, int y, char* string, SDL_Color color, _TTF_Font* font)
+{
+	iPoint position = { x,y };
+	GuiElement* item = new GuiText(position, string, color, font);
 
 	elements.add(item);
 

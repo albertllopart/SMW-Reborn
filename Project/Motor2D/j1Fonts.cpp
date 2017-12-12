@@ -5,8 +5,9 @@
 #include "j1Fonts.h"
 
 #include "SDL\include\SDL.h"
-#include "SDL_TTF\include\SDL_ttf.h"
+#include "SDL_ttf\include\SDL_ttf.h"
 #pragma comment( lib, "SDL_ttf/libx86/SDL2_ttf.lib" )
+
 
 j1Fonts::j1Fonts() : j1Module()
 {

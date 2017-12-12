@@ -73,6 +73,12 @@
     <ClCompile Include="GuiButton.cpp">
       <Filter>Desenvolupament  ========\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="j1Fonts.cpp">
+      <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiText.cpp">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -169,6 +175,12 @@
       <Filter>Desenvolupament  ========\GUI</Filter>
     </ClInclude>
     <ClInclude Include="GuiButton.h">
+      <Filter>Desenvolupament  ========\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Fonts.h">
+      <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiText.h">
       <Filter>Desenvolupament  ========\GUI</Filter>
     </ClInclude>
   </ItemGroup>
