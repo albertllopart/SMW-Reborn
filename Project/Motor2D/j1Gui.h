@@ -41,6 +41,8 @@ public:
 
 	SDL_Texture* GetAtlas() const;
 
+	bool MouseOnRect(SDL_Rect rect);
+
 	void Trigger();
 
 	GuiElement* CreateImage(int x, int y, SDL_Rect rect);

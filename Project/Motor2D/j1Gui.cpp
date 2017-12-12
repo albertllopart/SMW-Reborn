@@ -39,8 +39,8 @@ bool j1Gui::Start()
 	atlas = App->tex->Load(atlas_file_name.GetString());
 
 	CreateImage(0, 0, { 0,0,400,240 });//main screen
-	CreateButton(185, 120, { 400, 0, 30, 7 }, { 400, 0, 30, 7 }, { 400, 0, 30, 7 }, PLAY);//play
-	CreateButton(169, 135, { 400, 8, 60, 7 }, { 400, 8, 60, 7 }, { 400, 8, 60, 7 }, CONTINUE);//continue
+	CreateButton(185, 120, { 400, 0, 30, 7 }, { 300, 0, 30, 7 }, { 300, 0, 30, 7 }, PLAY);//play
+	CreateButton(169, 135, { 400, 8, 60, 7 }, { 300, 8, 60, 7 }, { 300, 8, 60, 7 }, CONTINUE);//continue
 
 	return true;
 }
@@ -48,6 +48,19 @@ bool j1Gui::Start()
 // Update all guis
 bool j1Gui::PreUpdate()
 {
+	p2List_item<GuiElement*>* item = elements.start;
+	while (item != nullptr)
+	{
+		if (item->data->active == true && MouseOnRect({ item->data->position.x, item->data->position.y, item->data->rect.w, item->data->rect.h }) == true)
+		{
+			item->data->mouseover = true;
+		}
+		else
+		{
+			item->data->mouseover = false;
+		}
+		item = item->next;
+	}
 	return true;
 }
 
@@ -115,6 +128,17 @@ void j1Gui::DeleteElement(GuiElement* element)
 			current_position++;
 		}
 	}
+}
+
+bool j1Gui::MouseOnRect(SDL_Rect rect)
+{
+	int x, y;
+	App->input->GetMousePosition(x, y);
+
+	if (x < (rect.x + rect.w) && x > rect.x &&y < (rect.y + rect.h) && y > rect.y)
+		return true;
+	else
+		return false;
 }
 
 void j1Gui::Trigger()
