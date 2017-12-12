@@ -38,6 +38,8 @@ bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
 
+	CreateImage(0, 0, { 0,0,400,240 });
+
 	return true;
 }
 
@@ -50,6 +52,12 @@ bool j1Gui::PreUpdate()
 // Called after all Updates
 bool j1Gui::PostUpdate()
 {
+	p2List_item<GuiElement*>* item = elements.start;
+	while (item != nullptr)
+	{
+		item->data->Draw();
+		item = item->next;
+	}
 	return true;
 }
 

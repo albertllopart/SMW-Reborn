@@ -8,6 +8,7 @@ GuiImage::GuiImage(iPoint position, SDL_Rect rect)
 	this->position = position;
 	this->rect = rect;
 	etype = IMAGE;
+	active = true;
 }
 
 GuiImage::~GuiImage() {};

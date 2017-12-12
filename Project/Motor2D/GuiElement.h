@@ -39,7 +39,7 @@ public:
 	bool active;
 	bool selected;
 
-	SDL_Rect rect = { 0,0,0,0 };
+	SDL_Rect rect;
 };
 
 #endif
