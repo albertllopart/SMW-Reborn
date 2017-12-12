@@ -41,7 +41,7 @@ bool j1Scene::Start()
 {
 	BROFILER_CATEGORY("Scene Start", Profiler::Color::Brown)
 
-	App->audio->PlayMusic("audio/main_music.ogg");
+	App->audio->PlayMusic("audio/title_theme.ogg");
 
 	//sound fx
 	App->audio->LoadFx("audio/jump.wav"); //1
@@ -242,7 +242,7 @@ bool j1Scene::GuiTrigger(GuiElement* element)
 	GuiButton* button = (GuiButton*)element;
 	switch (button->btype)
 	{
-	case PLAY:
+	case EXIT:
 		exit_from_gui = true;
 		break;
 	}

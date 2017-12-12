@@ -41,6 +41,9 @@ bool j1Gui::Start()
 	CreateImage(0, 0, { 0,0,400,240 });//main screen
 	CreateButton(185, 120, { 400, 0, 30, 7 }, { 462, 0, 30, 7 }, { 524, 0, 30, 7 }, PLAY, (j1Module*)App->scene);//play
 	CreateButton(169, 135, { 400, 8, 60, 7 }, { 462, 8, 60, 7 }, { 524, 8, 60, 7 }, CONTINUE, (j1Module*)App->scene);//continue
+	CreateButton(169, 150, { 400, 16, 60, 7 }, { 462, 16, 60, 7 }, { 524, 16, 60, 7 }, SETTINGS, (j1Module*)App->scene);//settings
+	CreateButton(173, 165, { 400, 24, 52, 7 }, { 462, 24, 52, 7 }, { 524, 24, 52, 7 }, CREDITS, (j1Module*)App->scene);//credits
+	CreateButton(186, 180, { 400, 32, 28, 7 }, { 462, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, (j1Module*)App->scene);//exit
 
 	return true;
 }
