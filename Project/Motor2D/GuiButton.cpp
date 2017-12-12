@@ -10,6 +10,7 @@ GuiButton::GuiButton(iPoint position, SDL_Rect rect, SDL_Rect mover, SDL_Rect pr
 	this->mover = mover;
 	this->pressed = pressed;
 	btype = btype;
+	active = true;
 
 	etype = BUTTON;
 }
@@ -20,7 +21,7 @@ void GuiButton::Draw()
 {
 	if (active)
 	{
-		if (mouseover)
+		if (mouseover == true)
 		{
 			App->render->Blit(App->gui->GetAtlas(), position.x, position.y, &mover);
 		}
