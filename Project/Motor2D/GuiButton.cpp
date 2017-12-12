@@ -22,9 +22,13 @@ void GuiButton::Draw()
 {
 	if (active)
 	{
-		if (mouseover == true)
+		if (mouseover == true && selected == false)
 		{
 			App->render->Blit(App->gui->GetAtlas(), position.x, position.y, &mover);
+		}
+		else if (selected == true)
+		{
+			App->render->Blit(App->gui->GetAtlas(), position.x, position.y, &pressed);
 		}
 		else
 		{

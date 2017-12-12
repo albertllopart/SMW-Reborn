@@ -39,8 +39,8 @@ bool j1Gui::Start()
 	atlas = App->tex->Load(atlas_file_name.GetString());
 
 	CreateImage(0, 0, { 0,0,400,240 });//main screen
-	CreateButton(185, 120, { 400, 0, 30, 7 }, { 300, 0, 30, 7 }, { 300, 0, 30, 7 }, PLAY, (j1Module*)App->scene);//play
-	CreateButton(169, 135, { 400, 8, 60, 7 }, { 300, 8, 60, 7 }, { 300, 8, 60, 7 }, CONTINUE, (j1Module*)App->scene);//continue
+	CreateButton(185, 120, { 400, 0, 30, 7 }, { 462, 0, 30, 7 }, { 524, 0, 30, 7 }, PLAY, (j1Module*)App->scene);//play
+	CreateButton(169, 135, { 400, 8, 60, 7 }, { 462, 8, 60, 7 }, { 524, 8, 60, 7 }, CONTINUE, (j1Module*)App->scene);//continue
 
 	return true;
 }
