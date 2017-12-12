@@ -28,8 +28,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 
 	PERF_START(ptimer);
 
-
-
 	input =			new j1Input();
 	win =			new j1Window();
 	render =		new j1Render();
@@ -49,14 +47,20 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
-	
 	AddModule(map);
 	AddModule(scene);
+
 	AddModule(entitymodule);
+	
 	AddModule(pathfinding);
 	AddModule(fadetoblack);
 	AddModule(collision);
 	AddModule(gui);
+
+	entitymodule->waiting = true;
+	pathfinding->waiting = true;
+	collision->waiting = true;
+
 
 
 	// render last to swap buffer

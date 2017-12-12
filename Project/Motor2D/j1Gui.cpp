@@ -5,6 +5,11 @@
 #include "j1Textures.h"
 //#include "j1Fonts.h"
 #include "j1Input.h"
+#include "j1EntityModule.h"
+#include "j1Collision.h"
+#include "j1Pathfinding.h"
+#include "j1Map.h"
+#include "j1Audio.h"
 #include "j1Gui.h"
 
 #include "GuiElement.h"
@@ -36,10 +41,15 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool j1Gui::Start()
 {
+	App->entitymodule->active = false;
+	App->pathfinding->active = false;
+	App->collision->active = false;
+
 	atlas = App->tex->Load(atlas_file_name.GetString());
+	App->audio->PlayMusic("audio/title_theme.ogg");
 
 	CreateImage(0, 0, { 0,0,400,240 });//main screen
-	CreateButton(185, 120, { 400, 0, 30, 7 }, { 462, 0, 30, 7 }, { 524, 0, 30, 7 }, PLAY, (j1Module*)App->scene);//play
+	CreateButton(185, 120, { 400, 0, 30, 7 }, { 462, 0, 30, 7 }, { 524, 0, 30, 7 }, PLAY, (j1Module*)App->gui);//play
 	CreateButton(169, 135, { 400, 8, 60, 7 }, { 462, 8, 60, 7 }, { 524, 8, 60, 7 }, CONTINUE, (j1Module*)App->scene);//continue
 	CreateButton(169, 150, { 400, 16, 60, 7 }, { 462, 16, 60, 7 }, { 524, 16, 60, 7 }, SETTINGS, (j1Module*)App->scene);//settings
 	CreateButton(173, 165, { 400, 24, 52, 7 }, { 462, 24, 52, 7 }, { 524, 24, 52, 7 }, CREDITS, (j1Module*)App->scene);//credits
@@ -149,9 +159,30 @@ bool j1Gui::MouseOnRect(SDL_Rect rect)
 		return false;
 }
 
-void j1Gui::GuiTrigger()
+bool j1Gui::GuiTrigger(GuiElement* element)
 {
-	return;
+	GuiButton* button = (GuiButton*)element;
+
+	switch (button->btype)
+	{
+	case PLAY:
+		
+		App->pathfinding->active = true;
+		App->collision->active = true;
+		App->entitymodule->active = true;
+
+		p2List_item<GuiElement*>* item = elements.start;
+		while (item != NULL)
+		{
+			item->data->active = false;
+			item = item->next;
+		}
+
+		App->audio->PlayMusic("audio/main_music.ogg");
+
+		break;
+	}
+	return true;
 }
 
 // class Gui ---------------------------------------------------

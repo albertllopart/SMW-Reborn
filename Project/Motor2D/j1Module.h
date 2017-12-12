@@ -80,6 +80,7 @@ public:
 
 	p2SString	name;
 	bool		active;
+	bool		waiting;
 
 };
 

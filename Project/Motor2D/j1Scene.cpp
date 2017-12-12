@@ -11,6 +11,8 @@
 #include "j1Player.h"
 #include "j1FadeToBlack.h"
 #include "j1EntityModule.h"
+#include "j1Collision.h"
+#include "j1Pathfinding.h"
 #include "j1Gui.h"
 #include "GuiButton.h"
 
@@ -40,8 +42,6 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 	BROFILER_CATEGORY("Scene Start", Profiler::Color::Brown)
-
-	App->audio->PlayMusic("audio/title_theme.ogg");
 
 	//sound fx
 	App->audio->LoadFx("audio/jump.wav"); //1
@@ -242,6 +242,7 @@ bool j1Scene::GuiTrigger(GuiElement* element)
 	GuiButton* button = (GuiButton*)element;
 	switch (button->btype)
 	{
+		
 	case EXIT:
 		exit_from_gui = true;
 		break;

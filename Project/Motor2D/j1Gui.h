@@ -43,7 +43,7 @@ public:
 
 	bool MouseOnRect(SDL_Rect rect);
 
-	void GuiTrigger();
+	bool GuiTrigger(GuiElement* element);
 
 	GuiElement* CreateImage(int x, int y, SDL_Rect rect);
 
