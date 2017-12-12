@@ -11,6 +11,8 @@
 #include "j1Player.h"
 #include "j1FadeToBlack.h"
 #include "j1EntityModule.h"
+#include "j1Gui.h"
+#include "GuiButton.h"
 
 #include "Brofiler\Brofiler.h"
 
@@ -144,7 +146,7 @@ bool j1Scene::PostUpdate()
 {
 	bool ret = true;
 
-	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || exit_from_gui == true)
 		ret = false;
 
 	return ret;
@@ -233,4 +235,16 @@ void j1Scene::LoadLvl(int current, bool lvl_start)
 		App->entitymodule->player->position.y = 197;
 	}
 
+}
+
+bool j1Scene::GuiTrigger(GuiElement* element)
+{
+	GuiButton* button = (GuiButton*)element;
+	switch (button->btype)
+	{
+	case PLAY:
+		exit_from_gui = true;
+		break;
+	}
+	return true;
 }

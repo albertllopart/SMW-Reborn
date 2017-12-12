@@ -3,14 +3,15 @@
 
 GuiButton::GuiButton() {};
 
-GuiButton::GuiButton(iPoint position, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype)
+GuiButton::GuiButton(iPoint position, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype, j1Module* callback)
 {
 	this->position = position;
 	this->rect = rect;
 	this->mover = mover;
 	this->pressed = pressed;
-	btype = btype;
+	this->btype = btype;
 	active = true;
+	this->callback = callback;
 
 	etype = BUTTON;
 }
@@ -34,5 +35,10 @@ void GuiButton::Draw()
 
 void GuiButton::OnClick()
 {
+	if (mouseover == true && active == true)
+	{
+		selected = true;
+		callback->GuiTrigger(this);
+	}
 	return;
 }

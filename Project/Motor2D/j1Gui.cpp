@@ -39,8 +39,8 @@ bool j1Gui::Start()
 	atlas = App->tex->Load(atlas_file_name.GetString());
 
 	CreateImage(0, 0, { 0,0,400,240 });//main screen
-	CreateButton(185, 120, { 400, 0, 30, 7 }, { 300, 0, 30, 7 }, { 300, 0, 30, 7 }, PLAY);//play
-	CreateButton(169, 135, { 400, 8, 60, 7 }, { 300, 8, 60, 7 }, { 300, 8, 60, 7 }, CONTINUE);//continue
+	CreateButton(185, 120, { 400, 0, 30, 7 }, { 300, 0, 30, 7 }, { 300, 0, 30, 7 }, PLAY, (j1Module*)App->scene);//play
+	CreateButton(169, 135, { 400, 8, 60, 7 }, { 300, 8, 60, 7 }, { 300, 8, 60, 7 }, CONTINUE, (j1Module*)App->scene);//continue
 
 	return true;
 }
@@ -58,6 +58,11 @@ bool j1Gui::PreUpdate()
 		else
 		{
 			item->data->mouseover = false;
+		}
+
+		if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
+		{
+			item->data->OnClick();
 		}
 		item = item->next;
 	}
@@ -100,10 +105,10 @@ GuiElement* j1Gui::CreateImage(int x, int y, SDL_Rect rect)
 	return item;
 }
 
-GuiElement* j1Gui::CreateButton(int x, int y, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype)
+GuiElement* j1Gui::CreateButton(int x, int y, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype, j1Module* callback)
 {
 	iPoint position = { x,y };
-	GuiElement* item = new GuiButton(position, rect, mover, pressed, btype);
+	GuiElement* item = new GuiButton(position, rect, mover, pressed, btype, callback);
 
 	elements.add(item);
 
@@ -141,7 +146,7 @@ bool j1Gui::MouseOnRect(SDL_Rect rect)
 		return false;
 }
 
-void j1Gui::Trigger()
+void j1Gui::GuiTrigger()
 {
 	return;
 }

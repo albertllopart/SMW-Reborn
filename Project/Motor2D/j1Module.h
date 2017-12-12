@@ -10,6 +10,7 @@
 #include "PugiXml\src\pugixml.hpp"
 
 class j1App;
+class GuiElement;
 
 class j1Module
 {
@@ -65,6 +66,12 @@ public:
 	}
 
 	virtual bool Save(pugi::xml_node&) const
+	{
+		return true;
+	}
+
+	//ui
+	virtual bool GuiTrigger(GuiElement* element)
 	{
 		return true;
 	}

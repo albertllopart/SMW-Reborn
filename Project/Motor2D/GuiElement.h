@@ -30,6 +30,8 @@ public:
 
 	virtual void Draw();
 
+	virtual void OnClick();
+
 public:
 
 	element_type etype = EMPTY;

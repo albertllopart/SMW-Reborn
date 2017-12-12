@@ -43,11 +43,11 @@ public:
 
 	bool MouseOnRect(SDL_Rect rect);
 
-	void Trigger();
+	void GuiTrigger();
 
 	GuiElement* CreateImage(int x, int y, SDL_Rect rect);
 
-	GuiElement* CreateButton(int x, int y, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype);
+	GuiElement* CreateButton(int x, int y, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype, j1Module* callback);
 
 	void DeleteElement(GuiElement* element);
 

@@ -14,3 +14,5 @@ void GuiElement::Update(float dt)
 };
 
 void GuiElement::Draw() {};
+
+void GuiElement::OnClick() {};

@@ -2,6 +2,7 @@
 #define __j1SCENE_H__
 
 #include "j1Module.h"
+#include "GuiElement.h"
 
 struct SDL_Texture;
 
@@ -38,8 +39,13 @@ public:
 
 	void LoadLvl(int, bool);
 
+	bool GuiTrigger(GuiElement* element);
+
 	int current_lvl = 0;
+
 private:
+
+	bool exit_from_gui = false;
 };
 
 #endif // __j1SCENE_H__
