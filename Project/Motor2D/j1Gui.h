@@ -18,6 +18,11 @@ enum button_type
 	SETTINGS,
 	CREDITS,
 	EXIT,
+	MUSICUP,
+	MUSICDOWN,
+	FXUP,
+	FXDOWN,
+	BACK,
 	NONE
 };
 

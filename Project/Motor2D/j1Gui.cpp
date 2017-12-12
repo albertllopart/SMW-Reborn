@@ -51,8 +51,8 @@ bool j1Gui::Start()
 	CreateImage(0, 0, { 0,0,400,240 });//main screen
 	CreateButton(185, 120, { 400, 0, 30, 7 }, { 462, 0, 30, 7 }, { 524, 0, 30, 7 }, PLAY, (j1Module*)App->gui);//play
 	CreateButton(169, 135, { 400, 8, 60, 7 }, { 462, 8, 60, 7 }, { 524, 8, 60, 7 }, CONTINUE, (j1Module*)App->scene);//continue
-	CreateButton(169, 150, { 400, 16, 60, 7 }, { 462, 16, 60, 7 }, { 524, 16, 60, 7 }, SETTINGS, (j1Module*)App->scene);//settings
-	CreateButton(173, 165, { 400, 24, 52, 7 }, { 462, 24, 52, 7 }, { 524, 24, 52, 7 }, CREDITS, (j1Module*)App->scene);//credits
+	CreateButton(169, 150, { 400, 16, 60, 7 }, { 462, 16, 60, 7 }, { 524, 16, 60, 7 }, SETTINGS, (j1Module*)App->gui);//settings
+	CreateButton(173, 165, { 400, 24, 52, 7 }, { 462, 24, 52, 7 }, { 524, 24, 52, 7 }, CREDITS, (j1Module*)App->gui);//credits
 	CreateButton(186, 180, { 400, 32, 28, 7 }, { 462, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, (j1Module*)App->scene);//exit
 
 	return true;
@@ -166,7 +166,7 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 	switch (button->btype)
 	{
 	case PLAY:
-		
+	{
 		App->pathfinding->active = true;
 		App->collision->active = true;
 		App->entitymodule->active = true;
@@ -181,6 +181,45 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 		App->audio->PlayMusic("audio/main_music.ogg");
 
 		break;
+	}
+		
+	case SETTINGS:
+	{
+		p2List_item<GuiElement*>* item = elements.start;
+		while (item != NULL)
+		{
+			if (item->data->etype == BUTTON)
+			{
+				GuiButton* button2 = (GuiButton*)item->data;
+				if (button2->btype == PLAY || button2->btype == CONTINUE || button2->btype == SETTINGS || button2->btype == CREDITS || button2->btype == EXIT)
+				{
+					button2->active = false;
+				}
+			}
+			item = item->next;
+		}
+
+		break;
+	}
+
+	case CREDITS:
+	{
+		p2List_item<GuiElement*>* item = elements.start;
+		while (item != NULL)
+		{
+			if (item->data->etype == BUTTON)
+			{
+				GuiButton* button2 = (GuiButton*)item->data;
+				if (button2->btype == PLAY || button2->btype == CONTINUE || button2->btype == SETTINGS || button2->btype == CREDITS || button2->btype == EXIT)
+				{
+					button2->active = false;
+				}
+			}
+			item = item->next;
+		}
+
+		break;
+	}
 	}
 	return true;
 }
