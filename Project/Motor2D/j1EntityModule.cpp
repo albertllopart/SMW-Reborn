@@ -3,6 +3,7 @@
 #include "j1Input.h"
 #include "p2Defs.h"
 #include "Entity.h"
+#include "Coins.h"
 
 j1EntityModule::j1EntityModule() : j1Module()
 {
@@ -90,6 +91,15 @@ void j1EntityModule::CreatePlayer(fPoint position)
 	player = player_a;
 }
 
+void j1EntityModule::CreateCoins(fPoint position)
+{
+	Coins* coins = new Coins();
+	coins->Awake();
+	coins->Start();
+	coins->position = position;
+	entities.add(coins);
+	
+}
 void j1EntityModule::DeleteBoo(Entity* boo)
 {
 	if (boo != nullptr)
@@ -102,6 +112,9 @@ void j1EntityModule::DeleteBoo(Entity* boo)
 		{
 			if (current_position == find)
 			{
+				if (entities[current_position]->name == "Chuck")
+				entities[current_position]->collision_head->to_delete = true;
+
 				entities[current_position]->collision->to_delete = true;
 				
 				entities.del(item);
@@ -125,7 +138,9 @@ void j1EntityModule::DeleteChuck(Entity* chuck)
 		{
 			if (current_position == find)
 			{
+				if (entities[current_position]->name == "Chuck")
 				entities[current_position]->collision_head->to_delete = true;
+
 				entities[current_position]->collision->to_delete = true;
 				entities.del(item);
 				return;

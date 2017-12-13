@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClCompile Include="Boo.cpp" />
     <ClCompile Include="Chuck.cpp" />
+    <ClCompile Include="Coins.cpp" />
     <ClCompile Include="GuiButton.cpp" />
     <ClCompile Include="GuiElement.cpp" />
     <ClCompile Include="GuiImage.cpp" />
@@ -106,6 +107,7 @@
   <ItemGroup>
     <ClInclude Include="Boo.h" />
     <ClInclude Include="Chuck.h" />
+    <ClInclude Include="Coins.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GuiButton.h" />
     <ClInclude Include="GuiElement.h" />

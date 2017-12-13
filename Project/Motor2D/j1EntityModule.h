@@ -36,6 +36,7 @@ public:
 	void				CreateBoo(fPoint position);
 	void				CreateChuck(fPoint position);
 	void				CreatePlayer(fPoint position);
+	void				CreateCoins(fPoint position);
 
 	void				DeleteBoo(Entity* boo);
 	void				DeleteChuck(Entity* chuck);

@@ -3,17 +3,22 @@
 	<input />
 	<window />
 	<textures />
+	<fonts />
 	<audio />
 	<map />
-	<scene current_lvl="2" />
+	<scene current_lvl="1" />
 	<Entitymodule>
-		<player_position x="277.800201" y="199.399994" />
-		<boo_position x="382" y="110" />
+		<player_position x="10" y="197" />
+		<boo_position x="144" y="96" />
+		<chuck_position x="688" y="165" />
+		<chuck_position x="176" y="197" />
+		<chuck_position x="464" y="197" />
 	</Entitymodule>
 	<pathfinding />
 	<fadetoblack />
 	<:anonymous />
+	<gui />
 	<renderer>
-		<camera x="-170" y="0" />
+		<camera x="0" y="0" />
 	</renderer>
 </save>

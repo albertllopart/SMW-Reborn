@@ -3,7 +3,7 @@
  <tileset firstgid="1" name="backgroundTileset" tilewidth="16" tileheight="16" spacing="1" margin="1" tilecount="48" columns="8">
   <image source="backgroundTileset.png" width="137" height="103"/>
  </tileset>
- <tileset firstgid="49" name="test" tilewidth="16" tileheight="16" spacing="1" margin="1" tilecount="64" columns="8">
+ <tileset firstgid="49" name="test" tilewidth="16" tileheight="16" spacing="1" margin="1" tilecount="0" columns="8">
   <image source="floorTiles22et.png" width="152" height="152"/>
  </tileset>
  <layer name="cel" width="101" height="19">
@@ -10147,7 +10147,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="19"/>
+   <tile gid="28"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>

@@ -400,9 +400,10 @@ bool j1Player::Falling()
 		if (*nextGid1 == 28 || *nextGid2 == 28)
 		{
 			App->audio->PlayFx(3);
-			level_complete = true;
+			App->entitymodule->level_complete = true;
 			//App->fadetoblack->FadeToBlack(this, this, 2);
-			App->scene->LoadLvl(2, true);
+			//App->scene->LoadLvl(2, true);
+
 			jump = false;
 		}
 
