@@ -59,6 +59,17 @@ bool j1Gui::Start()
 	CreateButton(173, 165, { 400, 24, 52, 7 }, { 462, 24, 52, 7 }, { 524, 24, 52, 7 }, CREDITS, MAINMENU, (j1Module*)App->gui);//credits
 	CreateButton(186, 180, { 400, 32, 28, 7 }, { 462, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, MAINMENU, (j1Module*)App->scene);//exit
 
+	//settings menu
+	CreateImage(90, 60, { 560, 147, 38, 32 }, SETTINGSMENU);//musicsound
+	CreateImage(90, 144, { 560, 147, 38, 32 }, SETTINGSMENU);//fxsound
+	CreateButton(288, 32, { 400, 127, 44, 19 }, { 444, 127, 44, 19 }, { 444, 127, 44, 19 }, BACK, SETTINGSMENU, (j1Module*)App->gui);//settingsback
+	CreateButton(137, 70, { 400, 180, 16, 16 }, { 417, 180, 16, 16 }, { 417, 180, 16, 16 }, MUSICUP, SETTINGSMENU, (j1Module*)App->audio);//musicup
+	CreateButton(65, 70, { 434, 180, 16, 16 }, { 451, 180, 16, 16 }, { 451, 180, 16, 16 }, MUSICDOWN, SETTINGSMENU, (j1Module*)App->audio);//musicdown
+	CreateButton(137, 154, { 400, 180, 16, 16 }, { 417, 180, 16, 16 }, { 417, 180, 16, 16 }, FXUP, SETTINGSMENU, (j1Module*)App->audio);//fxup
+	CreateButton(65, 154, { 434, 180, 16, 16 }, { 451, 180, 16, 16 }, { 451, 180, 16, 16 }, FXDOWN, SETTINGSMENU, (j1Module*)App->audio);//fxdown
+	CreateText(60, 36, "MUSIC VOLUME", { 50, 50, 255, 255 }, App->fonts->default, SETTINGSMENU);
+	CreateText(60, 120, "SOUND FX VOLUME", { 50, 50, 255, 255 }, App->fonts->default, SETTINGSMENU);
+
 	//credits menu
 	CreateButton(288, 32, { 400, 127, 44, 19 }, { 444, 127, 44, 19 }, { 444, 127, 44, 19 }, BACK, CREDITSMENU, (j1Module*)App->gui);//credditsback
 	CreateText(60, 40, "LOOK AT THESE CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU);
@@ -210,7 +221,7 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 		p2List_item<GuiElement*>* item = elements.start;
 		while (item != NULL)
 		{
-			if (item->data->mtype != SETTINGSMENU)
+			if (item->data->mtype != SETTINGSMENU && item->data->mtype != OTHER)
 			{
 				item->data->active = false;
 			}
@@ -257,6 +268,23 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 					item->data->active = true;
 				}
 				else if (item->data->mtype == CREDITSMENU)
+				{
+					item->data->active = false;
+				}
+				item = item->next;
+			}
+			break;
+		}
+		case SETTINGSMENU:
+		{
+			p2List_item<GuiElement*>* item = elements.start;
+			while (item != NULL)
+			{
+				if (item->data->mtype == MAINMENU || item->data->mtype == OTHER)
+				{
+					item->data->active = true;
+				}
+				else if (item->data->mtype == SETTINGSMENU)
 				{
 					item->data->active = false;
 				}
