@@ -27,10 +27,7 @@ struct Collider
 	COLLIDER_TYPE type;
 	Entity* callback = nullptr;
 
-	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, Entity* callback = nullptr) :
-		rect(rectangle),
-		type(type),
-		callback(callback)
+	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, Entity* callback = nullptr) :rect(rectangle),type(type),callback(callback)
 	{}
 
 	void SetPos(int x, int y)
@@ -64,7 +61,7 @@ private:
 	Collider* colliders[MAX_COLLIDERS];
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
 	bool debug = false;
-
+	
 	float sound_timer = 0;
 };
 

@@ -5,6 +5,8 @@
 #include "j1Animation.h"
 #include "Entity.h"
 
+#define HEAD_DISTANCE 1
+#define CHUCK_HEAD_HIGHT 5
 #define CHUCK_HIGHT 27
 #define CHUCK_WIDTH 26
 #define CHASE_RANGE 120

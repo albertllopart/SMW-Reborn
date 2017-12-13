@@ -341,7 +341,7 @@ bool j1Player::Jump()
 		jump = false;
 		ret = false;
 		jump_height = 0;
-		
+		//todo something wrong with jump player starts jumping some times and stop when arrives on height 0;
 		if (direction == L) state = IDLE_LEFT;
 		else if (direction == R) state = IDLE_RIGHT;
 	}

@@ -6,6 +6,7 @@
 #include "j1EntityModule.h"
 #include "j1Audio.h"
 #include "j1FadeToBlack.h"
+#include "j1EntityModule.h"
 
 j1Collision::j1Collision()
 {
@@ -73,27 +74,31 @@ bool j1Collision::Update(float dt)
 
 			if (c1->CheckCollision(c2->rect) == true && App->entitymodule->player->god_mode == false)
 			{
-				if (c1->type == COLLIDER_HEAD_CHUCK || c2->type == COLLIDER_HEAD_CHUCK && matrix[c1->type][c2->type])
+				if (/*c1->type == COLLIDER_HEAD_CHUCK ||*/ c2->type == COLLIDER_HEAD_CHUCK && matrix[c1->type][c2->type])
 				{
+						App->entitymodule->DeleteChuck(c2->callback);
+						break;
+											
 					//no se com enviar que el chuck està mort al modul del chuck
 				}
-				if (matrix[c1->type][c2->type])
-				{
-					//c1->callback->OnCollision(c1, c2);
-					App->entitymodule->player->dead = true;
-					if (sound_timer > 2.0)
+				else if (matrix[c1->type][c2->type])
 					{
-						App->audio->PlayFx(5);
-						sound_timer = 0;
+						//c1->callback->OnCollision(c1, c2);
+						App->entitymodule->player->dead = true;
+						if (sound_timer > 2.0)
+						{
+							App->audio->PlayFx(5);
+							sound_timer = 0;
+						}
+						App->fadetoblack->FadeToBlack(App->entitymodule, this, 1.5f);
 					}
-					App->fadetoblack->FadeToBlack(App->entitymodule, this,  1.5f);				
-				}
+				
 				
 					
 			}
 			else
 			{
-
+				//LOG("GOD MODE");
 			}
 			
 		}
@@ -139,7 +144,7 @@ void j1Collision::DebugDraw()
 			case COLLIDER_BOO:
 				App->render->DrawQuad(colliders[i]->rect, 255, 35, 1, alpha); //red
 			case COLLIDER_HEAD_CHUCK:
-				App->render->DrawQuad(colliders[i]->rect, 255, 100, 100, alpha);
+				App->render->DrawQuad(colliders[i]->rect, 75, 0, 130, alpha); //purple
 				break;
 		}
 	}

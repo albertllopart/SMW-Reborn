@@ -58,8 +58,8 @@ Chuck::~Chuck()
 bool Chuck::Awake()
 {
 	//position.create(150, 150);
-	collision = App->collision->AddCollider({ (int)position.x, (int)position.y, CHUCK_WIDTH, CHUCK_HIGHT }, COLLIDER_CHUCK, this);
-	collision_head = App->collision->AddCollider({ (int)position.x+5, (int)position.y, 10, 2 }, COLLIDER_HEAD_CHUCK, this);
+	collision = App->collision->AddCollider({ (int)position.x, (int)position.y, CHUCK_WIDTH, CHUCK_HIGHT - CHUCK_HEAD_HIGHT }, COLLIDER_CHUCK, this);
+	collision_head = App->collision->AddCollider({ (int)position.x, (int)position.y, 24, CHUCK_HEAD_HIGHT }, COLLIDER_HEAD_CHUCK, this);
 	return true;
 }
 
@@ -116,8 +116,8 @@ bool Chuck::Update(float dt)
 	//collision
 	if (collision != NULL)
 	{
-		collision->SetPos(position.x, position.y);
-		collision_head->SetPos(position.x + 5, position.y);
+		collision->SetPos(position.x, position.y + CHUCK_HEAD_HIGHT);
+		collision_head->SetPos(position.x + HEAD_DISTANCE, position.y);
 		OnCollision(collision, App->entitymodule->player->collision);
 		OnCollision(collision_head, App->entitymodule->player->collision);
 		if (chuck_dead)
