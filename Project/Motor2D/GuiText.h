@@ -11,7 +11,7 @@ class GuiText : public GuiElement
 public:
 
 	GuiText();
-	GuiText(iPoint position, char* string, SDL_Color color, _TTF_Font* font);
+	GuiText(iPoint position, char* string, SDL_Color color, _TTF_Font* font, menu_type mtype);
 	~GuiText();
 
 	void Draw();

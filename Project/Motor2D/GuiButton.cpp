@@ -3,15 +3,24 @@
 
 GuiButton::GuiButton() {};
 
-GuiButton::GuiButton(iPoint position, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype, j1Module* callback)
+GuiButton::GuiButton(iPoint position, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype, menu_type mtype, j1Module* callback)
 {
 	this->position = position;
 	this->rect = rect;
 	this->mover = mover;
 	this->pressed = pressed;
 	this->btype = btype;
-	active = true;
+	this->mtype = mtype;
 	this->callback = callback;
+
+	if (mtype == MAINMENU || mtype == OTHER)
+	{
+		active = true;
+	}
+	else
+	{
+		active = false;
+	}
 
 	etype = BUTTON;
 }
@@ -41,7 +50,6 @@ void GuiButton::OnClick()
 {
 	if (mouseover == true && active == true)
 	{
-		selected = true;
 		callback->GuiTrigger(this);
 	}
 	return;

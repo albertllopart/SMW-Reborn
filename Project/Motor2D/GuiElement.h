@@ -18,6 +18,14 @@ enum element_type
 	EMPTY
 };
 
+enum menu_type
+{
+	MAINMENU,
+	SETTINGSMENU,
+	CREDITSMENU,
+	OTHER
+};
+
 class GuiElement
 {
 public:
@@ -36,6 +44,7 @@ public:
 public:
 
 	element_type etype = EMPTY;
+	menu_type mtype = OTHER;
 
 	iPoint position;
 	bool mouseover;

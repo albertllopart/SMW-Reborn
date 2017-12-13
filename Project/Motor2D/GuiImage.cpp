@@ -3,12 +3,22 @@
 
 GuiImage::GuiImage() {};
 
-GuiImage::GuiImage(iPoint position, SDL_Rect rect)
+GuiImage::GuiImage(iPoint position, SDL_Rect rect, menu_type mtype)
 {
 	this->position = position;
 	this->rect = rect;
+	this->mtype = mtype;
+	
+	if (mtype == MAINMENU || mtype == OTHER)
+	{
+		active = true;
+	}
+	else
+	{
+		active = false;
+	}
+
 	etype = IMAGE;
-	active = true;
 }
 
 GuiImage::~GuiImage() {};

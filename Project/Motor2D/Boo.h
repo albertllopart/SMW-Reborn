@@ -78,6 +78,6 @@ private:
 
 	//pathfinding timer
 	float						pathfind_timer = 0;
-	bool						boo_chase = true;
+	bool						boo_chase = false;
 	
 };

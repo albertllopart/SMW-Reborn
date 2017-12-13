@@ -50,16 +50,22 @@ bool j1Gui::Start()
 	atlas = App->tex->Load(atlas_file_name.GetString());
 	App->audio->PlayMusic("audio/title_theme.ogg");
 
-	CreateImage(0, 0, { 0,0,400,240 });//main screen
-	CreateButton(185, 120, { 400, 0, 30, 7 }, { 462, 0, 30, 7 }, { 524, 0, 30, 7 }, PLAY, (j1Module*)App->gui);//play
-	CreateButton(169, 135, { 400, 8, 60, 7 }, { 462, 8, 60, 7 }, { 524, 8, 60, 7 }, CONTINUE, (j1Module*)App->scene);//continue
-	CreateButton(169, 150, { 400, 16, 60, 7 }, { 462, 16, 60, 7 }, { 524, 16, 60, 7 }, SETTINGS, (j1Module*)App->gui);//settings
-	CreateButton(173, 165, { 400, 24, 52, 7 }, { 462, 24, 52, 7 }, { 524, 24, 52, 7 }, CREDITS, (j1Module*)App->gui);//credits
-	CreateButton(186, 180, { 400, 32, 28, 7 }, { 462, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, (j1Module*)App->scene);//exit
+	//main menu
+	CreateImage(0, 0, { 0,0,400,240 }, OTHER);//main screen
+	CreateImage(105, 35, { 400, 65, 214, 61 }, MAINMENU);//super mario world
+	CreateButton(185, 120, { 400, 0, 30, 7 }, { 462, 0, 30, 7 }, { 524, 0, 30, 7 }, PLAY, MAINMENU, (j1Module*)App->gui);//play
+	CreateButton(169, 135, { 400, 8, 60, 7 }, { 462, 8, 60, 7 }, { 524, 8, 60, 7 }, CONTINUE, MAINMENU, (j1Module*)App->scene);//continue
+	CreateButton(169, 150, { 400, 16, 60, 7 }, { 462, 16, 60, 7 }, { 524, 16, 60, 7 }, SETTINGS, MAINMENU, (j1Module*)App->gui);//settings
+	CreateButton(173, 165, { 400, 24, 52, 7 }, { 462, 24, 52, 7 }, { 524, 24, 52, 7 }, CREDITS, MAINMENU, (j1Module*)App->gui);//credits
+	CreateButton(186, 180, { 400, 32, 28, 7 }, { 462, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, MAINMENU, (j1Module*)App->scene);//exit
 
-	//text
-
-	CreateText(60, 40, "I DID IT LOL", { 50, 50, 255, 255 }, App->fonts->default);
+	//credits menu
+	CreateButton(288, 32, { 400, 127, 44, 19 }, { 444, 127, 44, 19 }, { 444, 127, 44, 19 }, BACK, CREDITSMENU, (j1Module*)App->gui);//credditsback
+	CreateText(60, 40, "LOOK AT THESE CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU);
+	CreateText(60, 55, "WOW SUCH CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU);
+	CreateText(60, 70, "AMAZING CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU);
+	CreateText(60, 85, "UNBELIEVEABLE CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU);
+	CreateText(60, 100, "even  with  lowercase  wow", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU);
 
 	return true;
 }
@@ -114,30 +120,30 @@ SDL_Texture* j1Gui::GetAtlas() const
 	return atlas;
 }
 
-GuiElement* j1Gui::CreateImage(int x, int y, SDL_Rect rect)
+GuiElement* j1Gui::CreateImage(int x, int y, SDL_Rect rect, menu_type mtype)
 {
 	iPoint position = { x,y };
-	GuiElement* item = new GuiImage(position, rect);
+	GuiElement* item = new GuiImage(position, rect, mtype);
 
 	elements.add(item);
 
 	return item;
 }
 
-GuiElement* j1Gui::CreateButton(int x, int y, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype, j1Module* callback)
+GuiElement* j1Gui::CreateButton(int x, int y, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype, menu_type mtype, j1Module* callback)
 {
 	iPoint position = { x,y };
-	GuiElement* item = new GuiButton(position, rect, mover, pressed, btype, callback);
+	GuiElement* item = new GuiButton(position, rect, mover, pressed, btype, mtype, callback);
 
 	elements.add(item);
 
 	return item;
 }
 
-GuiElement* j1Gui::CreateText(int x, int y, char* string, SDL_Color color, _TTF_Font* font)
+GuiElement* j1Gui::CreateText(int x, int y, char* string, SDL_Color color, _TTF_Font* font, menu_type mtype)
 {
 	iPoint position = { x,y };
-	GuiElement* item = new GuiText(position, string, color, font);
+	GuiElement* item = new GuiText(position, string, color, font, mtype);
 
 	elements.add(item);
 
@@ -204,13 +210,13 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 		p2List_item<GuiElement*>* item = elements.start;
 		while (item != NULL)
 		{
-			if (item->data->etype == BUTTON)
+			if (item->data->mtype != SETTINGSMENU)
 			{
-				GuiButton* button2 = (GuiButton*)item->data;
-				if (button2->btype == PLAY || button2->btype == CONTINUE || button2->btype == SETTINGS || button2->btype == CREDITS || button2->btype == EXIT)
-				{
-					button2->active = false;
-				}
+				item->data->active = false;
+			}
+			else if (item->data->mtype == SETTINGSMENU)
+			{
+				item->data->active = true;
 			}
 			item = item->next;
 		}
@@ -223,15 +229,41 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 		p2List_item<GuiElement*>* item = elements.start;
 		while (item != NULL)
 		{
-			if (item->data->etype == BUTTON)
+			if (item->data->mtype != CREDITSMENU && item->data->mtype != OTHER)
 			{
-				GuiButton* button2 = (GuiButton*)item->data;
-				if (button2->btype == PLAY || button2->btype == CONTINUE || button2->btype == SETTINGS || button2->btype == CREDITS || button2->btype == EXIT)
-				{
-					button2->active = false;
-				}
+				item->data->active = false;
+			}
+			else if (item->data->mtype == CREDITSMENU)
+			{
+				item->data->active = true;
 			}
 			item = item->next;
+		}
+
+		break;
+	}
+
+	case BACK:
+	{
+		switch (button->mtype)
+		{
+		case CREDITSMENU:
+		{
+			p2List_item<GuiElement*>* item = elements.start;
+			while (item != NULL)
+			{
+				if (item->data->mtype == MAINMENU || item->data->mtype == OTHER)
+				{
+					item->data->active = true;
+				}
+				else if (item->data->mtype == CREDITSMENU)
+				{
+					item->data->active = false;
+				}
+				item = item->next;
+			}
+			break;
+		}
 		}
 
 		break;

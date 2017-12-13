@@ -10,6 +10,7 @@
 
 struct SDL_Rect;
 struct SDL_Texture;
+enum menu_type;
 class GuiElement;
 
 enum button_type
@@ -51,11 +52,11 @@ public:
 
 	bool GuiTrigger(GuiElement* element);
 
-	GuiElement* CreateImage(int x, int y, SDL_Rect rect);
+	GuiElement* CreateImage(int x, int y, SDL_Rect rect, menu_type mtype);
 
-	GuiElement* CreateButton(int x, int y, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype, j1Module* callback);
+	GuiElement* CreateButton(int x, int y, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype, menu_type mtype, j1Module* callback);
 
-	GuiElement* CreateText(int x, int y, char* string, SDL_Color color, _TTF_Font* font);
+	GuiElement* CreateText(int x, int y, char* string, SDL_Color color, _TTF_Font* font, menu_type mtype);
 
 	void DeleteElement(GuiElement* element);
 

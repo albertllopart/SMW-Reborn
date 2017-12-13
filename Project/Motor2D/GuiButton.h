@@ -15,7 +15,7 @@ class GuiButton : public GuiElement
 public:
 
 	GuiButton();
-	GuiButton(iPoint position, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype, j1Module* callback);
+	GuiButton(iPoint position, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype, menu_type mtype, j1Module* callback);
 	~GuiButton();
 
 	void Draw();
