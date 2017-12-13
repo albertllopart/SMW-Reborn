@@ -4,6 +4,7 @@
 #include "p2List.h"
 #include "GuiElement.h"
 #include "GuiButton.h"
+#include "GuiImage.h"
 
 #include "SDL/include/SDL.h"
 #include "SDL_mixer\include\SDL_mixer.h"
@@ -227,18 +228,30 @@ bool j1Audio::GuiTrigger(GuiElement* element)
 		case MUSICUP:
 		{
 			MusicUp();
+			if (button->imgcallback != nullptr && button->imgcallback->index < 4)
+			{
+				button->imgcallback->index++;
+			}
 			Mix_VolumeMusic(music_volume);
 			break;
 		}
 		case MUSICDOWN:
 		{
 			MusicDown();
+			if (button->imgcallback != nullptr && button->imgcallback->index > 0)
+			{
+				button->imgcallback->index--;
+			}
 			Mix_VolumeMusic(music_volume);
 			break;
 		}
 		case FXUP:
 		{
 			FxUp();
+			if (button->imgcallback != nullptr && button->imgcallback->index < 4)
+			{
+				button->imgcallback->index++;
+			}
 			for (int i = 2; i <= MAX_CHANNELS; i++)
 			{
 				Mix_Volume(i, fx_volume);
@@ -249,6 +262,10 @@ bool j1Audio::GuiTrigger(GuiElement* element)
 		case FXDOWN:
 		{
 			FxDown();
+			if (button->imgcallback != nullptr && button->imgcallback->index > 0)
+			{
+				button->imgcallback->index--;
+			}
 			for (int i = 2; i <= MAX_CHANNELS; i++)
 			{
 				Mix_Volume(i, fx_volume);

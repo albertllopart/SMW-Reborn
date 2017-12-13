@@ -60,13 +60,31 @@ bool j1Gui::Start()
 	CreateButton(186, 180, { 400, 32, 28, 7 }, { 462, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, MAINMENU, (j1Module*)App->scene);//exit
 
 	//settings menu
-	CreateImage(90, 60, { 560, 147, 38, 32 }, SETTINGSMENU);//musicsound
-	CreateImage(90, 144, { 560, 147, 38, 32 }, SETTINGSMENU);//fxsound
+	GuiImage* image = CreateImage(90, 60, { 560, 147, 38, 32 }, SETTINGSMENU, 3);//musicsound
+	{
+		image->status.PushBack({ 400, 147, 38, 32 });
+		image->status.PushBack({ 440, 147, 38, 32 });
+		image->status.PushBack({ 480, 147, 38, 32 });
+		image->status.PushBack({ 520, 147, 38, 32 });
+		image->status.PushBack({ 560, 147, 38, 32 });
+	}
+	GuiButton* button = CreateButton(137, 70, { 400, 180, 16, 16 }, { 417, 180, 16, 16 }, { 417, 180, 16, 16 }, MUSICUP, SETTINGSMENU, (j1Module*)App->audio);//musicup
+	button->imgcallback = image;
+	button = CreateButton(65, 70, { 434, 180, 16, 16 }, { 451, 180, 16, 16 }, { 451, 180, 16, 16 }, MUSICDOWN, SETTINGSMENU, (j1Module*)App->audio);//musicdown
+	button->imgcallback = image;
+	image = CreateImage(90, 144, { 560, 147, 38, 32 }, SETTINGSMENU, 4);//fxsound
+	{
+		image->status.PushBack({ 400, 147, 38, 32 });
+		image->status.PushBack({ 440, 147, 38, 32 });
+		image->status.PushBack({ 480, 147, 38, 32 });
+		image->status.PushBack({ 520, 147, 38, 32 });
+		image->status.PushBack({ 560, 147, 38, 32 });
+	}
+	button = CreateButton(137, 154, { 400, 180, 16, 16 }, { 417, 180, 16, 16 }, { 417, 180, 16, 16 }, FXUP, SETTINGSMENU, (j1Module*)App->audio);//fxup
+	button->imgcallback = image;
+	button = CreateButton(65, 154, { 434, 180, 16, 16 }, { 451, 180, 16, 16 }, { 451, 180, 16, 16 }, FXDOWN, SETTINGSMENU, (j1Module*)App->audio);//fxdown
+	button->imgcallback = image;
 	CreateButton(288, 32, { 400, 127, 44, 19 }, { 444, 127, 44, 19 }, { 444, 127, 44, 19 }, BACK, SETTINGSMENU, (j1Module*)App->gui);//settingsback
-	CreateButton(137, 70, { 400, 180, 16, 16 }, { 417, 180, 16, 16 }, { 417, 180, 16, 16 }, MUSICUP, SETTINGSMENU, (j1Module*)App->audio);//musicup
-	CreateButton(65, 70, { 434, 180, 16, 16 }, { 451, 180, 16, 16 }, { 451, 180, 16, 16 }, MUSICDOWN, SETTINGSMENU, (j1Module*)App->audio);//musicdown
-	CreateButton(137, 154, { 400, 180, 16, 16 }, { 417, 180, 16, 16 }, { 417, 180, 16, 16 }, FXUP, SETTINGSMENU, (j1Module*)App->audio);//fxup
-	CreateButton(65, 154, { 434, 180, 16, 16 }, { 451, 180, 16, 16 }, { 451, 180, 16, 16 }, FXDOWN, SETTINGSMENU, (j1Module*)App->audio);//fxdown
 	CreateText(60, 36, "MUSIC VOLUME", { 50, 50, 255, 255 }, App->fonts->default, SETTINGSMENU);
 	CreateText(60, 120, "SOUND FX VOLUME", { 50, 50, 255, 255 }, App->fonts->default, SETTINGSMENU);
 
@@ -111,7 +129,22 @@ bool j1Gui::PostUpdate()
 	p2List_item<GuiElement*>* item = elements.start;
 	while (item != nullptr)
 	{
-		item->data->Draw();
+		if (item->data->etype == IMAGE)
+		{
+			GuiImage* image = (GuiImage*)item->data;
+			if (image->status.last_frame > 0)
+			{
+				image->DrawStatus();
+			}
+			else
+			{
+				item->data->Draw();
+			}
+		}
+		else
+		{
+			item->data->Draw();
+		}
 		item = item->next;
 	}
 	return true;
@@ -131,20 +164,20 @@ SDL_Texture* j1Gui::GetAtlas() const
 	return atlas;
 }
 
-GuiElement* j1Gui::CreateImage(int x, int y, SDL_Rect rect, menu_type mtype)
+GuiImage* j1Gui::CreateImage(int x, int y, SDL_Rect rect, menu_type mtype, uint index)
 {
 	iPoint position = { x,y };
-	GuiElement* item = new GuiImage(position, rect, mtype);
+	GuiImage* item = new GuiImage(position, rect, mtype, index);
 
 	elements.add(item);
 
 	return item;
 }
 
-GuiElement* j1Gui::CreateButton(int x, int y, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype, menu_type mtype, j1Module* callback)
+GuiButton* j1Gui::CreateButton(int x, int y, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype, menu_type mtype, j1Module* callback)
 {
 	iPoint position = { x,y };
-	GuiElement* item = new GuiButton(position, rect, mover, pressed, btype, mtype, callback);
+	GuiButton* item = new GuiButton(position, rect, mover, pressed, btype, mtype, callback);
 
 	elements.add(item);
 

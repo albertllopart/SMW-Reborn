@@ -9,6 +9,7 @@
 
 struct SDL_Texture;
 struct SDL_Rect;
+class GuiImage;
 
 class GuiButton : public GuiElement
 {
@@ -32,6 +33,7 @@ public:
 	SDL_Rect pressed;
 
 	j1Module* callback = nullptr;
+	GuiImage* imgcallback = nullptr;
 };
 
 #endif

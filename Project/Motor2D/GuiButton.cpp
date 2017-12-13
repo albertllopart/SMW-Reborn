@@ -1,4 +1,5 @@
 #include "GuiButton.h"
+#include "GuiImage.h"
 #include "j1Render.h"
 
 GuiButton::GuiButton() {};
