@@ -50,6 +50,7 @@ public:
 	bool				level_complete = false;
 	Entity*				player;
 	j1Collision*        col = nullptr;
+
 };
 
 #endif

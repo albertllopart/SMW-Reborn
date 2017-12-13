@@ -50,10 +50,10 @@ public:
 	fPoint				GetPositionINT() const;
 
 	bool				Falling();
+	bool				chuck_dead = false;
 
 	iPoint				chuck_quadrant_1;
 	iPoint				chuck_quadrant_2;
-
 
 private:
 

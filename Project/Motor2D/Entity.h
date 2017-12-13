@@ -103,4 +103,5 @@ public:
 	EDirection					direction;
 
 	Collider*					collision = nullptr;
+	Collider*					collision_head = nullptr;
 };

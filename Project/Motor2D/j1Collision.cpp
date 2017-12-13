@@ -16,12 +16,15 @@ j1Collision::j1Collision()
 
 	matrix[COLLIDER_PLAYER][COLLIDER_CHUCK] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_BOO] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_HEAD_CHUCK] = true;
 
 	matrix[COLLIDER_CHUCK][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_CHUCK][COLLIDER_BOO] = false;
 
 	matrix[COLLIDER_BOO][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_BOO][COLLIDER_CHUCK] = false;
+
+	matrix[COLLIDER_HEAD_CHUCK][COLLIDER_PLAYER] = true;
 }
 
 j1Collision::~j1Collision()
@@ -70,6 +73,10 @@ bool j1Collision::Update(float dt)
 
 			if (c1->CheckCollision(c2->rect) == true && App->entitymodule->player->god_mode == false)
 			{
+				if (c1->type == COLLIDER_HEAD_CHUCK || c2->type == COLLIDER_HEAD_CHUCK && matrix[c1->type][c2->type])
+				{
+					//no se com enviar que el chuck està mort al modul del chuck
+				}
 				if (matrix[c1->type][c2->type])
 				{
 					//c1->callback->OnCollision(c1, c2);
@@ -131,6 +138,8 @@ void j1Collision::DebugDraw()
 				break;
 			case COLLIDER_BOO:
 				App->render->DrawQuad(colliders[i]->rect, 255, 35, 1, alpha); //red
+			case COLLIDER_HEAD_CHUCK:
+				App->render->DrawQuad(colliders[i]->rect, 255, 100, 100, alpha);
 				break;
 		}
 	}
