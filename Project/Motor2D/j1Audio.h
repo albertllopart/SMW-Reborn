@@ -6,6 +6,7 @@
 #include "p2List.h"
 
 #define DEFAULT_MUSIC_FADE_TIME 2.0f
+#define MAX_CHANNELS 32
 
 struct _Mix_Music;
 struct Mix_Chunk;
@@ -34,7 +35,17 @@ public:
 	// Play a previously loaded WAV
 	bool PlayFx(unsigned int fx, int repeat = 0);
 
+	void MusicUp();
+	void MusicDown();
+	void FxUp();
+	void FxDown();
+
+	bool GuiTrigger(GuiElement* element);
+
 	private:
+
+	uint				music_volume = 96;//possible volumes: 0, 32, 64, 96, 128
+	uint				fx_volume = 128;
 
 	_Mix_Music*			music;
 	p2List<Mix_Chunk*>	fx;

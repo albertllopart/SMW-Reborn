@@ -2,6 +2,8 @@
 #include "p2Log.h"
 #include "j1Audio.h"
 #include "p2List.h"
+#include "GuiElement.h"
+#include "GuiButton.h"
 
 #include "SDL/include/SDL.h"
 #include "SDL_mixer\include\SDL_mixer.h"
@@ -48,6 +50,14 @@ bool j1Audio::Awake(pugi::xml_node& config)
 		LOG("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
 		active = false;
 		ret = true;
+	}
+
+	Mix_AllocateChannels(MAX_CHANNELS);
+	Mix_VolumeMusic(music_volume);
+
+	for (int i = 2; i <= MAX_CHANNELS; i++)
+	{
+		Mix_Volume(i, fx_volume);
 	}
 
 
@@ -170,8 +180,83 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 
 	if(id > 0 && id <= fx.count())
 	{
-		Mix_PlayChannel(-1, fx[id - 1], repeat);
+		Mix_PlayChannel(2, fx[id - 1], repeat);
 	}
 
 	return ret;
+}
+
+void j1Audio::MusicUp()
+{
+	if (music_volume < 128)
+	{
+		music_volume += 32;
+	}
+}
+
+void j1Audio::MusicDown()
+{
+	if (music_volume > 0)
+	{
+		music_volume -= 32;
+	}
+}
+
+void j1Audio::FxUp()
+{
+	if (fx_volume < 128)
+	{
+		fx_volume += 32;
+	}
+}
+
+void j1Audio::FxDown()
+{
+	if (fx_volume > 0)
+	{
+		fx_volume -= 32;
+	}
+}
+
+bool j1Audio::GuiTrigger(GuiElement* element)
+{
+	GuiButton* button = (GuiButton*)element;
+
+	switch (button->btype)
+	{
+		case MUSICUP:
+		{
+			MusicUp();
+			Mix_VolumeMusic(music_volume);
+			break;
+		}
+		case MUSICDOWN:
+		{
+			MusicDown();
+			Mix_VolumeMusic(music_volume);
+			break;
+		}
+		case FXUP:
+		{
+			FxUp();
+			for (int i = 2; i <= MAX_CHANNELS; i++)
+			{
+				Mix_Volume(i, fx_volume);
+			}
+			PlayFx(3);
+			break;
+		}
+		case FXDOWN:
+		{
+			FxDown();
+			for (int i = 2; i <= MAX_CHANNELS; i++)
+			{
+				Mix_Volume(i, fx_volume);
+			}
+			PlayFx(3);
+			break;
+		}
+	}
+
+	return true;
 }
