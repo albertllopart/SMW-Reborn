@@ -120,6 +120,7 @@ bool j1Player::Update(float dt)
 	if (dead)
 	{
 		dead_timer += dt;
+		App->scene->LoadLvl(App->scene->current_lvl, true);
 	}
 	if (position.y > 300 || position.y < 0)
 	{

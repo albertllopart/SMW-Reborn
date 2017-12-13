@@ -125,6 +125,8 @@ void j1EntityModule::DeleteChuck(Entity* chuck)
 		{
 			if (current_position == find)
 			{
+				entities[current_position]->collision_head->to_delete = true;
+				entities[current_position]->collision->to_delete = true;
 				entities.del(item);
 				return;
 			}
