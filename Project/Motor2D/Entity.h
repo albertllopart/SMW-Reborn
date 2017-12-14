@@ -8,6 +8,7 @@ struct SDL_Texture;
 
 enum EState
 {
+	IDLE,
 	IDLE_RIGHT,
 	IDLE_LEFT,
 	SHORT_HOP_LEFT,

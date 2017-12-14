@@ -7,6 +7,7 @@
 #include "j1Audio.h"
 #include "j1FadeToBlack.h"
 #include "j1EntityModule.h"
+#include "j1Player.h"
 
 j1Collision::j1Collision()
 {
@@ -18,14 +19,19 @@ j1Collision::j1Collision()
 	matrix[COLLIDER_PLAYER][COLLIDER_CHUCK] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_BOO] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_HEAD_CHUCK] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_COIN] = true;
 
 	matrix[COLLIDER_CHUCK][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_CHUCK][COLLIDER_BOO] = false;
+	matrix[COLLIDER_CHUCK][COLLIDER_COIN] = false;
 
 	matrix[COLLIDER_BOO][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_BOO][COLLIDER_CHUCK] = false;
+	matrix[COLLIDER_BOO][COLLIDER_COIN] = false;
 
 	matrix[COLLIDER_HEAD_CHUCK][COLLIDER_PLAYER] = true;
+
+	matrix[COLLIDER_COIN][COLLIDER_PLAYER] = false;
 }
 
 j1Collision::~j1Collision()
@@ -71,12 +77,18 @@ bool j1Collision::Update(float dt)
 			}
 
 			c2 = colliders[j];
+			if (c1->CheckCollision(c2->rect) == true && c2->type == COLLIDER_COIN && matrix[c1->type][c2->type])
+			{
+				App->entitymodule->DeleteChuck(c2->callback);
 
+			}
 			if (c1->CheckCollision(c2->rect) == true && App->entitymodule->player->god_mode == false)
 			{
 				if (/*c1->type == COLLIDER_HEAD_CHUCK ||*/ c2->type == COLLIDER_HEAD_CHUCK && matrix[c1->type][c2->type])
 				{
 						App->entitymodule->DeleteChuck(c2->callback);
+						
+						
 						break;
 											
 					//no se com enviar que el chuck està mort al modul del chuck
@@ -146,6 +158,8 @@ void j1Collision::DebugDraw()
 			case COLLIDER_HEAD_CHUCK:
 				App->render->DrawQuad(colliders[i]->rect, 75, 0, 130, alpha); //purple
 				break;
+			case COLLIDER_COIN:
+				App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha); //yellow
 		}
 	}
 }

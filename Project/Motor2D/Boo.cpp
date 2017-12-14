@@ -56,7 +56,7 @@ Boo::~Boo()
 
 bool Boo::Awake()
 {
-	position.create(144, 96);
+	position.create(144, 50);
 	collision = App->collision->AddCollider({ (int)position.x, (int)position.y, BOO_SIZE, BOO_SIZE }, COLLIDER_BOO, this);
 
 	position.create(188, 96);

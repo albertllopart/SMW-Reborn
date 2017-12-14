@@ -9,6 +9,7 @@
 
 struct SDL_Texture;
 
+
 class Coins : public Entity
 {
 public:

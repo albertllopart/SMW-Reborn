@@ -232,8 +232,6 @@ void j1Scene::LoadLvl(int current, bool lvl_start)
 		App->audio->PlayMusic("audio/main_music.ogg");
 		App->map->Load("level_2.tmx");
 		current_lvl = current;
-		App->entitymodule->player->position.x = 10;
-		App->entitymodule->player->position.y = 197;
 	}
 
 }
