@@ -56,7 +56,7 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	Mix_AllocateChannels(MAX_CHANNELS);
 	Mix_VolumeMusic(music_volume);
 
-	for (int i = 2; i <= MAX_CHANNELS; i++)
+	for (int i = 0; i <= MAX_CHANNELS; i++)
 	{
 		Mix_Volume(i, fx_volume);
 	}
@@ -181,7 +181,7 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 
 	if(id > 0 && id <= fx.count())
 	{
-		Mix_PlayChannel(2, fx[id - 1], repeat);
+		Mix_PlayChannel(-1, fx[id - 1], repeat);
 	}
 
 	return ret;
@@ -252,7 +252,7 @@ bool j1Audio::GuiTrigger(GuiElement* element)
 			{
 				button->imgcallback->index++;
 			}
-			for (int i = 2; i <= MAX_CHANNELS; i++)
+			for (int i = 0; i <= MAX_CHANNELS; i++)
 			{
 				Mix_Volume(i, fx_volume);
 			}
@@ -266,7 +266,7 @@ bool j1Audio::GuiTrigger(GuiElement* element)
 			{
 				button->imgcallback->index--;
 			}
-			for (int i = 2; i <= MAX_CHANNELS; i++)
+			for (int i = 0; i <= MAX_CHANNELS; i++)
 			{
 				Mix_Volume(i, fx_volume);
 			}
