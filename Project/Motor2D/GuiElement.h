@@ -23,6 +23,7 @@ enum menu_type
 	MAINMENU,
 	SETTINGSMENU,
 	CREDITSMENU,
+	PAUSEMENU,
 	OTHER
 };
 

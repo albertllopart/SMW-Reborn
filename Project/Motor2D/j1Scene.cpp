@@ -49,6 +49,7 @@ bool j1Scene::Start()
 	App->audio->LoadFx("audio/level_complete.wav"); //3
 	App->audio->LoadFx("audio/chuck_walk.wav"); //4
 	App->audio->LoadFx("audio/mario_hurt.wav"); //5
+	App->audio->LoadFx("audio/pause.wav"); //6
 	current_lvl = 1;
 	App->map->Load("level_1.tmx");
 	App->map->LoadEnemies();
@@ -146,7 +147,7 @@ bool j1Scene::PostUpdate()
 {
 	bool ret = true;
 
-	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || exit_from_gui == true)
+	if(exit_from_gui == true)
 		ret = false;
 
 	return ret;

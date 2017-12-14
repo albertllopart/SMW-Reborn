@@ -27,6 +27,9 @@ enum button_type
 	FXUP,
 	FXDOWN,
 	BACK,
+	RESUME,
+	SAVEANDRESUME,
+	SAVEANDEXIT,
 	NONE
 };
 

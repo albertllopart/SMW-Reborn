@@ -50,6 +50,17 @@ bool j1Gui::Start()
 	atlas = App->tex->Load(atlas_file_name.GetString());
 	App->audio->PlayMusic("audio/title_theme.ogg");
 
+	//pause menu
+	CreateImage(0, 0, { 0, 240, 400, 240 }, PAUSEMENU);//pause background
+	CreateImage(105, 20, { 400, 65, 214, 61 }, PAUSEMENU);//super mario world
+	CreateText(166, 110, "PAUSE MENU", { 0, 216, 248, 255 }, App->fonts->default, PAUSEMENU);
+	CreateButton(176, 135, { 400, 197, 46, 7 }, { 493, 197, 46, 7 }, { 493, 197, 46, 7 }, RESUME, PAUSEMENU, (j1Module*)App->gui);//resume
+	CreateButton(155, 150, { 400, 205, 92, 7 }, { 493, 205, 92, 7 }, { 493, 205, 92, 7 }, SAVEANDRESUME, PAUSEMENU, (j1Module*)App->gui);//save and resume
+	CreateButton(162, 165, { 400, 213, 74, 7 }, { 493, 213, 74, 7 }, { 493, 213, 74, 7 }, SAVEANDEXIT, PAUSEMENU, (j1Module*)App->gui);//save and exit
+	CreateButton(169, 180, { 400, 16, 60, 7 }, { 524, 16, 60, 7 }, { 524, 16, 60, 7 }, SETTINGS, PAUSEMENU, (j1Module*)App->gui);//settings
+	CreateButton(186, 195, { 400, 32, 28, 7 }, { 524, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, PAUSEMENU, (j1Module*)App->scene);//exit
+
+
 	//main menu
 	CreateImage(0, 0, { 0,0,400,240 }, OTHER);//main screen
 	CreateImage(105, 35, { 400, 65, 214, 61 }, MAINMENU);//super mario world
@@ -102,6 +113,46 @@ bool j1Gui::Start()
 // Update all guis
 bool j1Gui::PreUpdate()
 {
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	{
+		if (App->entitymodule->active == true)
+		{
+			App->audio->PlayFx(6);
+
+			App->entitymodule->active = false;
+			App->pathfinding->active = false;
+			App->collision->active = false;
+
+			p2List_item<GuiElement*>* item = elements.start;
+			while (item != nullptr)
+			{
+				if (item->data->mtype == PAUSEMENU)
+				{
+					item->data->active = true;
+				}
+				item = item->next;
+			}
+		}
+		else
+		{
+			App->audio->PlayFx(6);
+
+			App->entitymodule->active = true;
+			App->pathfinding->active = true;
+			App->collision->active = true;
+
+			p2List_item<GuiElement*>* item = elements.start;
+			while (item != nullptr)
+			{
+				if (item->data->mtype == PAUSEMENU)
+				{
+					item->data->active = false;
+				}
+				item = item->next;
+			}
+		}
+	}
+
 	p2List_item<GuiElement*>* item = elements.start;
 	while (item != nullptr)
 	{
@@ -245,6 +296,24 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 		}
 
 		App->audio->PlayMusic("audio/main_music.ogg");
+
+		break;
+	}
+
+	case RESUME:
+	{
+		App->audio->PlayFx(6);
+
+		App->pathfinding->active = true;
+		App->collision->active = true;
+		App->entitymodule->active = true;
+
+		p2List_item<GuiElement*>* item = elements.start;
+		while (item != NULL)
+		{
+			item->data->active = false;
+			item = item->next;
+		}
 
 		break;
 	}
