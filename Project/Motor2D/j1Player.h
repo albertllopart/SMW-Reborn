@@ -50,9 +50,8 @@ private:
 	SDL_Rect*			test;
 	fPoint				velocity;
 	float				gravity = 9.8;
-	bool				jump;
-	int					jump_height;
-	bool				jump1_on = false;
+	
+	
 	bool				jump2_on = false;
 
 	//Animations

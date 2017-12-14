@@ -3,7 +3,7 @@
 #include "SDL_image/include/SDL_image.h"
 #include "j1Textures.h"
 #include "j1Render.h"
-
+#include "j1EntityModule.h"
 
 Coins::Coins() : Entity()
 {
@@ -27,7 +27,9 @@ bool Coins::Awake()
 bool Coins::Start()
 {
 	graphic = App->tex->Load("gui/atlas.png");
-	position.create(184, 110);
+	fPoint pos;
+	pos.create(184, 110);
+	App->entitymodule->CreateCoins(pos);
 	return true;
 }
 

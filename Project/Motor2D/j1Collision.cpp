@@ -86,6 +86,9 @@ bool j1Collision::Update(float dt)
 			{
 				if (/*c1->type == COLLIDER_HEAD_CHUCK ||*/ c2->type == COLLIDER_HEAD_CHUCK && matrix[c1->type][c2->type])
 				{
+					App->entitymodule->player->jump = true;
+					App->entitymodule->player->jump_height = App->entitymodule->player->position.y - 35;
+					App->entitymodule->player->jump1_on = true;
 						App->entitymodule->DeleteChuck(c2->callback);
 						
 						

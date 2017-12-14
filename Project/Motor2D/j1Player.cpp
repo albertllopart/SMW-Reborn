@@ -329,6 +329,7 @@ bool j1Player::GodMode()
 	
 	return true;
 }
+
 bool j1Player::Jump()
  {
 	bool ret;

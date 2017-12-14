@@ -99,10 +99,14 @@ public:
 	bool						flies;
 	bool						dead = false;
 	bool						god_mode = false;
+	bool						jump;
+	int							jump_height;
+	bool						jump1_on = false;
 
 	EState						state;
 	EDirection					direction;
 
 	Collider*					collision = nullptr;
 	Collider*					collision_head = nullptr;
+	
 };

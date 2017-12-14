@@ -102,6 +102,7 @@ bool j1Scene::Update(float dt)
 
 		else if (current_lvl == 2)
 			LoadLvl(1, true);
+
 		App->entitymodule->level_complete = false;
 		//App->map->WantToChange();
 	}
