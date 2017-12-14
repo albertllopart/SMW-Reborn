@@ -51,7 +51,10 @@ bool j1Gui::Start()
 	App->audio->PlayMusic("audio/title_theme.ogg");
 
 	//pause menu
-	CreateImage(0, 0, { 0, 240, 400, 240 }, PAUSEMENU);//pause background
+	GuiImage* image = CreateImage(0, 0, { 0, 240, 400, 240 }, PAUSEMENU);//pause background
+	{
+		image->itype = PAUSEBACKGROUND;
+	}
 	CreateImage(105, 20, { 400, 65, 214, 61 }, PAUSEMENU);//super mario world
 	CreateText(166, 110, "PAUSE MENU", { 0, 216, 248, 255 }, App->fonts->default, PAUSEMENU);
 	CreateButton(176, 135, { 400, 197, 46, 7 }, { 493, 197, 46, 7 }, { 493, 197, 46, 7 }, RESUME, PAUSEMENU, (j1Module*)App->gui);//resume
@@ -62,7 +65,10 @@ bool j1Gui::Start()
 
 
 	//main menu
-	CreateImage(0, 0, { 0,0,400,240 }, OTHER);//main screen
+	menubackground = CreateImage(0, 0, { 0,0,400,240 }, OTHER);//main screen
+	{
+		menubackground->itype = MENUBACKGROUND;
+	}
 	CreateImage(105, 35, { 400, 65, 214, 61 }, MAINMENU);//super mario world
 	CreateButton(185, 120, { 400, 0, 30, 7 }, { 462, 0, 30, 7 }, { 524, 0, 30, 7 }, PLAY, MAINMENU, (j1Module*)App->gui);//play
 	CreateButton(169, 135, { 400, 8, 60, 7 }, { 462, 8, 60, 7 }, { 524, 8, 60, 7 }, CONTINUE, MAINMENU, (j1Module*)App->scene);//continue
@@ -71,7 +77,7 @@ bool j1Gui::Start()
 	CreateButton(186, 180, { 400, 32, 28, 7 }, { 462, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, MAINMENU, (j1Module*)App->scene);//exit
 
 	//settings menu
-	GuiImage* image = CreateImage(90, 60, { 560, 147, 38, 32 }, SETTINGSMENU, 3);//musicsound
+	image = CreateImage(90, 60, { 560, 147, 38, 32 }, SETTINGSMENU, 3);//musicsound
 	{
 		image->status.PushBack({ 400, 147, 38, 32 });
 		image->status.PushBack({ 440, 147, 38, 32 });
@@ -115,7 +121,7 @@ bool j1Gui::PreUpdate()
 {
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 	{
-		if (App->entitymodule->active == true)
+		if (App->entitymodule->active == true && menubackground->active == false)
 		{
 			App->audio->PlayFx(6);
 
@@ -133,7 +139,7 @@ bool j1Gui::PreUpdate()
 				item = item->next;
 			}
 		}
-		else
+		else if(App->entitymodule->active == false && menubackground->active == false)
 		{
 			App->audio->PlayFx(6);
 
@@ -320,16 +326,35 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 		
 	case SETTINGS:
 	{
+		bool pause = false;
+		GuiImage* pausebackground = new GuiImage();
 		p2List_item<GuiElement*>* item = elements.start;
 		while (item != NULL)
 		{
+			if (item->data->etype == IMAGE)
+			{
+				GuiImage* image = (GuiImage*)item->data;
+				if (image->itype == PAUSEBACKGROUND)
+				{
+					pausebackground = image;
+					if (image->active == true)
+					{
+						pause = true;
+					}
+				}
+			}
+
 			if (item->data->mtype != SETTINGSMENU && item->data->mtype != OTHER)
 			{
 				item->data->active = false;
 			}
-			else if (item->data->mtype == SETTINGSMENU)
+			else if (item->data->mtype == SETTINGSMENU || item->data->mtype == OTHER)
 			{
 				item->data->active = true;
+				if (pause == true)
+				{
+					pausebackground->active = true;
+				}
 			}
 			item = item->next;
 		}
@@ -379,22 +404,55 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 		}
 		case SETTINGSMENU:
 		{
+			bool pause = false;
+			GuiImage* menubackground = new GuiImage();
 			p2List_item<GuiElement*>* item = elements.start;
 			while (item != NULL)
 			{
-				if (item->data->mtype == MAINMENU || item->data->mtype == OTHER)
+				if (item->data->etype == IMAGE)
 				{
-					item->data->active = true;
+					GuiImage* image = (GuiImage*)item->data;
+					if (image->itype == PAUSEBACKGROUND)
+					{
+						if (image->active == true)
+						{
+							pause = true;
+						}
+					}
+					else if (image->itype == MENUBACKGROUND)
+					{
+						menubackground = image;
+					}
 				}
-				else if (item->data->mtype == SETTINGSMENU)
+
+				if (pause == true)
 				{
-					item->data->active = false;
+					if (item->data->mtype == PAUSEMENU)
+					{
+						item->data->active = true;
+					}
+					else if (item->data->mtype == SETTINGSMENU)
+					{
+						item->data->active = false;
+					}
+					menubackground->active = false;
+				}
+				else if (pause == false)
+				{
+					if (item->data->mtype == MAINMENU || item->data->mtype == OTHER)
+					{
+						item->data->active = true;
+					}
+					else if (item->data->mtype == SETTINGSMENU)
+					{
+						item->data->active = false;
+					}
 				}
 				item = item->next;
 			}
 			break;
 		}
-		}
+	}
 
 		break;
 	}

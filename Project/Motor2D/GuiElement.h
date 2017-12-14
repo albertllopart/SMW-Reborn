@@ -18,6 +18,13 @@ enum element_type
 	EMPTY
 };
 
+enum image_type
+{
+	MENUBACKGROUND,
+	PAUSEBACKGROUND,
+	DEFAULT
+};
+
 enum menu_type
 {
 	MAINMENU,

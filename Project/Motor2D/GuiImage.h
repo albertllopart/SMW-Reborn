@@ -24,6 +24,8 @@ public:
 	Animation status;
 	uint index = 0;
 
+	image_type itype = DEFAULT;
+
 };
 
 #endif
