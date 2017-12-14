@@ -51,21 +51,21 @@ bool j1Gui::Start()
 	App->audio->PlayMusic("audio/title_theme.ogg");
 
 	//pause menu
-	GuiImage* image = CreateImage(0, 0, { 0, 240, 400, 240 }, PAUSEMENU);//pause background
+	GuiImage* image = CreateImage(0, 0, { 0, 240, 400, 240 }, PAUSEMENU, true);//pause background
 	{
 		image->itype = PAUSEBACKGROUND;
 	}
-	CreateImage(105, 20, { 400, 65, 214, 61 }, PAUSEMENU);//super mario world
-	CreateText(166, 110, "PAUSE MENU", { 0, 216, 248, 255 }, App->fonts->default, PAUSEMENU);
-	CreateButton(176, 135, { 400, 197, 46, 7 }, { 493, 197, 46, 7 }, { 493, 197, 46, 7 }, RESUME, PAUSEMENU, (j1Module*)App->gui);//resume
-	CreateButton(155, 150, { 400, 205, 92, 7 }, { 493, 205, 92, 7 }, { 493, 205, 92, 7 }, SAVEANDRESUME, PAUSEMENU, (j1Module*)App->gui);//save and resume
-	CreateButton(162, 165, { 400, 213, 74, 7 }, { 493, 213, 74, 7 }, { 493, 213, 74, 7 }, SAVEANDEXIT, PAUSEMENU, (j1Module*)App->gui);//save and exit
-	CreateButton(169, 180, { 400, 16, 60, 7 }, { 524, 16, 60, 7 }, { 524, 16, 60, 7 }, SETTINGS, PAUSEMENU, (j1Module*)App->gui);//settings
-	CreateButton(186, 195, { 400, 32, 28, 7 }, { 524, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, PAUSEMENU, (j1Module*)App->scene);//exit
+	CreateImage(105, 20, { 400, 65, 214, 61 }, PAUSEMENU, true);//super mario world
+	CreateText(166, 110, "PAUSE MENU", { 0, 216, 248, 255 }, App->fonts->default, PAUSEMENU, true);
+	CreateButton(176, 135, { 400, 197, 46, 7 }, { 493, 197, 46, 7 }, { 493, 197, 46, 7 }, RESUME, PAUSEMENU, (j1Module*)App->gui, true);//resume
+	CreateButton(155, 150, { 400, 205, 92, 7 }, { 493, 205, 92, 7 }, { 493, 205, 92, 7 }, SAVEANDRESUME, PAUSEMENU, (j1Module*)App->gui, true);//save and resume
+	CreateButton(162, 165, { 400, 213, 74, 7 }, { 493, 213, 74, 7 }, { 493, 213, 74, 7 }, SAVEANDEXIT, PAUSEMENU, (j1Module*)App->gui, true);//save and exit
+	CreateButton(169, 180, { 400, 16, 60, 7 }, { 524, 16, 60, 7 }, { 524, 16, 60, 7 }, SETTINGS, PAUSEMENU, (j1Module*)App->gui, true);//settings
+	CreateButton(186, 195, { 400, 32, 28, 7 }, { 524, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, PAUSEMENU, (j1Module*)App->scene, true);//exit
 
 
 	//main menu
-	menubackground = CreateImage(0, 0, { 0,0,400,240 }, OTHER);//main screen
+	menubackground = CreateImage(0, 0, { 0,0,400,240 }, OTHER, true);//main screen
 	{
 		menubackground->itype = MENUBACKGROUND;
 	}
@@ -77,7 +77,7 @@ bool j1Gui::Start()
 	CreateButton(186, 180, { 400, 32, 28, 7 }, { 462, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, MAINMENU, (j1Module*)App->scene);//exit
 
 	//settings menu
-	image = CreateImage(90, 60, { 560, 147, 38, 32 }, SETTINGSMENU, 3);//musicsound
+	image = CreateImage(90, 60, { 560, 147, 38, 32 }, SETTINGSMENU, 3, true);//musicsound
 	{
 		image->status.PushBack({ 400, 147, 38, 32 });
 		image->status.PushBack({ 440, 147, 38, 32 });
@@ -85,11 +85,11 @@ bool j1Gui::Start()
 		image->status.PushBack({ 520, 147, 38, 32 });
 		image->status.PushBack({ 560, 147, 38, 32 });
 	}
-	GuiButton* button = CreateButton(137, 70, { 400, 180, 16, 16 }, { 417, 180, 16, 16 }, { 417, 180, 16, 16 }, MUSICUP, SETTINGSMENU, (j1Module*)App->audio);//musicup
+	GuiButton* button = CreateButton(137, 70, { 400, 180, 16, 16 }, { 417, 180, 16, 16 }, { 417, 180, 16, 16 }, MUSICUP, SETTINGSMENU, (j1Module*)App->audio, true);//musicup
 	button->imgcallback = image;
-	button = CreateButton(65, 70, { 434, 180, 16, 16 }, { 451, 180, 16, 16 }, { 451, 180, 16, 16 }, MUSICDOWN, SETTINGSMENU, (j1Module*)App->audio);//musicdown
+	button = CreateButton(65, 70, { 434, 180, 16, 16 }, { 451, 180, 16, 16 }, { 451, 180, 16, 16 }, MUSICDOWN, SETTINGSMENU, (j1Module*)App->audio, true);//musicdown
 	button->imgcallback = image;
-	image = CreateImage(90, 144, { 560, 147, 38, 32 }, SETTINGSMENU, 4);//fxsound
+	image = CreateImage(90, 144, { 560, 147, 38, 32 }, SETTINGSMENU, 4, true);//fxsound
 	{
 		image->status.PushBack({ 400, 147, 38, 32 });
 		image->status.PushBack({ 440, 147, 38, 32 });
@@ -97,13 +97,13 @@ bool j1Gui::Start()
 		image->status.PushBack({ 520, 147, 38, 32 });
 		image->status.PushBack({ 560, 147, 38, 32 });
 	}
-	button = CreateButton(137, 154, { 400, 180, 16, 16 }, { 417, 180, 16, 16 }, { 417, 180, 16, 16 }, FXUP, SETTINGSMENU, (j1Module*)App->audio);//fxup
+	button = CreateButton(137, 154, { 400, 180, 16, 16 }, { 417, 180, 16, 16 }, { 417, 180, 16, 16 }, FXUP, SETTINGSMENU, (j1Module*)App->audio, true);//fxup
 	button->imgcallback = image;
-	button = CreateButton(65, 154, { 434, 180, 16, 16 }, { 451, 180, 16, 16 }, { 451, 180, 16, 16 }, FXDOWN, SETTINGSMENU, (j1Module*)App->audio);//fxdown
+	button = CreateButton(65, 154, { 434, 180, 16, 16 }, { 451, 180, 16, 16 }, { 451, 180, 16, 16 }, FXDOWN, SETTINGSMENU, (j1Module*)App->audio, true);//fxdown
 	button->imgcallback = image;
-	CreateButton(288, 32, { 400, 127, 44, 19 }, { 444, 127, 44, 19 }, { 444, 127, 44, 19 }, BACK, SETTINGSMENU, (j1Module*)App->gui);//settingsback
-	CreateText(60, 36, "MUSIC VOLUME", { 50, 50, 255, 255 }, App->fonts->default, SETTINGSMENU);
-	CreateText(60, 120, "SOUND FX VOLUME", { 50, 50, 255, 255 }, App->fonts->default, SETTINGSMENU);
+	CreateButton(288, 32, { 400, 127, 44, 19 }, { 444, 127, 44, 19 }, { 444, 127, 44, 19 }, BACK, SETTINGSMENU, (j1Module*)App->gui, true);//settingsback
+	CreateText(60, 36, "MUSIC VOLUME", { 50, 50, 255, 255 }, App->fonts->default, SETTINGSMENU, true);
+	CreateText(60, 120, "SOUND FX VOLUME", { 50, 50, 255, 255 }, App->fonts->default, SETTINGSMENU, true);
 
 	//credits menu
 	CreateButton(288, 32, { 400, 127, 44, 19 }, { 444, 127, 44, 19 }, { 444, 127, 44, 19 }, BACK, CREDITSMENU, (j1Module*)App->gui);//credditsback
@@ -191,15 +191,24 @@ bool j1Gui::PostUpdate()
 			GuiImage* image = (GuiImage*)item->data;
 			if (image->status.last_frame > 0)
 			{
+				if (item->data->follows_camera == true)
+				{
+					item->data->PositionUpdate();
+				}
 				image->DrawStatus();
 			}
 			else
 			{
+				item->data->PositionUpdate();
 				item->data->Draw();
 			}
 		}
 		else
 		{
+			if (item->data->follows_camera == true)
+			{
+				item->data->PositionUpdate();
+			}
 			item->data->Draw();
 		}
 		item = item->next;
@@ -221,30 +230,30 @@ SDL_Texture* j1Gui::GetAtlas() const
 	return atlas;
 }
 
-GuiImage* j1Gui::CreateImage(int x, int y, SDL_Rect rect, menu_type mtype, uint index)
+GuiImage* j1Gui::CreateImage(int x, int y, SDL_Rect rect, menu_type mtype, uint index, bool follows_camera)
 {
 	iPoint position = { x,y };
-	GuiImage* item = new GuiImage(position, rect, mtype, index);
+	GuiImage* item = new GuiImage(position, rect, mtype, index, follows_camera);
 
 	elements.add(item);
 
 	return item;
 }
 
-GuiButton* j1Gui::CreateButton(int x, int y, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype, menu_type mtype, j1Module* callback)
+GuiButton* j1Gui::CreateButton(int x, int y, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype, menu_type mtype, j1Module* callback, bool follows_camera)
 {
 	iPoint position = { x,y };
-	GuiButton* item = new GuiButton(position, rect, mover, pressed, btype, mtype, callback);
+	GuiButton* item = new GuiButton(position, rect, mover, pressed, btype, mtype, callback, follows_camera);
 
 	elements.add(item);
 
 	return item;
 }
 
-GuiElement* j1Gui::CreateText(int x, int y, char* string, SDL_Color color, _TTF_Font* font, menu_type mtype)
+GuiElement* j1Gui::CreateText(int x, int y, char* string, SDL_Color color, _TTF_Font* font, menu_type mtype, bool follows_camera)
 {
 	iPoint position = { x,y };
-	GuiElement* item = new GuiText(position, string, color, font, mtype);
+	GuiElement* item = new GuiText(position, string, color, font, mtype, follows_camera);
 
 	elements.add(item);
 

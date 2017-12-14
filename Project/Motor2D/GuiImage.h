@@ -13,7 +13,7 @@ class GuiImage : public GuiElement
 public:
 
 	GuiImage();
-	GuiImage(iPoint position, SDL_Rect rect, menu_type mtype, uint index = 0);
+	GuiImage(iPoint position, SDL_Rect rect, menu_type mtype, uint index = 0, bool follows_camera = false);
 	~GuiImage();
 
 	void Draw();

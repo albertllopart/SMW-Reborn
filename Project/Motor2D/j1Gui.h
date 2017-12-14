@@ -57,11 +57,11 @@ public:
 
 	bool GuiTrigger(GuiElement* element);
 
-	GuiImage* CreateImage(int x, int y, SDL_Rect rect, menu_type mtype, uint index = 0);
+	GuiImage* CreateImage(int x, int y, SDL_Rect rect, menu_type mtype, uint index = 0, bool follows_camera = false);
 
-	GuiButton* CreateButton(int x, int y, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype, menu_type mtype, j1Module* callback);
+	GuiButton* CreateButton(int x, int y, SDL_Rect rect, SDL_Rect mover, SDL_Rect pressed, button_type btype, menu_type mtype, j1Module* callback, bool follows_camera = false);
 
-	GuiElement* CreateText(int x, int y, char* string, SDL_Color color, _TTF_Font* font, menu_type mtype);
+	GuiElement* CreateText(int x, int y, char* string, SDL_Color color, _TTF_Font* font, menu_type mtype, bool follows_camera = false);
 
 	void DeleteElement(GuiElement* element);
 

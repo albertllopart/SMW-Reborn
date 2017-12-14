@@ -5,12 +5,13 @@
 
 GuiText::GuiText() {};
 
-GuiText::GuiText(iPoint position, char* string, SDL_Color color, _TTF_Font* font, menu_type mtype)
+GuiText::GuiText(iPoint position, char* string, SDL_Color color, _TTF_Font* font, menu_type mtype, bool follows_camera)
 {
 	this->position = position;
 	this->string = string;
 	this->color = color;
 	this->mtype = mtype;
+	this->follows_camera = follows_camera;
 	
 	if (mtype == MAINMENU || mtype == OTHER)
 	{
@@ -30,6 +31,8 @@ GuiText::~GuiText() {};
 
 void GuiText::Draw()
 {
-	if(active == true)
+	if(active == true && follows_camera == false)
 		App->render->Blit(text, position.x, position.y);
+	else if(active == true && follows_camera == true)
+		App->render->Blit(text, position_camera.x, position.y);
 }

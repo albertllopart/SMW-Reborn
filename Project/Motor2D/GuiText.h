@@ -11,7 +11,7 @@ class GuiText : public GuiElement
 public:
 
 	GuiText();
-	GuiText(iPoint position, char* string, SDL_Color color, _TTF_Font* font, menu_type mtype);
+	GuiText(iPoint position, char* string, SDL_Color color, _TTF_Font* font, menu_type mtype, bool follows_camera = false);
 	~GuiText();
 
 	void Draw();

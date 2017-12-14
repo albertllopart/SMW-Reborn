@@ -49,15 +49,19 @@ public:
 
 	virtual void OnClick();
 
+	void PositionUpdate();
+
 public:
 
 	element_type etype = EMPTY;
 	menu_type mtype = OTHER;
 
 	iPoint position;
+	iPoint position_camera;
 	bool mouseover;
 	bool active;
 	bool selected;
+	bool follows_camera;
 
 	SDL_Rect rect;
 };
