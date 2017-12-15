@@ -17,6 +17,20 @@ You can find:
 
 ![image](https://user-images.githubusercontent.com/17165192/34013324-473f39f4-e117-11e7-8cc4-bec4d11bd544.png)
 
+### Pause Menu
+
+By pressing **Esc** while playing you will find:
+
+- Resume          ->You will continue.
+- Save and Resume ->You will save and continue.
+- Save and Exit   ->You will save your current status and exit.
+- Settings        ->You can adjust the music volume and the fx volume.
+
+By pressing **Esc** again you will go to the Menu.
+
+![image](https://user-images.githubusercontent.com/17145449/34023181-c324daac-e143-11e7-9c42-c869b74d2cc8.png)
+
+
 ### Inputs
  
  You can use:
