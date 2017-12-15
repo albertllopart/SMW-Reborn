@@ -55,6 +55,15 @@ bool j1Player::Start()
 	bool ret = true;
 	graphic = App->tex->Load("maps/Mario.png");
 
+	player_lives = 5;
+	player_coins = 0;
+	player_score = 0;
+	player_hours = 0;
+	player_minutes = 0;
+	player_seconds = 0;
+
+	accumulatted_time = 0;
+
 	position.x = 10;
 	position.y = 197;
 
@@ -79,6 +88,23 @@ bool j1Player::Start()
 bool j1Player::Update(float dt)
 {
 	BROFILER_CATEGORY("Player Update", Profiler::Color::Orange)
+
+	accumulatted_time += dt;
+	if (accumulatted_time >= 1)
+	{
+		player_seconds++;
+		accumulatted_time = 0;
+	}
+	if (player_seconds >= 60)
+	{
+		player_minutes++;
+		player_seconds = 0;
+	}
+	if (player_minutes >= 60)
+	{
+		player_hours++;
+		player_minutes = 0;
+	}
 
 	if (dead != true)
 	{
@@ -191,6 +217,11 @@ void j1Player::Draw()
 void j1Player::Input(float dt)
 {
 	BROFILER_CATEGORY("Player Input", Profiler::Color::Orange)
+
+	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN)
+	{
+		player_lives--;
+	}
 
 	//Right
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)

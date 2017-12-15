@@ -50,7 +50,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_ITERATOR_DEBUG_LEVEL=0;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
@@ -82,6 +82,7 @@
     <ClCompile Include="GuiButton.cpp" />
     <ClCompile Include="GuiElement.cpp" />
     <ClCompile Include="GuiImage.cpp" />
+    <ClCompile Include="GuiNumber.cpp" />
     <ClCompile Include="GuiText.cpp" />
     <ClCompile Include="j1Collision.cpp" />
     <ClCompile Include="j1EntityModule.cpp" />
@@ -112,6 +113,7 @@
     <ClInclude Include="GuiButton.h" />
     <ClInclude Include="GuiElement.h" />
     <ClInclude Include="GuiImage.h" />
+    <ClInclude Include="GuiNumber.h" />
     <ClInclude Include="GuiText.h" />
     <ClInclude Include="j1Collision.h" />
     <ClInclude Include="j1EntityModule.h" />

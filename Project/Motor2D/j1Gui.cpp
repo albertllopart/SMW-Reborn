@@ -17,6 +17,8 @@
 #include "GuiImage.h"
 #include "GuiButton.h"
 #include "GuiText.h"
+#include "GuiNumber.h"
+
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -55,28 +57,34 @@ bool j1Gui::Start()
 	{
 		image->itype = PAUSEBACKGROUND;
 	}
-	CreateImage(105, 20, { 400, 65, 214, 61 }, PAUSEMENU, 0, true);//super mario world
-	CreateText(166, 110, "PAUSE MENU", { 0, 216, 248, 255 }, App->fonts->default, PAUSEMENU, true);
-	CreateButton(176, 135, { 400, 197, 46, 7 }, { 493, 197, 46, 7 }, { 493, 197, 46, 7 }, RESUME, PAUSEMENU, (j1Module*)App->gui, true);//resume
-	CreateButton(155, 150, { 400, 205, 92, 7 }, { 493, 205, 92, 7 }, { 493, 205, 92, 7 }, SAVEANDRESUME, PAUSEMENU, (j1Module*)App->gui, true);//save and resume
-	CreateButton(162, 165, { 400, 213, 74, 7 }, { 493, 213, 74, 7 }, { 493, 213, 74, 7 }, SAVEANDEXIT, PAUSEMENU, (j1Module*)App->gui, true);//save and exit
-	CreateButton(169, 180, { 400, 16, 60, 7 }, { 524, 16, 60, 7 }, { 524, 16, 60, 7 }, SETTINGS, PAUSEMENU, (j1Module*)App->gui, true);//settings
-	CreateButton(186, 195, { 400, 32, 28, 7 }, { 524, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, PAUSEMENU, (j1Module*)App->gui, true);//exit
+	CreateImage(105, 40, { 400, 65, 214, 61 }, PAUSEMENU, 0, true);//super mario world
+	CreateText(166, 120, "PAUSE MENU", { 0, 216, 248, 255 }, App->fonts->default, PAUSEMENU, true);
+	CreateButton(176, 145, { 400, 197, 46, 7 }, { 493, 197, 46, 7 }, { 493, 197, 46, 7 }, RESUME, PAUSEMENU, (j1Module*)App->gui, true);//resume
+	CreateButton(155, 160, { 400, 205, 92, 7 }, { 493, 205, 92, 7 }, { 493, 205, 92, 7 }, SAVEANDRESUME, PAUSEMENU, (j1Module*)App->gui, true);//save and resume
+	CreateButton(162, 175, { 400, 213, 74, 7 }, { 493, 213, 74, 7 }, { 493, 213, 74, 7 }, SAVEANDEXIT, PAUSEMENU, (j1Module*)App->gui, true);//save and exit
+	CreateButton(169, 190, { 400, 16, 60, 7 }, { 524, 16, 60, 7 }, { 524, 16, 60, 7 }, SETTINGS, PAUSEMENU, (j1Module*)App->gui, true);//settings
+	CreateButton(186, 205, { 400, 32, 28, 7 }, { 524, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, PAUSEMENU, (j1Module*)App->gui, true);//exit
 
 	//ingame ui
 	CreateImage(10, 10, { 413, 40, 12, 15 }, INGAMEMENU, 0, true);//mario lives
 	CreateImage(25, 14, { 426, 40, 7, 7 }, INGAMEMENU, 0, true);//mario x
-	CreateText(37, 8, "05", { 255, 255, 255, 255 }, App->fonts->numbers, INGAMEMENU, true);//mario lives number
+	CreateNumber(37, 8, &App->entitymodule->player->player_lives, { 255, 255, 255, 255 }, App->fonts->numbers, INGAMEMENU, true);//mario lives number
 
 	CreateImage(75, 9, {400, 40, 12, 16}, INGAMEMENU, 0, true);//coins
 	CreateImage(90, 14, { 426, 40, 7, 7 }, INGAMEMENU, 0, true);//coins x
-	CreateText(102, 8, "99", { 255, 255, 255, 255 }, App->fonts->numbers, INGAMEMENU, true);//coins number
+	CreateNumber(102, 8, &App->entitymodule->player->player_coins, { 255, 255, 255, 255 }, App->fonts->numbers, INGAMEMENU, true);//coins number
 
-	CreateText(255, 12, "score", { 248, 56, 56, 255 }, App->fonts->default, INGAMEMENU, true);//score
-	CreateText(295, 12, "999", { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);//score number
+	CreateText(235, 12, "score", { 248, 56, 56, 255 }, App->fonts->default, INGAMEMENU, true);//score
+	CreateNumber(235, 24, &App->entitymodule->player->player_score, { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);//score number
 
-	CreateText(345, 12, "time", { 248, 56, 56, 255 }, App->fonts->default, INGAMEMENU, true);//time
-	CreateText(345, 24, "00:00:00", { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);//time numbers
+	CreateText(295, 12, "timer", { 248, 56, 56, 255 }, App->fonts->default, INGAMEMENU, true);//time
+	CreateNumber(295, 24, &App->entitymodule->player->player_hours, { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);
+	CreateText(310, 24, "h", { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);//time numbers
+	CreateNumber(325, 24, &App->entitymodule->player->player_minutes, { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);
+	CreateText(340, 24, "m", { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);//time numbers
+	CreateNumber(355, 24, &App->entitymodule->player->player_seconds, { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);
+	CreateText(370, 24, "s", { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);//time numbers
+
 	//ShellExecute(NULL, "open", "https://www.google.com", NULL, NULL, SW_SHOWNORMAL);
 
 	//main menu
@@ -269,6 +277,16 @@ GuiElement* j1Gui::CreateText(int x, int y, char* string, SDL_Color color, _TTF_
 {
 	iPoint position = { x,y };
 	GuiElement* item = new GuiText(position, string, color, font, mtype, follows_camera);
+
+	elements.add(item);
+
+	return item;
+}
+
+GuiElement* j1Gui::CreateNumber(int x, int y, uint* number, SDL_Color color, _TTF_Font* font, menu_type mtype, bool follows_camera)
+{
+	iPoint position = { x,y };
+	GuiElement* item = new GuiNumber(position, number, color, font, mtype, follows_camera);
 
 	elements.add(item);
 

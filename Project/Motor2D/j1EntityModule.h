@@ -48,7 +48,7 @@ public:
 
 	p2List<Entity*>		entities;
 	bool				level_complete = false;
-	Entity*				player;
+	j1Player*				player;
 	j1Collision*        col = nullptr;
 
 };

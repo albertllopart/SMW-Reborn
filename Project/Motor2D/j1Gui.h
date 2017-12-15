@@ -63,6 +63,8 @@ public:
 
 	GuiElement* CreateText(int x, int y, char* string, SDL_Color color, _TTF_Font* font, menu_type mtype, bool follows_camera = false);
 
+	GuiElement* CreateNumber(int x, int y, uint* number, SDL_Color color, _TTF_Font* font, menu_type mtype, bool follows_camera);
+
 	void DeleteElement(GuiElement* element);
 
 private:

@@ -39,6 +39,12 @@ public:
 	
 	iPoint				player_quadrant_1;
 	iPoint				player_quadrant_2;
+	uint				player_lives;
+	uint				player_coins;
+	uint				player_score;
+	uint				player_hours;
+	uint				player_minutes;
+	uint				player_seconds;
 
 	bool				level_complete = false;
 
@@ -61,6 +67,9 @@ private:
 	Animation			short_hop_left;
 	Animation			short_hop_right;
 	Animation*			current_animation;
+
+	//timer
+	float				accumulatted_time;
 
 };
 
