@@ -137,6 +137,7 @@ bool j1Map::LoadEnemies()
 				pos.create((float)j * 16, ((float)i * 16));
 				App->entitymodule->CreateBoo(pos);
 			}
+
 		}
 	}
 	return ret;

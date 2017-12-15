@@ -193,9 +193,9 @@ void j1Scene::LoadLvl(int current, bool lvl_start)
 			}
 		}
 		//Create_Boo
-		fPoint pos;
-		pos.create(144, 96);
-		App->entitymodule->CreateBoo(pos);
+		//fPoint pos;
+		//pos.create(144, 96);
+		//App->entitymodule->CreateBoo(pos);
 	
 	}
 	if (current == 1)
