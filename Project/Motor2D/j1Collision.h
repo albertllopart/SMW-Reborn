@@ -63,7 +63,6 @@ private:
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
 	bool debug = false;
 	
-	float sound_timer = 0;
 };
 
 #endif 

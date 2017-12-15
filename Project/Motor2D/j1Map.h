@@ -105,6 +105,7 @@ public:
 	iPoint WorldToMap(int x, int y) const;
 
 	//Colisions
+	
 	bool IsWalkable(Entity* entity);
 	bool IsFallable(Entity* entity);
 	bool level_1 = true;

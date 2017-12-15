@@ -50,9 +50,7 @@ bool j1Scene::Start()
 	App->audio->LoadFx("audio/chuck_walk.wav"); //4
 	App->audio->LoadFx("audio/mario_hurt.wav"); //5
 	App->audio->LoadFx("audio/pause.wav"); //6
-	current_lvl = 1;
-	App->map->Load("level_1.tmx");
-	App->map->LoadEnemies();
+	LoadLvl(1, true);
 	return true;
 }
 
@@ -175,66 +173,42 @@ bool j1Scene::Load(pugi::xml_node& node)
 
 void j1Scene::LoadLvl(int current, bool lvl_start)
 {
+	Entity* player = App->entitymodule->player;
 	if (lvl_start == true)
 	{
 		
 		App->render->camera.x = 0;
 		App->render->camera.y = 0;
-		App->entitymodule->player->position.x = 10;
-		App->entitymodule->player->position.y = 197;
-		//App->entitymodule->
-		for (int i = 0; i < App->entitymodule->entities.count(); i++)
-		{
-			//delete boo
-			if (App->entitymodule->entities[i]->name == "Boo" || App->entitymodule->entities[i]->name == "Chuck")
-			{
-				App->entitymodule->DeleteBoo(App->entitymodule->entities[i]);
-				i--;
-			}
-		}
-		//Create_Boo
-		//fPoint pos;
-		//pos.create(144, 96);
-		//App->entitymodule->CreateBoo(pos);
-	
+		player->position.x = 10;
+		player->position.y = 197;	
+		
+
 	}
+	player->state = IDLE_RIGHT;
+	player->collision->SetPos(player->position.x, player->position.y);
+	player->jump = false;
+	player->PostUpdate();
+	App->entitymodule->DeleteEntities();
+
+
 	if (current == 1)
 	{
 		App->audio->PlayMusic("audio/main_music.ogg");
+		App->map->UnloadMap();
 		App->map->Load("level_1.tmx");
-		current_lvl = current;
-		//Create chucks
-		for (int i = 0; i < CHUCK_ENEMIES; i++)
-		{
-			if (i == 0)
-			{
-				fPoint pos;
-				pos.create(688, 165);
-				App->entitymodule->CreateChuck(pos);
-			}
-			else if (i == 1)
-			{
+		
 
-				fPoint pos;
-				pos.create(176, 197);
-				App->entitymodule->CreateChuck(pos);
-
-			}
-			else if (i == 2)
-			{
-				fPoint pos;
-				pos.create(464, 197);
-				App->entitymodule->CreateChuck(pos);
-			}
-		}
+		
 	}
 	else if (current == 2)
 	{
 		App->audio->PlayMusic("audio/main_music.ogg");
+		App->map->UnloadMap();
 		App->map->Load("level_2.tmx");
-		current_lvl = current;
+		
 	}
-
+	current_lvl = current;
+	App->map->LoadEnemies();
 }
 
 bool j1Scene::GuiTrigger(GuiElement* element)

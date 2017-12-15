@@ -114,7 +114,6 @@ bool Boo::Update(float dt)
 	if (collision != NULL)
 	{
 		collision->SetPos(position.x, position.y);
-		OnCollision(collision, App->entitymodule->player->collision);
 	}
 
 	pathfind_timer += dt;

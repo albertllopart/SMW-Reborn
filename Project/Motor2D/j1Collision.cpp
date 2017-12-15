@@ -79,7 +79,7 @@ bool j1Collision::Update(float dt)
 			c2 = colliders[j];
 			if (c1->CheckCollision(c2->rect) == true && c2->type == COLLIDER_COIN && matrix[c1->type][c2->type])
 			{
-				App->entitymodule->DeleteChuck(c2->callback);
+				App->entitymodule->DeleteEntity(c2->callback);
 
 			}
 			if (c1->CheckCollision(c2->rect) == true && App->entitymodule->player->god_mode == false)
@@ -89,27 +89,22 @@ bool j1Collision::Update(float dt)
 					App->entitymodule->player->jump = true;
 					App->entitymodule->player->jump_height = App->entitymodule->player->position.y - 35;
 					App->entitymodule->player->jump1_on = true;
-						App->entitymodule->DeleteChuck(c2->callback);
-						
-						
-						break;
+					App->entitymodule->DeleteEntity(c2->callback);						
+					break;
 											
 					//no se com enviar que el chuck està mort al modul del chuck
 				}
 				else if (matrix[c1->type][c2->type])
+				{
+					if (App->entitymodule->player->dead == false)
 					{
-						//c1->callback->OnCollision(c1, c2);
+						App->audio->PlayFx(5);
+						App->fadetoblack->FadeToBlack(NULL, NULL, 1.5f);
 						App->entitymodule->player->dead = true;
-						if (sound_timer > 2.0)
-						{
-							App->audio->PlayFx(5);
-							sound_timer = 0;
-						}
-						App->fadetoblack->FadeToBlack(App->entitymodule, this, 1.5f);
 					}
-				
-				
 					
+				}
+				
 			}
 			else
 			{
@@ -118,7 +113,7 @@ bool j1Collision::Update(float dt)
 			
 		}
 	}
-	sound_timer += dt;
+	
 
 	return true;
 }
@@ -158,11 +153,13 @@ void j1Collision::DebugDraw()
 				break;
 			case COLLIDER_BOO:
 				App->render->DrawQuad(colliders[i]->rect, 255, 35, 1, alpha); //red
+				break;
 			case COLLIDER_HEAD_CHUCK:
 				App->render->DrawQuad(colliders[i]->rect, 75, 0, 130, alpha); //purple
 				break;
 			case COLLIDER_COIN:
 				App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha); //yellow
+				break;
 		}
 	}
 }

@@ -137,6 +137,7 @@ bool j1Map::LoadEnemies()
 				pos.create((float)j * 16, ((float)i * 16));
 				App->entitymodule->CreateBoo(pos);
 			}
+			//TODO
 
 		}
 	}
@@ -210,6 +211,8 @@ bool j1Map::Load(const char* file_name)
 	BROFILER_CATEGORY("Map Load", Profiler::Color::Yellow)
 
 	bool ret = true;
+
+
 	p2SString tmp("%s%s", folder.GetString(), file_name);
 
 	pugi::xml_parse_result result = map_file.load_file(tmp.GetString());
@@ -459,6 +462,7 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	
 	return ret;
 }
+
 
 bool j1Map::IsWalkable(Entity* entity)
 {

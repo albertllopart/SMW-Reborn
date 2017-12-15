@@ -49,7 +49,9 @@ bool j1FadeToBlack::Update(float dt)
 		{
 			if (now >= total_time)
 			{
+				if(module_off!=NULL)
 				module_off->CleanUp();
+				if(module_on != NULL)
 				module_on->Start();
 
 				total_time += total_time;

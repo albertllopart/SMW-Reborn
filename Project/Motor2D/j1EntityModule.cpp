@@ -100,53 +100,26 @@ void j1EntityModule::CreateCoins(fPoint position)
 	entities.add(coins);
 	
 }
-void j1EntityModule::DeleteBoo(Entity* boo)
-{
-	if (boo != nullptr)
-	{
-		int find = entities.find(boo);
-		int current_position = 0;
-		p2List_item<Entity*>* item = entities.start;
-		
-		while (item != NULL)
-		{
-			if (current_position == find)
-			{
-				if (entities[current_position]->name == "Chuck")
-				entities[current_position]->collision_head->to_delete = true;
 
-				entities[current_position]->collision->to_delete = true;
-				
-				entities.del(item);
-				
-				return;
-			}
-			item = item->next;
-			current_position++;
-		}
-	}
-}
-
-void j1EntityModule::DeleteChuck(Entity* chuck)
+void j1EntityModule::DeleteEntity(Entity* entity)
 {
-	if (chuck != nullptr)
+	if (entity != nullptr)
 	{
-		int find = entities.find(chuck);
-		int current_position = 0;
+	
 		p2List_item<Entity*>* item = entities.start;
 		while (item != NULL)
 		{
-			if (current_position == find)
+			if (item->data == entity)
 			{
-				if (entities[current_position]->name == "Chuck")
-				entities[current_position]->collision_head->to_delete = true;
+				if (entity->name == "Chuck")
+				entity->collision_head->to_delete = true;
 
-				entities[current_position]->collision->to_delete = true;
+				entity->collision->to_delete = true;
+				RELEASE(entity);
 				entities.del(item);
 				return;
 			}
 			item = item->next;
-			current_position++;
 		}
 	}
 }
@@ -155,6 +128,21 @@ void j1EntityModule::DeletePlayer(Entity* player)
 {
 
 }
+
+void j1EntityModule::DeleteEntities()
+{
+	for (int i = 0; i < entities.count(); i++)
+	{
+		if (entities[i]->name != "Player" )
+		{
+			App->entitymodule->DeleteEntity(entities[i]);
+			i--;
+		}
+	}
+}
+
+
+
 
 bool j1EntityModule::Save(pugi::xml_node& node) const
 {
@@ -200,13 +188,13 @@ bool j1EntityModule::Load(pugi::xml_node& node)
 		//delete boo
 		if (entities[i]->name == "Boo")
 		{
-			DeleteBoo(entities[i]);
+			DeleteEntity(entities[i]);
 			i--;
 		}
 		//delete chuck
 		else if (entities[i]->name == "Chuck")
 		{
-			DeleteChuck(entities[i]);
+			DeleteEntity(entities[i]);
 			i--;
 		}
 			/*if (entities[i]->name == "player")

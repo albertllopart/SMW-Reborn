@@ -18,7 +18,7 @@
 
 j1Player::j1Player() : Entity()
 {
-	name.create("player");
+	name.create("Player");
 
 	//Animations
 	
@@ -80,53 +80,50 @@ bool j1Player::Update(float dt)
 {
 	BROFILER_CATEGORY("Player Update", Profiler::Color::Orange)
 
-		if (dead_timer == 0 || dead_timer > 1.0f)
+	if (dead != true)
+	{
+		Input(dt);
+		if (jump)
 		{
-			if (dead_timer != 0)
+			if (Jump())
 			{
-				dead_timer = 0;
-				dead = false;
-				App->scene->LoadLvl(App->scene->current_lvl, true);
-								
+				position.y -= 150 * dt;
 			}
-
-			Input(dt);
-			if (jump)
-			{
-				if (Jump())
-				{
-					position.y -= 150 * dt;
-				}
-			}
-			else
-			{
-				if (Falling())
-				{
-					position.y += 150 * dt;
-				}
-			}
-
-			if (jump == true)
-			{
-				if (direction == L)
-					state = SHORT_HOP_LEFT;
-				else if (direction == R)
-					state = SHORT_HOP_RIGHT;
-			}
-
-			collision->SetPos(position.x, position.y);
 		}
+		else
+		{
+			if (Falling())
+			{
+				position.y += 150 * dt;
+			}
+		}
+
+		if (jump == true)
+		{
+			if (direction == L)
+				state = SHORT_HOP_LEFT;
+			else if (direction == R)
+				state = SHORT_HOP_RIGHT;
+		}
+		collision->SetPos(position.x, position.y);	
+	}
 
 	if (dead)
 	{
-		dead_timer += dt;
-		App->scene->LoadLvl(App->scene->current_lvl, true);
+		if (App->fadetoblack->current_step == j1FadeToBlack::fade_from_black)
+		{
+			App->scene->LoadLvl(App->scene->current_lvl, true);
+			dead = false;
+		}
+			
+		
 	}
-	if (position.y > 300 || position.y < 0)
+	/*if (position.y > 300 || position.y < 0)
 	{
 		position.y = 167;
-	}
+	}*/
 	Draw();
+	
 
 	return true;
 }
@@ -387,7 +384,7 @@ bool j1Player::Falling()
 		else if (*nextGid1 == 20)
 		{
 			App->audio->PlayFx(5);
-			App->fadetoblack->FadeToBlack(App->entitymodule, App->entitymodule, 1.5f);
+			App->fadetoblack->FadeToBlack(NULL, NULL, 1.5f);
 			dead = true;
 			ret = false;
 			jump2_on = false;

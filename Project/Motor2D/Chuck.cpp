@@ -118,8 +118,8 @@ bool Chuck::Update(float dt)
 	{
 		collision->SetPos(position.x, position.y + CHUCK_HEAD_HIGHT);
 		collision_head->SetPos(position.x + HEAD_DISTANCE, position.y);
-		OnCollision(collision, App->entitymodule->player->collision);
-		OnCollision(collision_head, App->entitymodule->player->collision);
+		//OnCollision(collision, App->entitymodule->player->collision);
+		//OnCollision(collision_head, App->entitymodule->player->collision);
 		if (chuck_dead)
 		{
 
@@ -281,7 +281,7 @@ bool Chuck::Falling()
 	}
 	else if (*nextGid1 == 20)
 	{
-		App->entitymodule->DeleteChuck(this);
+		App->entitymodule->DeleteEntity(this);
 	}
 	else
 	{
