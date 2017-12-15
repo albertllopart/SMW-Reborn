@@ -61,7 +61,7 @@ bool j1Gui::Start()
 	CreateButton(155, 150, { 400, 205, 92, 7 }, { 493, 205, 92, 7 }, { 493, 205, 92, 7 }, SAVEANDRESUME, PAUSEMENU, (j1Module*)App->gui, true);//save and resume
 	CreateButton(162, 165, { 400, 213, 74, 7 }, { 493, 213, 74, 7 }, { 493, 213, 74, 7 }, SAVEANDEXIT, PAUSEMENU, (j1Module*)App->gui, true);//save and exit
 	CreateButton(169, 180, { 400, 16, 60, 7 }, { 524, 16, 60, 7 }, { 524, 16, 60, 7 }, SETTINGS, PAUSEMENU, (j1Module*)App->gui, true);//settings
-	CreateButton(186, 195, { 400, 32, 28, 7 }, { 524, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, PAUSEMENU, (j1Module*)App->scene, true);//exit
+	CreateButton(186, 195, { 400, 32, 28, 7 }, { 524, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, PAUSEMENU, (j1Module*)App->gui, true);//exit
 
 	//ingame ui
 	CreateImage(10, 10, { 413, 40, 12, 15 }, INGAMEMENU, 0, true);//mario lives
@@ -84,12 +84,12 @@ bool j1Gui::Start()
 	{
 		menubackground->itype = MENUBACKGROUND;
 	}
-	CreateImage(105, 35, { 400, 65, 214, 61 }, MAINMENU);//super mario world
-	CreateButton(185, 120, { 400, 0, 30, 7 }, { 462, 0, 30, 7 }, { 524, 0, 30, 7 }, PLAY, MAINMENU, (j1Module*)App->gui);//play
-	CreateButton(169, 135, { 400, 8, 60, 7 }, { 462, 8, 60, 7 }, { 524, 8, 60, 7 }, CONTINUE, MAINMENU, (j1Module*)App->scene);//continue
-	CreateButton(169, 150, { 400, 16, 60, 7 }, { 462, 16, 60, 7 }, { 524, 16, 60, 7 }, SETTINGS, MAINMENU, (j1Module*)App->gui);//settings
-	CreateButton(173, 165, { 400, 24, 52, 7 }, { 462, 24, 52, 7 }, { 524, 24, 52, 7 }, CREDITS, MAINMENU, (j1Module*)App->gui);//credits
-	CreateButton(186, 180, { 400, 32, 28, 7 }, { 462, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, MAINMENU, (j1Module*)App->scene);//exit
+	CreateImage(105, 35, { 400, 65, 214, 61 }, MAINMENU, 0, true);//super mario world
+	CreateButton(185, 120, { 400, 0, 30, 7 }, { 462, 0, 30, 7 }, { 524, 0, 30, 7 }, PLAY, MAINMENU, (j1Module*)App->gui, true);//play
+	CreateButton(169, 135, { 400, 8, 60, 7 }, { 462, 8, 60, 7 }, { 524, 8, 60, 7 }, CONTINUE, MAINMENU, (j1Module*)App->scene, true);//continue
+	CreateButton(169, 150, { 400, 16, 60, 7 }, { 462, 16, 60, 7 }, { 524, 16, 60, 7 }, SETTINGS, MAINMENU, (j1Module*)App->gui, true);//settings
+	CreateButton(173, 165, { 400, 24, 52, 7 }, { 462, 24, 52, 7 }, { 524, 24, 52, 7 }, CREDITS, MAINMENU, (j1Module*)App->gui, true);//credits
+	CreateButton(186, 180, { 400, 32, 28, 7 }, { 462, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, MAINMENU, (j1Module*)App->scene, true);//exit
 
 	//settings menu
 	image = CreateImage(90, 60, { 560, 147, 38, 32 }, SETTINGSMENU, 3, true);//musicsound
@@ -121,12 +121,12 @@ bool j1Gui::Start()
 	CreateText(60, 120, "SOUND FX VOLUME", { 50, 50, 255, 255 }, App->fonts->default, SETTINGSMENU, true);
 
 	//credits menu
-	CreateButton(288, 32, { 400, 127, 44, 19 }, { 444, 127, 44, 19 }, { 444, 127, 44, 19 }, BACK, CREDITSMENU, (j1Module*)App->gui);//credditsback
-	CreateText(60, 40, "LOOK AT THESE CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU);
-	CreateText(60, 55, "WOW SUCH CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU);
-	CreateText(60, 70, "AMAZING CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU);
-	CreateText(60, 85, "UNBELIEVEABLE CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU);
-	CreateText(60, 100, "even  with  lowercase  wow", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU);
+	CreateButton(288, 32, { 400, 127, 44, 19 }, { 444, 127, 44, 19 }, { 444, 127, 44, 19 }, BACK, CREDITSMENU, (j1Module*)App->gui, true);//credditsback
+	CreateText(60, 40, "LOOK AT THESE CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
+	CreateText(60, 55, "WOW SUCH CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
+	CreateText(60, 70, "AMAZING CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
+	CreateText(60, 85, "UNBELIEVEABLE CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
+	CreateText(60, 100, "even  with  lowercase  wow", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
 
 	return true;
 }
@@ -318,6 +318,12 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 		App->collision->active = true;
 		App->entitymodule->active = true;
 
+		App->pathfinding->Start();
+		App->collision->Start();
+		App->entitymodule->Start();
+
+		App->render->camera.x = 0;
+
 		p2List_item<GuiElement*>* item = elements.start;
 		while (item != NULL)
 		{
@@ -492,6 +498,25 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 		}
 	}
 
+		break;
+	}
+
+	case EXIT:
+	{
+		p2List_item<GuiElement*>* item = elements.start;
+		while (item != NULL)
+		{
+			if (item->data->mtype == MAINMENU || item->data->mtype == OTHER)
+			{
+				item->data->active = true;
+			}
+			else
+			{
+				item->data->active = false;
+			}
+			item = item->next;
+		}
+		App->audio->PlayMusic("audio/title_theme.ogg");
 		break;
 	}
 	}
