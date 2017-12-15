@@ -51,11 +51,11 @@ bool j1Gui::Start()
 	App->audio->PlayMusic("audio/title_theme.ogg");
 
 	//pause menu
-	GuiImage* image = CreateImage(0, 0, { 0, 240, 400, 240 }, PAUSEMENU, true);//pause background
+	GuiImage* image = CreateImage(0, 0, { 0, 240, 400, 240 }, PAUSEMENU, 0, true);//pause background
 	{
 		image->itype = PAUSEBACKGROUND;
 	}
-	CreateImage(105, 20, { 400, 65, 214, 61 }, PAUSEMENU, true);//super mario world
+	CreateImage(105, 20, { 400, 65, 214, 61 }, PAUSEMENU, 0, true);//super mario world
 	CreateText(166, 110, "PAUSE MENU", { 0, 216, 248, 255 }, App->fonts->default, PAUSEMENU, true);
 	CreateButton(176, 135, { 400, 197, 46, 7 }, { 493, 197, 46, 7 }, { 493, 197, 46, 7 }, RESUME, PAUSEMENU, (j1Module*)App->gui, true);//resume
 	CreateButton(155, 150, { 400, 205, 92, 7 }, { 493, 205, 92, 7 }, { 493, 205, 92, 7 }, SAVEANDRESUME, PAUSEMENU, (j1Module*)App->gui, true);//save and resume
@@ -63,9 +63,24 @@ bool j1Gui::Start()
 	CreateButton(169, 180, { 400, 16, 60, 7 }, { 524, 16, 60, 7 }, { 524, 16, 60, 7 }, SETTINGS, PAUSEMENU, (j1Module*)App->gui, true);//settings
 	CreateButton(186, 195, { 400, 32, 28, 7 }, { 524, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, PAUSEMENU, (j1Module*)App->scene, true);//exit
 
+	//ingame ui
+	CreateImage(10, 10, { 413, 40, 12, 15 }, INGAMEMENU, 0, true);//mario lives
+	CreateImage(25, 14, { 426, 40, 7, 7 }, INGAMEMENU, 0, true);//mario x
+	CreateText(37, 8, "05", { 255, 255, 255, 255 }, App->fonts->numbers, INGAMEMENU, true);//mario lives number
+
+	CreateImage(75, 9, {400, 40, 12, 16}, INGAMEMENU, 0, true);//coins
+	CreateImage(90, 14, { 426, 40, 7, 7 }, INGAMEMENU, 0, true);//coins x
+	CreateText(102, 8, "99", { 255, 255, 255, 255 }, App->fonts->numbers, INGAMEMENU, true);//coins number
+
+	CreateText(255, 12, "score", { 248, 56, 56, 255 }, App->fonts->default, INGAMEMENU, true);//score
+	CreateText(295, 12, "999", { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);//score number
+
+	CreateText(345, 12, "time", { 248, 56, 56, 255 }, App->fonts->default, INGAMEMENU, true);//time
+	CreateText(345, 24, "00:00:00", { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);//time numbers
+	//ShellExecute(NULL, "open", "https://www.google.com", NULL, NULL, SW_SHOWNORMAL);
 
 	//main menu
-	menubackground = CreateImage(0, 0, { 0,0,400,240 }, OTHER, true);//main screen
+	menubackground = CreateImage(0, 0, { 0,0,400,240 }, OTHER, 0, true);//main screen
 	{
 		menubackground->itype = MENUBACKGROUND;
 	}
@@ -203,7 +218,7 @@ bool j1Gui::PostUpdate()
 				item->data->Draw();
 			}
 		}
-		else
+		else if (item->data->etype != IMAGE)
 		{
 			if (item->data->follows_camera == true)
 			{
@@ -306,7 +321,14 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 		p2List_item<GuiElement*>* item = elements.start;
 		while (item != NULL)
 		{
-			item->data->active = false;
+			if (item->data->mtype != INGAMEMENU)
+			{
+				item->data->active = false;
+			}
+			else if (item->data->mtype == INGAMEMENU)
+			{
+				item->data->active = true;
+			}
 			item = item->next;
 		}
 
@@ -326,7 +348,14 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 		p2List_item<GuiElement*>* item = elements.start;
 		while (item != NULL)
 		{
-			item->data->active = false;
+			if (item->data->mtype != INGAMEMENU)
+			{
+				item->data->active = false;
+			}
+			else if (item->data->mtype == INGAMEMENU)
+			{
+				item->data->active = true;
+			}
 			item = item->next;
 		}
 
@@ -436,7 +465,7 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 
 				if (pause == true)
 				{
-					if (item->data->mtype == PAUSEMENU)
+					if (item->data->mtype == PAUSEMENU || item->data->mtype == INGAMEMENU)
 					{
 						item->data->active = true;
 					}
