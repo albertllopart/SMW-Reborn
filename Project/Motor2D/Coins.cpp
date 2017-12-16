@@ -10,9 +10,9 @@ Coins::Coins() : Entity()
 	name.create("Coins");
 
 	idle.PushBack({ 400,40,12,16});
-	idle.PushBack({ 434,40,9,16 });
-	idle.PushBack({ 443,40,7,16 });
-	idle.PushBack({ 450,40,9,16 });
+	idle.PushBack({ 433,40,12,16 });
+	idle.PushBack({ 445,40,12,16 });
+	idle.PushBack({ 457,40,12,16 });
 	
 }
 
