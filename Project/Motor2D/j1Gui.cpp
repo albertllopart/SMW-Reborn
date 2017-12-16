@@ -206,6 +206,16 @@ bool j1Gui::PreUpdate()
 		{
 			item->data->OnClick();
 		}
+		if (App->input->GetMouseButtonDown(1) == KEY_REPEAT)
+		{
+			if (item->data->etype == SLIDER)
+				item->data->OnDrag();
+		}
+		if (App->input->GetMouseButtonDown(1) == KEY_UP)
+		{
+			if (item->data->etype == SLIDER)
+				item->data->OnRelease();
+		}
 		item = item->next;
 	}
 	return true;

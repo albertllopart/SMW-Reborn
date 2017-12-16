@@ -16,6 +16,7 @@ enum element_type
 	BUTTON,
 	TEXT,
 	NUMBER,
+	SLIDER,
 	EMPTY
 };
 
@@ -75,6 +76,10 @@ public:
 	virtual void Draw();
 
 	virtual void OnClick();
+
+	virtual void OnDrag() {};
+
+	virtual void OnRelease() {};
 
 	void PositionUpdate();
 

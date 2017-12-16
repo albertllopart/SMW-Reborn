@@ -28,10 +28,12 @@ GuiSlider::GuiSlider(iPoint position, SDL_Rect rect, SDL_Rect bar_rect, slider_t
 	}
 
 	top = position.y;
-	bottom = bar_rect.h - rect.h;//setting the minimum height the slider can reach without going any further from the bar
+	bottom = position.y + bar_rect.h - rect.h;//setting the minimum height the slider can reach without going any further from the bar
 
 	bar = App->gui->CreateImage(position.x, position.y, bar_rect, mtype, 0, true);
 	bar->active = false;
+
+	etype = SLIDER;
 }
 
 GuiSlider::~GuiSlider() {};
@@ -60,15 +62,18 @@ void GuiSlider::OnDrag()
 	int x, y;
 	App->input->GetMousePosition(x, y);
 
-	if (y > stored_mouse.y)
+	if (mouseover == true && active == true)
 	{
-		if(position.y < bottom)
-			position.y += y - stored_mouse.y;
-	}
-	else if (y < stored_mouse.y)
-	{
-		if (position.y > top)
-			position.y -= stored_mouse.y - y;
+		if (y > stored_mouse.y)
+		{
+			if (position.y < bottom)
+				position.y += y - stored_mouse.y;
+		}
+		else if (y < stored_mouse.y)
+		{
+			if (position.y > top)
+				position.y -= stored_mouse.y - y;
+		}
 	}
 }
 
