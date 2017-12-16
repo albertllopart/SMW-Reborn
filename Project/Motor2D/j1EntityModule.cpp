@@ -94,9 +94,10 @@ void j1EntityModule::CreatePlayer(fPoint position)
 void j1EntityModule::CreateCoins(fPoint position)
 {
 	Coins* coins = new Coins();
+	coins->position = position;
 	coins->Awake();
 	coins->Start();
-	coins->position = position;
+	//coins->position = position;
 	entities.add(coins);
 	
 }
@@ -112,7 +113,7 @@ void j1EntityModule::DeleteEntity(Entity* entity)
 			if (item->data == entity)
 			{
 				if (entity->name == "Chuck")
-				entity->collision_head->to_delete = true;
+					entity->collision_head->to_delete = true;
 
 				entity->collision->to_delete = true;
 				RELEASE(entity);

@@ -19,7 +19,7 @@ j1Collision::j1Collision()
 	matrix[COLLIDER_PLAYER][COLLIDER_CHUCK] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_BOO] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_HEAD_CHUCK] = true;
-	matrix[COLLIDER_PLAYER][COLLIDER_COIN] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_COIN] = false;
 
 	matrix[COLLIDER_CHUCK][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_CHUCK][COLLIDER_BOO] = false;
@@ -77,7 +77,7 @@ bool j1Collision::Update(float dt)
 			}
 
 			c2 = colliders[j];
-			if (c1->CheckCollision(c2->rect) == true && c2->type == COLLIDER_COIN && matrix[c1->type][c2->type])
+			if (c1->CheckCollision(c2->rect) == true && c2->type == COLLIDER_COIN && c1->type != COLLIDER_CHUCK)
 			{
 				App->entitymodule->DeleteEntity(c2->callback);
 
@@ -92,7 +92,6 @@ bool j1Collision::Update(float dt)
 					App->entitymodule->DeleteEntity(c2->callback);						
 					break;
 											
-					//no se com enviar que el chuck està mort al modul del chuck
 				}
 				else if (matrix[c1->type][c2->type])
 				{

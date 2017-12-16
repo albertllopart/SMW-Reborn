@@ -137,6 +137,7 @@ bool j1Map::LoadEnemies()
 				pos.create((float)j * 16, ((float)i * 16));
 				App->entitymodule->CreateBoo(pos);
 			}
+
 			//TODO
 
 		}
@@ -144,6 +145,34 @@ bool j1Map::LoadEnemies()
 	return ret;
 }
 
+bool j1Map::LoadCoins()
+{
+	bool ret = false;
+	p2List_item<MapLayer*>* iterator;
+	p2List_item<MapLayer*>* fakeLayer = nullptr;
+
+	for (iterator = App->map->data.layers.start; iterator != NULL; iterator = iterator->next)
+	{
+		if (iterator->data->name == "logica")
+		{
+			fakeLayer = iterator;
+		}
+	}
+	for (uint i = 0; i < data.height; i++)
+	{
+		for (uint j = 0; j < data.width; j++)
+		{
+			uint* nextGid = &fakeLayer->data->gid[i * data.width + j];
+			if (*nextGid == 17)
+			{
+				fPoint pos;
+				pos.create(((float)j * 16) - 13, ((float)i * 16));
+				App->entitymodule->CreateCoins(pos);
+			}
+		}
+	}
+	return ret;
+}
 
 iPoint j1Map::MapToWorld(int x, int y) const
 {

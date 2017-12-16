@@ -9,8 +9,11 @@ Coins::Coins() : Entity()
 {
 	name.create("Coins");
 
-	idle.PushBack({440,41,46,44});
-
+	idle.PushBack({ 400,40,12,16});
+	idle.PushBack({ 434,40,9,16 });
+	idle.PushBack({ 443,40,7,16 });
+	idle.PushBack({ 450,40,9,16 });
+	
 }
 
 // Destructor
@@ -20,16 +23,15 @@ Coins::~Coins()
 // Called before render is available
 bool Coins::Awake()
 {
-
+	collision = App->collision->AddCollider({ (int)position.x, (int)position.y, 12, 16 }, COLLIDER_COIN, this);
 	return true;
 }
 
 bool Coins::Start()
 {
 	graphic = App->tex->Load("gui/atlas.png");
-	fPoint pos;
-	pos.create(184, 110);
-	App->entitymodule->CreateCoins(pos);
+	current_animation = &idle;
+	//collision = App->collision->AddCollider({ (int)position.x, (int)position.y, 12, 16 }, COLLIDER_COIN, this);
 	return true;
 }
 
