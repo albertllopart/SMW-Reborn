@@ -136,6 +136,8 @@ bool j1Player::Update(float dt)
 
 	if (dead)
 	{
+		App->collision->CleanUp();
+		Awake();
 		player_coins = 0;
 		if (App->fadetoblack->current_step == j1FadeToBlack::fade_from_black)
 		{
