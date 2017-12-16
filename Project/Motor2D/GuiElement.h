@@ -26,6 +26,31 @@ enum image_type
 	DEFAULT
 };
 
+enum button_type
+{
+	PLAY,
+	CONTINUE,
+	SETTINGS,
+	CREDITS,
+	EXIT,
+	MUSICUP,
+	MUSICDOWN,
+	FXUP,
+	FXDOWN,
+	BACK,
+	RESUME,
+	SAVEANDRESUME,
+	SAVEANDEXIT,
+	NONE
+};
+
+enum slider_type
+{
+	MUSIC,
+	FX,
+	UNDEFINED
+};
+
 enum menu_type
 {
 	MAINMENU,

@@ -28,7 +28,6 @@ public:
 
 	button_type btype;
 
-	//SDL_Rect brect;
 	SDL_Rect mover;
 	SDL_Rect pressed;
 

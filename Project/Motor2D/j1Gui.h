@@ -11,27 +11,12 @@
 struct SDL_Rect;
 struct SDL_Texture;
 enum menu_type;
+enum button_type;
+enum slider_type;
 class GuiElement;
 class GuiImage;
 class GuiButton;
-
-enum button_type
-{
-	PLAY,
-	CONTINUE,
-	SETTINGS,
-	CREDITS,
-	EXIT,
-	MUSICUP,
-	MUSICDOWN,
-	FXUP,
-	FXDOWN,
-	BACK,
-	RESUME,
-	SAVEANDRESUME,
-	SAVEANDEXIT,
-	NONE
-};
+class GuiSlider;
 
 class j1Gui : public j1Module
 {
@@ -64,6 +49,8 @@ public:
 	GuiElement* CreateText(int x, int y, char* string, SDL_Color color, _TTF_Font* font, menu_type mtype, bool follows_camera = false);
 
 	GuiElement* CreateNumber(int x, int y, uint* number, SDL_Color color, _TTF_Font* font, menu_type mtype, bool follows_camera);
+
+	GuiElement* CreateSlider(int x, int y, SDL_Rect rect, SDL_Rect bar_rect, slider_type stype, menu_type mtype, j1Module* callback, bool follows_camera);
 
 	void DeleteElement(GuiElement* element);
 

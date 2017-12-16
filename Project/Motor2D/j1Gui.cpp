@@ -18,6 +18,8 @@
 #include "GuiButton.h"
 #include "GuiText.h"
 #include "GuiNumber.h"
+#include "GuiSlider.h"
+
 
 
 j1Gui::j1Gui() : j1Module()
@@ -74,16 +76,16 @@ bool j1Gui::Start()
 	CreateImage(90, 14, { 426, 40, 7, 7 }, INGAMEMENU, 0, true);//coins x
 	CreateNumber(102, 8, &App->entitymodule->player->player_coins, { 255, 255, 255, 255 }, App->fonts->numbers, INGAMEMENU, true);//coins number
 
-	CreateText(235, 12, "score", { 248, 56, 56, 255 }, App->fonts->default, INGAMEMENU, true);//score
-	CreateNumber(235, 24, &App->entitymodule->player->player_score, { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);//score number
+	CreateText(240, 7, "score", { 248, 56, 56, 255 }, App->fonts->default, INGAMEMENU, true);//score
+	CreateNumber(240, 19, &App->entitymodule->player->player_score, { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);//score number
 
-	CreateText(295, 12, "timer", { 248, 56, 56, 255 }, App->fonts->default, INGAMEMENU, true);//time
-	CreateNumber(295, 24, &App->entitymodule->player->player_hours, { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);
-	CreateText(310, 24, "h", { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);//time numbers
-	CreateNumber(325, 24, &App->entitymodule->player->player_minutes, { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);
-	CreateText(340, 24, "m", { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);//time numbers
-	CreateNumber(355, 24, &App->entitymodule->player->player_seconds, { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);
-	CreateText(370, 24, "s", { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);//time numbers
+	CreateText(300, 7, "timer", { 248, 56, 56, 255 }, App->fonts->default, INGAMEMENU, true);//time
+	CreateNumber(300, 19, &App->entitymodule->player->player_hours, { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);
+	CreateText(315, 19, "h", { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);//time numbers
+	CreateNumber(330, 19, &App->entitymodule->player->player_minutes, { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);
+	CreateText(345, 19, "m", { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);//time numbers
+	CreateNumber(360, 19, &App->entitymodule->player->player_seconds, { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);
+	CreateText(375, 19, "s", { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);//time numbers
 
 	//ShellExecute(NULL, "open", "https://www.google.com", NULL, NULL, SW_SHOWNORMAL);
 
@@ -135,6 +137,8 @@ bool j1Gui::Start()
 	CreateText(60, 70, "AMAZING CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
 	CreateText(60, 85, "UNBELIEVEABLE CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
 	CreateText(60, 100, "even  with  lowercase  wow", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
+
+	CreateSlider(60, 60, { 400, 247, 12, 6 }, { 400, 253, 12, 50 }, MUSIC, MAINMENU, (j1Module*)App->audio, true);
 
 	return true;
 }
@@ -291,6 +295,16 @@ GuiElement* j1Gui::CreateNumber(int x, int y, uint* number, SDL_Color color, _TT
 {
 	iPoint position = { x,y };
 	GuiElement* item = new GuiNumber(position, number, color, font, mtype, follows_camera);
+
+	elements.add(item);
+
+	return item;
+}
+
+GuiElement* j1Gui::CreateSlider(int x, int y, SDL_Rect rect, SDL_Rect bar_rect, slider_type stype, menu_type mtype, j1Module* callback, bool follows_camera)
+{
+	iPoint position = { x,y };
+	GuiElement* item = new GuiSlider(position, rect, bar_rect, stype, mtype, callback, follows_camera);
 
 	elements.add(item);
 
