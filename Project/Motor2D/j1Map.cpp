@@ -106,7 +106,7 @@ void j1Map::Draw(float dt)
 		LOG("Mouse tile pos: x - %i, y - %i", tile.x, tile.y);
 }
 
-bool j1Map::LoadEnemies()
+bool j1Map::LoadEntities()
 {
 	bool ret = false;
 	p2List_item<MapLayer*>* iterator;
@@ -138,14 +138,19 @@ bool j1Map::LoadEnemies()
 				App->entitymodule->CreateBoo(pos);
 			}
 
-			//TODO
+			if (*nextGid == 17)
+			{
+				fPoint pos;
+				pos.create(((float)j * 16) - 13, ((float)i * 16));
+				App->entitymodule->CreateCoins(pos);
+			}
 
 		}
 	}
 	return ret;
 }
 
-bool j1Map::LoadCoins()
+/*bool j1Map::LoadCoins()
 {
 	bool ret = false;
 	p2List_item<MapLayer*>* iterator;
@@ -172,7 +177,7 @@ bool j1Map::LoadCoins()
 		}
 	}
 	return ret;
-}
+}*/
 
 iPoint j1Map::MapToWorld(int x, int y) const
 {

@@ -326,11 +326,16 @@ void j1Player::Input(float dt)
 	// To lvl1
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
+		App->collision->CleanUp();
+		Awake();
 		App->scene->LoadLvl(1, true);
+		
 	}
 	// To lvl 2
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
+		App->collision->CleanUp();
+		Awake();
 		App->scene->LoadLvl(2, true);
 	}
 
@@ -434,7 +439,7 @@ bool j1Player::Falling()
 		{
 			App->audio->PlayFx(3);
 			App->entitymodule->level_complete = true;
-			//App->fadetoblack->FadeToBlack(this, this, 2);
+			App->fadetoblack->FadeToBlack(NULL, NULL, 2);
 			//App->scene->LoadLvl(2, true);
 
 			jump = false;

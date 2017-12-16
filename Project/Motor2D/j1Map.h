@@ -88,8 +88,8 @@ public:
 
 	// Called each loop iteration
 	void Draw(float dt);
-	bool LoadEnemies();
-	bool LoadCoins();
+	bool LoadEntities();
+	
 
 	// Called before quitting
 	bool CleanUp();

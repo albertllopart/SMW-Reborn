@@ -212,8 +212,8 @@ void j1Scene::LoadLvl(int current, bool lvl_start)
 		
 	}
 	current_lvl = current;
-	App->map->LoadEnemies();
-	App->map->LoadCoins();
+	App->map->LoadEntities();
+
 }
 
 bool j1Scene::GuiTrigger(GuiElement* element)
