@@ -147,10 +147,12 @@ bool j1Player::Update(float dt)
 			
 		
 	}
-	/*if (position.y > 300 || position.y < 0)
+	if (player_coins >= 100)
 	{
-		position.y = 167;
-	}*/
+		player_coins = 0;
+		player_lives ++;
+	}
+
 	Draw();
 	
 
@@ -224,6 +226,10 @@ void j1Player::Input(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN)
 	{
 		player_lives--;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
+	{
+		player_coins += player_coins;
 	}
 
 	//Right

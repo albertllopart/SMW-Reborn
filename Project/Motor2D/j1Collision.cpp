@@ -82,6 +82,7 @@ bool j1Collision::Update(float dt)
 				App->entitymodule->DeleteEntity(c2->callback);
 				App->audio->PlayFx(9);
 				App->entitymodule->player->player_coins++;
+				App->entitymodule->player->player_score += 50;
 
 			}
 			if (c1->CheckCollision(c2->rect) == true && App->entitymodule->player->god_mode == false)
@@ -91,6 +92,7 @@ bool j1Collision::Update(float dt)
 					App->entitymodule->player->jump = true;
 					App->entitymodule->player->jump_height = App->entitymodule->player->position.y - 35;
 					App->entitymodule->player->jump1_on = true;
+					App->entitymodule->player->player_score += 300;
 					App->entitymodule->DeleteEntity(c2->callback);						
 					break;
 											

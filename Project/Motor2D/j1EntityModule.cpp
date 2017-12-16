@@ -150,6 +150,7 @@ bool j1EntityModule::Save(pugi::xml_node& node) const
 	{
 		if (entities[i]->name == "Boo")
 		{
+		
 			pugi::xml_node root = node.append_child("boo_position");
 			root.append_attribute("x") = entities[i]->position.x;
 			root.append_attribute("y") = entities[i]->position.y;
@@ -157,14 +158,24 @@ bool j1EntityModule::Save(pugi::xml_node& node) const
 		}
 		else if (entities[i]->name == "Chuck")
 		{
+		
 			pugi::xml_node root = node.append_child("chuck_position");
 			root.append_attribute("x") = entities[i]->position.x;
 			root.append_attribute("y") = entities[i]->position.y;
 
 		}
-		else if (entities[i]->name == "player")
+		else if (entities[i]->name == "Player")
 		{
+		
 			pugi::xml_node root = node.append_child("player_position");
+			root.append_attribute("x") = entities[i]->position.x;
+			root.append_attribute("y") = entities[i]->position.y;
+
+		}
+		else if (entities[i]->name == "Coins")
+		{
+		
+			pugi::xml_node root = node.append_child("coin_position");
 			root.append_attribute("x") = entities[i]->position.x;
 			root.append_attribute("y") = entities[i]->position.y;
 
@@ -186,17 +197,12 @@ bool j1EntityModule::Load(pugi::xml_node& node)
 	for (int i = 0; i < entities.count(); i++)
 	{
 		//delete boo
-		if (entities[i]->name == "Boo")
+		if (entities[i]->name != "Player")
 		{
 			DeleteEntity(entities[i]);
 			i--;
 		}
-		//delete chuck
-		else if (entities[i]->name == "Chuck")
-		{
-			DeleteEntity(entities[i]);
-			i--;
-		}
+		
 			/*if (entities[i]->name == "player")
 			DeletePlayer(entities[i]);*/
 	}
@@ -216,6 +222,13 @@ bool j1EntityModule::Load(pugi::xml_node& node)
 			fPoint point;
 			point.create(root.attribute("x").as_int(), root.attribute("y").as_int());
 			CreateChuck(point);
+
+		}
+		else if (strncmp(root.name(), "coin_position", 14) == 0)
+		{
+			fPoint point;
+			point.create(root.attribute("x").as_int(), root.attribute("y").as_int());
+			CreateCoins(point);
 
 		}
 		else if (strncmp(root.name(), "player_position", 16) == 0)
