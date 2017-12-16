@@ -80,6 +80,7 @@ bool j1Collision::Update(float dt)
 			if (c1->CheckCollision(c2->rect) == true && c2->type == COLLIDER_COIN && c1->type != COLLIDER_CHUCK)
 			{
 				App->entitymodule->DeleteEntity(c2->callback);
+				App->entitymodule->player->player_coins++;
 
 			}
 			if (c1->CheckCollision(c2->rect) == true && App->entitymodule->player->god_mode == false)
@@ -100,6 +101,7 @@ bool j1Collision::Update(float dt)
 						App->audio->PlayFx(5);
 						App->fadetoblack->FadeToBlack(NULL, NULL, 1.5f);
 						App->entitymodule->player->dead = true;
+						--App->entitymodule->player->player_lives;
 					}
 					
 				}

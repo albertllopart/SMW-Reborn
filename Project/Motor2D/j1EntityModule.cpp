@@ -114,7 +114,6 @@ void j1EntityModule::DeleteEntity(Entity* entity)
 			{
 				if (entity->name == "Chuck")
 					entity->collision_head->to_delete = true;
-
 				entity->collision->to_delete = true;
 				RELEASE(entity);
 				entities.del(item);

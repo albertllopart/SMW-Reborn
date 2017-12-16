@@ -136,6 +136,7 @@ bool j1Player::Update(float dt)
 
 	if (dead)
 	{
+		player_coins = 0;
 		if (App->fadetoblack->current_step == j1FadeToBlack::fade_from_black)
 		{
 			App->scene->LoadLvl(App->scene->current_lvl, true);
@@ -420,6 +421,7 @@ bool j1Player::Falling()
 			ret = false;
 			jump2_on = false;
 			jump1_on = false;
+			--player_lives;
 		}
 		else
 		{
