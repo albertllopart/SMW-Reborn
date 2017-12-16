@@ -80,6 +80,7 @@ bool j1Collision::Update(float dt)
 			if (c1->CheckCollision(c2->rect) == true && c2->type == COLLIDER_COIN && c1->type != COLLIDER_CHUCK)
 			{
 				App->entitymodule->DeleteEntity(c2->callback);
+				App->audio->PlayFx(9);
 				App->entitymodule->player->player_coins++;
 
 			}

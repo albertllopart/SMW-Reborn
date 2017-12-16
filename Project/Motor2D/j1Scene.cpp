@@ -52,6 +52,7 @@ bool j1Scene::Start()
 	App->audio->LoadFx("audio/pause.wav"); //6
 	App->audio->LoadFx("audio/menu_over.wav");//7
 	App->audio->LoadFx("audio/menu_click.wav");//8
+	App->audio->LoadFx("audio/smw_coin.wav");//9
 
 	LoadLvl(1, true);
 	return true;
