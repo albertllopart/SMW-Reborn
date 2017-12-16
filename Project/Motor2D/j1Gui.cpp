@@ -187,6 +187,10 @@ bool j1Gui::PreUpdate()
 	{
 		if (item->data->active == true && MouseOnRect({ item->data->position.x, item->data->position.y, item->data->rect.w, item->data->rect.h }) == true)
 		{
+			if (item->data->etype == BUTTON && item->data->mouseover == false)
+			{
+				App->audio->PlayFx(7);
+			}
 			item->data->mouseover = true;
 		}
 		else
@@ -319,7 +323,9 @@ bool j1Gui::MouseOnRect(SDL_Rect rect)
 	App->input->GetMousePosition(x, y);
 
 	if (x < (rect.x + rect.w) && x > rect.x &&y < (rect.y + rect.h) && y > rect.y)
+	{
 		return true;
+	}
 	else
 		return false;
 }

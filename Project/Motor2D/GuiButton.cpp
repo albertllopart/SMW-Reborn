@@ -1,6 +1,7 @@
 #include "GuiButton.h"
 #include "GuiImage.h"
 #include "j1Render.h"
+#include "j1Audio.h"
 
 GuiButton::GuiButton() {};
 
@@ -67,6 +68,7 @@ void GuiButton::OnClick()
 {
 	if (mouseover == true && active == true)
 	{
+		App->audio->PlayFx(8);
 		callback->GuiTrigger(this);
 	}
 	return;

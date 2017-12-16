@@ -50,6 +50,9 @@ bool j1Scene::Start()
 	App->audio->LoadFx("audio/chuck_walk.wav"); //4
 	App->audio->LoadFx("audio/mario_hurt.wav"); //5
 	App->audio->LoadFx("audio/pause.wav"); //6
+	App->audio->LoadFx("audio/menu_over.wav");//7
+	App->audio->LoadFx("audio/menu_click.wav");//8
+
 	LoadLvl(1, true);
 	return true;
 }

@@ -256,7 +256,6 @@ bool j1Audio::GuiTrigger(GuiElement* element)
 			{
 				Mix_Volume(i, fx_volume);
 			}
-			PlayFx(3);
 			break;
 		}
 		case FXDOWN:
@@ -270,7 +269,6 @@ bool j1Audio::GuiTrigger(GuiElement* element)
 			{
 				Mix_Volume(i, fx_volume);
 			}
-			PlayFx(3);
 			break;
 		}
 	}
