@@ -454,8 +454,6 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 			item = item->next;
 		}
 		*/
-		App->audio->PlayMusic("audio/main_music.ogg");
-
 		break;
 	}
 
