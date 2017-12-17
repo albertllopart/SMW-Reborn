@@ -72,6 +72,15 @@ While playing you will be able to see:
 - [Albert LLopart](https://github.com/albertllopart)
 ![image](https://user-images.githubusercontent.com/17145449/34082035-525cb216-e357-11e7-9f40-41266c4ee4c9.png)
 
+## Tasks
+
+- UI system (along with atlas and animations)
+- Map loading and draw from Tiled
+- Entity module and Chuck behaviour and physics
+- Player physics
+- Load entities from Tiled
+- Game speed independent from framerate
+- Level design
 
 - [José Rodríguez](https://github.com/joserm45)
 ![image](https://user-images.githubusercontent.com/17145449/34082029-3cd632dc-e357-11e7-8d42-068bbb248db1.png)
