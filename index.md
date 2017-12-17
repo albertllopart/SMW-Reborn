@@ -84,6 +84,12 @@ While playing you will be able to see:
 - [José Rodríguez](https://github.com/joserm45)
 
 ![image](https://user-images.githubusercontent.com/17145449/34082029-3cd632dc-e357-11e7-8d42-068bbb248db1.png)
+- Save & load
+- Change between levels
+- Create & delete of entities
+- Game balance
+- Some adjustments on functionality of entities
+- Bug fixing
 
 
 - [Arnau Morgado](https://github.com/morgadoCV)
