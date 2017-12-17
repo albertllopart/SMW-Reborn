@@ -136,16 +136,11 @@ bool j1Player::Update(float dt)
 
 	if (dead)
 	{
-		App->collision->CleanUp();
-		Awake();
 		player_coins = 0;
 		if (App->fadetoblack->current_step == j1FadeToBlack::fade_from_black)
 		{
-			App->scene->LoadLvl(App->scene->current_lvl, true);
-			dead = false;
-		}
-			
-		
+			App->scene->WantToChangeLoadLvl(App->scene->current_lvl, true);
+		}	
 	}
 	if (player_coins >= 100)
 	{
@@ -164,7 +159,6 @@ bool j1Player::PostUpdate()
 	if (dead)
 	{
 		state = IDLE_RIGHT;
-		//App->map->restart();
 	}
 
 	player_quadrant_1.x = position.x / TILE_WIDTH;
@@ -310,7 +304,7 @@ void j1Player::Input(float dt)
 	//reset the lvl
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
-		App->scene->LoadLvl(App->scene->current_lvl, true);
+		App->scene->WantToChangeLoadLvl(App->scene->current_lvl, true);
 	}
 
 	//save
@@ -332,17 +326,13 @@ void j1Player::Input(float dt)
 	// To lvl1
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		App->collision->CleanUp();
-		Awake();
-		App->scene->LoadLvl(1, true);
+		App->scene->WantToChangeLoadLvl(1, true);
 		
 	}
 	// To lvl 2
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
-		App->collision->CleanUp();
-		Awake();
-		App->scene->LoadLvl(2, true);
+		App->scene->WantToChangeLoadLvl(2, true);
 	}
 
 }

@@ -79,9 +79,8 @@ bool j1Render::Update(float dt)
 {
 	if ((int)App->entitymodule->player->position.x / 16 >= 12 && ((int)App->entitymodule->player->position.x / 16 <= 36))
 	{
-		camera.x = ((int)App->entitymodule->player->position.x - 12*16)* -2;
+		camera.x = ((int)App->entitymodule->player->position.x - 12 * 16)* -2;
 	}
-
 	return true;
 }
 

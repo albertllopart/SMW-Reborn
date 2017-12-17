@@ -10,6 +10,8 @@
 #include "j1EntityModule.h"
 #include "j1Map.h"
 #include "j1Pathfinding.h"
+#include "j1Gui.h"
+#include "GuiElement.h"
 #include <math.h>
 
 Chuck::Chuck() : Entity()
@@ -178,20 +180,6 @@ void Chuck::Draw()
 	App->render->Blit(graphic, position.x, position.y, &r);
 }
 
-bool Chuck::Load(pugi::xml_node &)
-{
-	return true;
-}
-
-bool Chuck::Save(pugi::xml_node &) const
-{
-	return true;
-}
-
-int Chuck::GetDirection() const
-{
-	return 0;
-}
 
 fPoint Chuck::Getposition() const
 {
@@ -208,6 +196,11 @@ fPoint Chuck::GetPositionINT() const
 	return fPoint(position.x, position.y);
 }
 
+void Chuck::ChuckPoints()
+{
+	App->entitymodule->player->player_score += 300;
+	//App->gui->CreateNumber(240, 19, &App->entitymodule->player->player_score, { 255, 255, 255, 255 }, App->fonts->default, IMAGEMENU,  true);//score number
+}
 
 void Chuck::Move(float dt)
 {

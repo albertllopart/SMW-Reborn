@@ -34,7 +34,6 @@ bool j1Scene::Awake()
 {
 	LOG("Loading Scene");
 	bool ret = true;
-
 	return ret;
 }
 
@@ -53,7 +52,6 @@ bool j1Scene::Start()
 	App->audio->LoadFx("audio/menu_over.wav");//7
 	App->audio->LoadFx("audio/menu_click.wav");//8
 	App->audio->LoadFx("audio/smw_coin.wav");//9
-
 	LoadLvl(1, true);
 	return true;
 }
@@ -152,7 +150,10 @@ bool j1Scene::PostUpdate()
 
 	if(exit_from_gui == true)
 		ret = false;
-
+	if (want_to_load_lvl == true)
+	{
+		LoadLvl(lvl_to_change, want_to_start_scene);
+	}
 	return ret;
 }
 
@@ -177,32 +178,36 @@ bool j1Scene::Load(pugi::xml_node& node)
 
 void j1Scene::LoadLvl(int current, bool lvl_start)
 {
-	Entity* player = App->entitymodule->player;
-	if (lvl_start == true)
+	want_to_load_lvl = false;
+	int player_lives = -1;
+	int player_coins = -1;
+	int player_score = -1;
+	if (App->entitymodule->player != NULL)
 	{
-		
-		App->render->camera.x = 0;
-		App->render->camera.y = 0;
-		player->position.x = 10;
-		player->position.y = 197;	
-		
-
+		player_lives = App->entitymodule->player->player_lives;
+		player_coins = App->entitymodule->player->player_coins;
+		player_score = App->entitymodule->player->player_score;
 	}
-	player->state = IDLE_RIGHT;
-	player->collision->SetPos(player->position.x, player->position.y);
-	player->jump = false;
-	player->PostUpdate();
+		
+
 	App->entitymodule->DeleteEntities();
+	App->entitymodule->CreatePlayer(fPoint(10,197));
 
+	if (player_lives != -1)
+	{
+		App->entitymodule->player->player_lives = player_lives;
+		App->entitymodule->player->player_score = player_score;
+		App->entitymodule->player->player_coins = player_coins;
+	}
+		
 
+	Entity* player = App->entitymodule->player;
+	player->dead = true;
 	if (current == 1)
 	{
 		App->audio->PlayMusic("audio/main_music.ogg");
 		App->map->UnloadMap();
-		App->map->Load("level_1.tmx");
-		
-
-		
+		App->map->Load("level_1.tmx");		
 	}
 	else if (current == 2)
 	{
@@ -211,9 +216,27 @@ void j1Scene::LoadLvl(int current, bool lvl_start)
 		App->map->Load("level_2.tmx");
 		
 	}
-	current_lvl = current;
-	App->map->LoadEntities();
+	if (lvl_start == true)
+	{
 
+		App->render->camera.x = 0;
+		App->render->camera.y = 0;
+		App->map->LoadEntities();
+	}
+	player->collision->SetPos(player->position.x, player->position.y);
+	player->jump = false;
+	player->dead = false;
+	player->PostUpdate();
+	current_lvl = current;
+	
+
+}
+
+void j1Scene::WantToChangeLoadLvl(int next_lvl, bool lvl_start)
+{
+	want_to_load_lvl = true;
+	lvl_to_change = next_lvl;
+	want_to_start_scene = lvl_start;
 }
 
 bool j1Scene::GuiTrigger(GuiElement* element)

@@ -8,13 +8,21 @@
 	<map />
 	<scene current_lvl="1" />
 	<Entitymodule>
-		<player_position x="181.000031" y="196.249969" />
+		<player>
+			<player_position x="77.0000076" y="166.999985" />
+			<coins value="2" />
+			<score value="100" />
+			<lives value="4" />
+			<time value="0" />
+		</player>
 		<boo_position x="144" y="96" />
 		<coin_position x="707" y="144" />
 		<coin_position x="723" y="144" />
 		<chuck_position x="688" y="165" />
+		<coin_position x="99" y="176" />
 		<coin_position x="563" y="176" />
 		<coin_position x="579" y="176" />
+		<chuck_position x="142.789841" y="197" />
 		<chuck_position x="464" y="197" />
 		<coin_position x="259" y="208" />
 		<coin_position x="275" y="208" />
@@ -24,9 +32,9 @@
 	</Entitymodule>
 	<pathfinding />
 	<fadetoblack />
-	<:anonymous />
+	<Collision />
 	<gui />
 	<renderer>
-		<camera x="-4" y="0" />
+		<camera x="0" y="0" />
 	</renderer>
 </save>

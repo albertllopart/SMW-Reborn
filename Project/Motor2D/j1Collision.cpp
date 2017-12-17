@@ -11,6 +11,7 @@
 
 j1Collision::j1Collision()
 {
+	name.create("Collision");
 	for (uint i = 0; i < MAX_COLLIDERS; i++)
 	{
 		colliders[i] = nullptr;
@@ -92,7 +93,7 @@ bool j1Collision::Update(float dt)
 					App->entitymodule->player->jump = true;
 					App->entitymodule->player->jump_height = App->entitymodule->player->position.y - 35;
 					App->entitymodule->player->jump1_on = true;
-					App->entitymodule->player->player_score += 300;
+					App->entitymodule->player->player_score += 200;
 					App->entitymodule->DeleteEntity(c2->callback);						
 					break;
 											
