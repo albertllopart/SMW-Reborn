@@ -16,15 +16,21 @@ GuiNumber::GuiNumber(iPoint position, uint* number, SDL_Color color, _TTF_Font* 
 	this->mtype = mtype;
 
 	etype = NUMBER;
+
+	texture = App->tex->textures.add(App->fonts->Print("null", color, font))->data;
 }
 
-GuiNumber::~GuiNumber() {};
+GuiNumber::~GuiNumber() 
+{
+	App->tex->UnLoad(texture);
+};
 
 void GuiNumber::Draw()
 {
 	p2SString string;
 	sprintf(string.str, "%i", *number);
 
+	App->tex->UnLoad(texture);
 	texture = App->tex->textures.add(App->fonts->Print(string.str, color, font))->data;
 
 	if (active == true && follows_camera == false)

@@ -60,7 +60,7 @@ private:
 	p2SString atlas_file_name;
 
 	p2List<GuiElement*> elements;
-	GuiImage* menubackground;
+	GuiImage* menubackground = nullptr;
 
 };
 

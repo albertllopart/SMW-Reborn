@@ -1,8 +1,13 @@
-#include <stdlib.h>
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h> 
+#include <crtdbg.h>  
 
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
+
+  
+
 
 // This is needed here because SDL redefines main function
 // do not add any other libraries here, instead put them in their modules
@@ -117,5 +122,6 @@ int main(int argc, char* args[])
 	LOG("... Bye! :)\n");
 
 	// Dump memory leaks
+	_CrtDumpMemoryLeaks();
 	return result;
 }

@@ -28,7 +28,7 @@ public:
 
 	slider_type stype;
 
-	GuiImage* bar;
+	GuiImage* bar = nullptr;
 	uint top;
 	uint bottom;
 

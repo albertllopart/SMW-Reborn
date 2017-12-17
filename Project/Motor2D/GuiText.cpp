@@ -27,7 +27,10 @@ GuiText::GuiText(iPoint position, char* string, SDL_Color color, _TTF_Font* font
 	etype = TEXT;
 }
 
-GuiText::~GuiText() {};
+GuiText::~GuiText() 
+{
+	App->tex->UnLoad(text);
+};
 
 void GuiText::Draw()
 {

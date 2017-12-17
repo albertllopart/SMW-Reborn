@@ -138,7 +138,7 @@ bool j1Gui::Start()
 	CreateText(60, 85, "UNBELIEVEABLE CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
 	CreateText(60, 100, "even  with  lowercase  wow", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
 
-	CreateSlider(60, 60, { 400, 247, 12, 6 }, { 400, 253, 12, 50 }, MUSIC, MAINMENU, (j1Module*)App->audio, true);
+	//CreateSlider(60, 60, { 400, 247, 12, 6 }, { 400, 253, 12, 50 }, MUSIC, MAINMENU, (j1Module*)App->audio, true);
 
 	return true;
 }
@@ -209,6 +209,7 @@ bool j1Gui::PreUpdate()
 		if (App->input->GetMouseButtonDown(1) == KEY_REPEAT)
 		{
 			if (item->data->etype == SLIDER)
+				item->data->OnClick();
 				item->data->OnDrag();
 		}
 		if (App->input->GetMouseButtonDown(1) == KEY_UP)

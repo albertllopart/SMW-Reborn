@@ -26,8 +26,8 @@ public:
 
 	SDL_Texture* texture;
 	SDL_Color color;
-	_TTF_Font* font;
-	uint* number;
+	_TTF_Font* font = nullptr;
+	uint* number = nullptr;
 };
 
 #endif

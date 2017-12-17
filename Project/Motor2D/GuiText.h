@@ -19,7 +19,7 @@ public:
 public:
 
 	p2SString string;
-	SDL_Texture* text;
+	SDL_Texture* text = nullptr;
 	SDL_Color color;
 
 };
