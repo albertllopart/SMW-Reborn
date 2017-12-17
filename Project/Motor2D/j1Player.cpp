@@ -144,7 +144,7 @@ bool j1Player::Update(float dt)
 			App->scene->WantToChangeLoadLvl(App->scene->current_lvl, true);
 		}	
 	}
-	if (player_coins >= 100)
+	if (player_coins >= 10)
 	{
 		App->audio->PlayFx(10);
 		player_coins = 0;
