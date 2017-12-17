@@ -47,5 +47,5 @@ private:
 
 	//Animations
 	Animation			idle;
-	Animation*			current_animation;
+	Animation*			current_animation = nullptr;
 };

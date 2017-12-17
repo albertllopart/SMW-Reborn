@@ -119,7 +119,7 @@ public:
 
 	MapData				data;
 	float				cloud_parallax = 0.0f;
-	MapLayer*			pathfinding;
+	MapLayer*			pathfinding = nullptr;
 
 	//LOGIC LAYER
 	bool				logic = false;
@@ -130,7 +130,7 @@ private:
 	pugi::xml_document	map_file;
 	pugi::xml_node		map_node;
 	p2SString			folder;
-	bool				map_loaded;
+	bool				map_loaded = false;
 	
 };
 

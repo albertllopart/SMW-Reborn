@@ -79,8 +79,8 @@ public:
 public:
 
 	p2SString	name;
-	bool		active;
-	bool		waiting;
+	bool		active = false;
+	bool		waiting = false;
 
 };
 

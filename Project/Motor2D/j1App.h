@@ -86,19 +86,19 @@ private:
 public:
 
 	// Modules
-	j1Window*			win;
-	j1Input*			input;
-	j1Render*			render;
-	j1Textures*			tex;
-	j1Audio*			audio;
-	j1Scene*			scene;
-	j1Map*				map;
-	j1EntityModule*		entitymodule;
-	j1PathFinding*		pathfinding;
-	j1FadeToBlack*		fadetoblack;
-	j1Collision*		collision;
-	j1Gui*				gui;
-	j1Fonts*			fonts;
+	j1Window*			win = nullptr;
+	j1Input*			input = nullptr;
+	j1Render*			render = nullptr;
+	j1Textures*			tex = nullptr;
+	j1Audio*			audio = nullptr;
+	j1Scene*			scene = nullptr;
+	j1Map*				map = nullptr;
+	j1EntityModule*		entitymodule = nullptr;
+	j1PathFinding*		pathfinding = nullptr;
+	j1FadeToBlack*		fadetoblack = nullptr;
+	j1Collision*		collision = nullptr;
+	j1Gui*				gui = nullptr;
+	j1Fonts*			fonts = nullptr;
 
 private:
 

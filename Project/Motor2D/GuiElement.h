@@ -90,8 +90,8 @@ public:
 
 	iPoint position;
 	iPoint position_camera;
-	bool mouseover;
-	bool active;
+	bool mouseover = false;
+	bool active = false;
 	bool selected;
 	bool follows_camera;
 

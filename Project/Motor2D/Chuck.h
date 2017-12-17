@@ -63,7 +63,7 @@ private:
 	Animation			walk_right;
 	Animation			jump_left;
 	Animation			jump_right;
-	Animation*			current_animation;
+	Animation*			current_animation = nullptr;
 
 	//Move
 	float				count;

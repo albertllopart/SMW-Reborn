@@ -8,6 +8,8 @@
 #include "j1FadeToBlack.h"
 #include "j1EntityModule.h"
 #include "j1Player.h"
+#include "j1Gui.h"
+#include "GuiElement.h"
 
 j1Collision::j1Collision()
 {
@@ -94,6 +96,9 @@ bool j1Collision::Update(float dt)
 					App->entitymodule->player->jump_height = App->entitymodule->player->position.y - 35;
 					App->entitymodule->player->jump1_on = true;
 					App->entitymodule->player->player_score += 200;
+					/*uint points_chuck = 200;
+					App->gui->CreateNumber(App->entitymodule->player->position.x + 3, App->entitymodule->player->position.y - 10, &points_chuck, { 255, 255, 255, 255 }, App->fonts->numbers, App->gui, true);
+					*/
 					App->entitymodule->DeleteEntity(c2->callback);						
 					break;
 											

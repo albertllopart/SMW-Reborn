@@ -39,12 +39,12 @@ public:
 	
 	iPoint				player_quadrant_1;
 	iPoint				player_quadrant_2;
-	uint				player_lives;
-	uint				player_coins;
-	uint				player_score;
-	uint				player_hours;
-	uint				player_minutes;
-	uint				player_seconds;
+	uint				player_lives = 0;
+	uint				player_coins = 0;
+	uint				player_score = 0;
+	uint				player_hours = 0;
+	uint				player_minutes = 0;
+	uint				player_seconds = 0;
 
 	bool				level_complete = false;
 	
@@ -52,7 +52,7 @@ private:
 	unsigned int		width = 0;
 	unsigned int		height = 0;
 	SDL_Texture*		graphic = nullptr;
-	SDL_Rect*			test;
+	SDL_Rect*			test = nullptr;
 	fPoint				velocity;
 	float				gravity = 9.8;
 	

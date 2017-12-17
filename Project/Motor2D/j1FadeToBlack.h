@@ -25,8 +25,8 @@ public:
 	bool Update(float dt);
 	bool FadeToBlack(j1Module* module_off, j1Module* module_on, float time = 2.0f);
 
-	j1Module* module_off;
-	j1Module* module_on;
+	j1Module* module_off = nullptr;
+	j1Module* module_on = nullptr;
 
 	fade_step current_step = none;
 private:

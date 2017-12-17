@@ -36,8 +36,8 @@ public:
 public:
 
 	p2List<_TTF_Font*>	fonts;
-	_TTF_Font*			default;
-	_TTF_Font*			numbers;
+	_TTF_Font*			default = nullptr;
+	_TTF_Font*			numbers = nullptr;
 };
 
 
