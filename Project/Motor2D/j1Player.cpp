@@ -147,8 +147,9 @@ bool j1Player::Update(float dt)
 			
 		
 	}
-	if (player_coins >= 100)
+	if (player_coins >= 10)
 	{
+		App->audio->PlayFx(10);
 		player_coins = 0;
 		player_lives ++;
 	}
