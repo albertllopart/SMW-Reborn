@@ -14,6 +14,7 @@ You can find:
 - Settings  ->You can adjust the music volume and the fx volume.
 - Credits   ->It will give you the credits.
 - Exit      ->Will exit the game.
+- Scroll bar-> Bar you can use to scroll.
 
 ![image](https://user-images.githubusercontent.com/17165192/34013324-473f39f4-e117-11e7-8cc4-bec4d11bd544.png)
 
@@ -23,12 +24,23 @@ By pressing **Esc** while playing you will find:
 
 - Resume          ->You will continue.
 - Save and Resume ->You will save and continue.
-- Save and Exit   ->You will save your current status and exit.
+- Save and Exit   ->You will save your current status and exit to Menu.
 - Settings        ->You can adjust the music volume and the fx volume.
 
 By pressing **Esc** again you will go to the Menu.
 
 ![image](https://user-images.githubusercontent.com/17145449/34023181-c324daac-e143-11e7-9c42-c869b74d2cc8.png)
+
+### In-Game UI
+
+While playing you will be able to see:
+
+- Your lives.
+- Time you need to complete the level.
+- Coins you got.
+- Score.
+
+![image](https://user-images.githubusercontent.com/17145449/34078727-4af97bda-e320-11e7-9127-123dd4e5a0a6.png)
 
 
 ### Inputs
