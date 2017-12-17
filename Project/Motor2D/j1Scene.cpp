@@ -187,11 +187,16 @@ void j1Scene::LoadLvl(int current, bool lvl_start)
 	int player_lives = -1;
 	int player_coins = -1;
 	int player_score = -1;
+	int player_time_h , player_time_m, player_time_s = -1;
 	if (App->entitymodule->player != NULL)
 	{
 		player_lives = App->entitymodule->player->player_lives;
 		player_coins = App->entitymodule->player->player_coins;
 		player_score = App->entitymodule->player->player_score;
+		
+		player_time_h = App->entitymodule->player->player_hours;
+		player_time_m = App->entitymodule->player->player_minutes;
+		player_time_s = App->entitymodule->player->player_seconds;
 	}
 
 	App->entitymodule->DeleteEntities();
@@ -202,8 +207,10 @@ void j1Scene::LoadLvl(int current, bool lvl_start)
 		App->entitymodule->player->player_lives = player_lives;
 		App->entitymodule->player->player_score = player_score;
 		App->entitymodule->player->player_coins = player_coins;
+		App->entitymodule->player->player_hours = player_time_h;
+		App->entitymodule->player->player_minutes = player_time_m;
+		App->entitymodule->player->player_seconds = player_time_s;
 	}
-		
 
 	Entity* player = App->entitymodule->player;
 	player->dead = true;
