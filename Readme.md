@@ -2,6 +2,12 @@
 
 ## Second Assigment
 
+- Brand new Menu.
+- Solved some issues of the last version.
+- New website
+- Coins implemented.
+- UI In-Game.
+
 ### Controls
 
 -  A-D ->to move.
@@ -16,7 +22,7 @@
 -  0 ->Activates/Deactivates Boo Chasing function.
 -  Z ->Switch between 2 info titles
 
-### Link to Github and webside.
+### Link to Github and website
 
 -  https://github.com/albertllopart/SMW-Reborn
 -  https://albertllopart.github.io/SMW-Reborn/
