@@ -100,11 +100,14 @@ bool j1Scene::Update(float dt)
 	{
 		
 		if (current_lvl == 1)
+		{
 			LoadLvl(2, true);
+		}
 
 		else if (current_lvl == 2)
+		{
 			LoadLvl(1, true);
-
+		}
 		App->entitymodule->level_complete = false;
 		//App->map->WantToChange();
 	}
@@ -177,21 +180,21 @@ bool j1Scene::Load(pugi::xml_node& node)
 
 void j1Scene::LoadLvl(int current, bool lvl_start)
 {
-	Entity* player = App->entitymodule->player;
+	//Entity* player = App->entitymodule->player;
 	if (lvl_start == true)
 	{
 		
 		App->render->camera.x = 0;
 		App->render->camera.y = 0;
-		player->position.x = 10;
-		player->position.y = 197;	
+		App->entitymodule->player->position.x = 10;
+		App->entitymodule->player->position.y = 197;
 		
 
 	}
-	player->state = IDLE_RIGHT;
-	player->collision->SetPos(player->position.x, player->position.y);
-	player->jump = false;
-	player->PostUpdate();
+	App->entitymodule->player->state = IDLE_RIGHT;
+	App->entitymodule->player->collision->SetPos(App->entitymodule->player->position.x, App->entitymodule->player->position.y);
+	App->entitymodule->player->jump = false;
+	App->entitymodule->player->PostUpdate();
 	App->entitymodule->DeleteEntities();
 
 
@@ -212,6 +215,8 @@ void j1Scene::LoadLvl(int current, bool lvl_start)
 		
 	}
 	current_lvl = current;
+	App->collision->CleanUp();
+	App->entitymodule->player->Awake();
 	App->map->LoadEntities();
 
 }
