@@ -38,13 +38,15 @@ public:
 	bool title_2 = false;
 
 	void LoadLvl(int, bool);
-
+	void WantToChangeLoadLvl(int,bool);
 	bool GuiTrigger(GuiElement* element);
-
+	
 	int current_lvl = 0;
 
 private:
-
+	bool want_to_load_lvl = false;
+	int lvl_to_change = 0;
+	bool want_to_start_scene = false;
 	bool exit_from_gui = false;
 };
 

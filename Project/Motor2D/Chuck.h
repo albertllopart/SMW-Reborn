@@ -35,18 +35,13 @@ public:
 
 	// Called before all Updates
 	bool				PostUpdate();
-
-	//Save and Load functions
-	bool				Load(pugi::xml_node &);
-	bool				Save(pugi::xml_node&)const;
-
-	int					GetDirection() const;
-
+	
 	fPoint				Getposition() const;
 
 	// Called before quitting
 	bool				CleanUp();
 
+	void				ChuckPoints();
 	//move when the player is near
 	void				Move(float dt);
 	fPoint				GetPositionINT() const;

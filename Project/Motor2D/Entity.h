@@ -77,6 +77,14 @@ public:
 		return true;
 	}
 
+	fPoint	Getposition() const
+	{
+		return position;
+	}
+	EDirection GetDirection()const
+	{
+		return direction;
+	}
 	//virtual load/save function
 	virtual bool Load(pugi::xml_node&)
 	{

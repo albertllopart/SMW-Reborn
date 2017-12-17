@@ -89,6 +89,12 @@ bool Boo::PreUpdate()
 
 bool Boo::Update(float dt)
 {
+	if ((position.x - App->entitymodule->player->position.x <= 0 && App->entitymodule->player->GetDirection() == R) || 
+		(position.x - App->entitymodule->player->position.x >= 0 && App->entitymodule->player->GetDirection() == L))
+		boo_chase = true;
+	else
+		boo_chase = false;
+
 	if (boo_chase)
 	{
 		Move();
@@ -165,16 +171,6 @@ bool Boo::Load(pugi::xml_node &)
 bool Boo::Save(pugi::xml_node &) const
 {
 	return true;
-}
-
-int Boo::GetDirection() const
-{
-	return direction;
-}
-
-fPoint Boo::Getposition() const
-{
-	return position;
 }
 
 bool Boo::CleanUp()

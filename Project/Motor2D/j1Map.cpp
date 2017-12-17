@@ -29,12 +29,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 
 	folder.create(config.child("folder").child_value());
 
-	//player
-
-	fPoint pos;
-	pos.create(10,197);
-
-	App->entitymodule->CreatePlayer(pos);
+	
 	
 	return ret;
 }
@@ -575,20 +570,4 @@ bool j1Map::IsFallable(Entity* entity)
 	}
 
 	return ret;
-}
-
-void j1Map::WantToChange()
-{
-	if (level_1 == true)
-	{
-		level_1 = false;
-		level_2 = true;
-	}
-	else if (level_2 = true)
-	{
-		level_2 = false;
-		level_1 = true;
-	}
-
-	want_to_change_map = true;
 }

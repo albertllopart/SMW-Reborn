@@ -62,15 +62,7 @@ void Coins::Draw()
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	App->render->Blit(graphic, position.x, position.y, &r);
 }
-bool Coins::Load(pugi::xml_node &)
-{
-	return true;
-}
 
-bool Coins::Save(pugi::xml_node &) const
-{
-	return true;
-}
 // Called before quitting
 bool Coins::CleanUp()
 {

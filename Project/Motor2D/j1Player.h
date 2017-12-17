@@ -47,7 +47,7 @@ public:
 	uint				player_seconds;
 
 	bool				level_complete = false;
-
+	
 private:
 	unsigned int		width = 0;
 	unsigned int		height = 0;

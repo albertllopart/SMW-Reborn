@@ -39,7 +39,6 @@ public:
 	void				CreateCoins(fPoint position);
 
 	void				DeleteEntity(Entity* entity);
-	void				DeletePlayer(Entity* player);
 	void				DeleteEntities();
 	bool				Load(pugi::xml_node&);
 	bool				Save(pugi::xml_node&) const;
