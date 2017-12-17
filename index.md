@@ -6,7 +6,7 @@ SMW-Reborn, is a tribute to the original Super Mario World with two original map
 
 ## How does the game look and what can you do?
 
-[Press here to watch a gameplay video]()
+[Press here to watch a gameplay video](https://www.youtube.com/watch?v=dpPTbunCmfU&feature=youtu.be)
 
 ### Menu
 
@@ -70,9 +70,8 @@ While playing you will be able to see:
  ### Credits
 
 - [Albert LLopart](https://github.com/albertllopart)
-![image](https://user-images.githubusercontent.com/17145449/34082035-525cb216-e357-11e7-9f40-41266c4ee4c9.png)
 
-## Tasks
+![image](https://user-images.githubusercontent.com/17145449/34082035-525cb216-e357-11e7-9f40-41266c4ee4c9.png)
 
 - UI system (along with atlas and animations)
 - Map loading and draw from Tiled
@@ -83,10 +82,12 @@ While playing you will be able to see:
 - Level design
 
 - [José Rodríguez](https://github.com/joserm45)
+
 ![image](https://user-images.githubusercontent.com/17145449/34082029-3cd632dc-e357-11e7-8d42-068bbb248db1.png)
 
 
 - [Arnau Morgado](https://github.com/morgadoCV)
+
 ![image](https://user-images.githubusercontent.com/17145449/34081975-79d9af5c-e356-11e7-8528-4d8e63eb3ce9.png)
 
 - Jump.
