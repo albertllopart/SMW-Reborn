@@ -6,29 +6,29 @@
 	<fonts />
 	<audio />
 	<map />
-	<scene current_lvl="1" />
+	<scene current_lvl="2" />
 	<Entitymodule>
 		<player>
-			<player_position x="77.0000076" y="166.999985" />
-			<coins value="2" />
-			<score value="100" />
-			<lives value="4" />
+			<player_position x="117.500031" y="197" />
+			<coins value="12" />
+			<score value="1000" />
+			<lives value="5" />
 			<time value="0" />
 		</player>
-		<boo_position x="144" y="96" />
-		<coin_position x="707" y="144" />
-		<coin_position x="723" y="144" />
-		<chuck_position x="688" y="165" />
-		<coin_position x="99" y="176" />
-		<coin_position x="563" y="176" />
-		<coin_position x="579" y="176" />
-		<chuck_position x="142.789841" y="197" />
-		<chuck_position x="464" y="197" />
-		<coin_position x="259" y="208" />
-		<coin_position x="275" y="208" />
-		<coin_position x="387" y="208" />
-		<coin_position x="403" y="208" />
-		<coin_position x="419" y="208" />
+		<coin_position x="259" y="32" />
+		<coin_position x="339" y="32" />
+		<coin_position x="435" y="32" />
+		<coin_position x="547" y="32" />
+		<coin_position x="659" y="32" />
+		<chuck_position x="464" y="73.9499969" />
+		<chuck_position x="576" y="73.9499969" />
+		<boo_position x="775" y="64" />
+		<coin_position x="739" y="96" />
+		<coin_position x="211" y="160" />
+		<coin_position x="323" y="160" />
+		<coin_position x="499" y="160" />
+		<chuck_position x="640" y="169.949997" />
+		<chuck_position x="272" y="201.949997" />
 	</Entitymodule>
 	<pathfinding />
 	<fadetoblack />

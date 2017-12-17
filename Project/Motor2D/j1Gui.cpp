@@ -63,7 +63,7 @@ bool j1Gui::Start()
 	CreateText(166, 120, "PAUSE MENU", { 0, 216, 248, 255 }, App->fonts->default, PAUSEMENU, true);
 	CreateButton(176, 145, { 400, 197, 46, 7 }, { 493, 197, 46, 7 }, { 493, 197, 46, 7 }, RESUME, PAUSEMENU, (j1Module*)App->gui, true);//resume
 	CreateButton(155, 160, { 400, 205, 92, 7 }, { 493, 205, 92, 7 }, { 493, 205, 92, 7 }, SAVEANDRESUME, PAUSEMENU, (j1Module*)App->gui, true);//save and resume
-	CreateButton(162, 175, { 400, 213, 74, 7 }, { 493, 213, 74, 7 }, { 493, 213, 74, 7 }, SAVEANDEXIT, PAUSEMENU, (j1Module*)App->gui, true);//save and exit
+	CreateButton(162, 175, { 400, 213, 74, 7 }, { 493, 213, 74, 7 }, { 493, 213, 74, 7 }, SAVEANDEXIT, PAUSEMENU, (j1Module*)App->scene, true);//save and exit
 	CreateButton(169, 190, { 400, 16, 60, 7 }, { 524, 16, 60, 7 }, { 524, 16, 60, 7 }, SETTINGS, PAUSEMENU, (j1Module*)App->gui, true);//settings
 	CreateButton(186, 205, { 400, 32, 28, 7 }, { 524, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, PAUSEMENU, (j1Module*)App->gui, true);//exit
 
@@ -87,8 +87,6 @@ bool j1Gui::Start()
 	CreateNumber(360, 19, &App->entitymodule->player->player_seconds, { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);
 	CreateText(375, 19, "s", { 255, 255, 255, 255 }, App->fonts->default, INGAMEMENU, true);//time numbers
 
-	//ShellExecute(NULL, "open", "https://www.google.com", NULL, NULL, SW_SHOWNORMAL);
-
 	//main menu
 	menubackground = CreateImage(0, 0, { 0,0,400,240 }, OTHER, 0, true);//main screen
 	{
@@ -96,7 +94,7 @@ bool j1Gui::Start()
 	}
 	CreateImage(105, 35, { 400, 65, 214, 61 }, MAINMENU, 0, true);//super mario world
 	CreateButton(185, 120, { 400, 0, 30, 7 }, { 462, 0, 30, 7 }, { 524, 0, 30, 7 }, PLAY, MAINMENU, (j1Module*)App->gui, true);//play
-	CreateButton(169, 135, { 400, 8, 60, 7 }, { 462, 8, 60, 7 }, { 524, 8, 60, 7 }, CONTINUE, MAINMENU, (j1Module*)App->scene, true);//continue
+	CreateButton(169, 135, { 400, 8, 60, 7 }, { 462, 8, 60, 7 }, { 524, 8, 60, 7 }, CONTINUE, MAINMENU, (j1Module*)App->gui, true);//continue
 	CreateButton(169, 150, { 400, 16, 60, 7 }, { 462, 16, 60, 7 }, { 524, 16, 60, 7 }, SETTINGS, MAINMENU, (j1Module*)App->gui, true);//settings
 	CreateButton(173, 165, { 400, 24, 52, 7 }, { 462, 24, 52, 7 }, { 524, 24, 52, 7 }, CREDITS, MAINMENU, (j1Module*)App->gui, true);//credits
 	CreateButton(186, 180, { 400, 32, 28, 7 }, { 462, 32, 28, 7 }, { 524, 32, 28, 7 }, EXIT, MAINMENU, (j1Module*)App->scene, true);//exit
@@ -132,11 +130,21 @@ bool j1Gui::Start()
 
 	//credits menu
 	CreateButton(288, 32, { 400, 127, 44, 19 }, { 444, 127, 44, 19 }, { 444, 127, 44, 19 }, BACK, CREDITSMENU, (j1Module*)App->gui, true);//credditsback
-	CreateText(60, 40, "LOOK AT THESE CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
-	CreateText(60, 55, "WOW SUCH CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
-	CreateText(60, 70, "AMAZING CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
-	CreateText(60, 85, "UNBELIEVEABLE CREDITS", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
-	CreateText(60, 100, "even  with  lowercase  wow", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
+	CreateButton(160, 40, { 467, 247, 52, 7 }, { 413, 247, 52, 7 }, { 467, 247, 52, 7 }, WEBSITE, CREDITSMENU, (j1Module*)App->gui, true);//credditsback
+
+	CreateText(60, 40, "CREATED BY", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
+	CreateText(60, 60, "Albert Llopart", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
+	CreateText(60, 75, "Arnau Morgado", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
+	CreateText(60, 90, "Jose Rodriguez", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
+	CreateText(60, 115, "MIT LICENSE", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
+	CreateText(60, 135, "Copyright C 2017", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
+	CreateText(60, 150, "Albert Llopart", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
+	CreateText(60, 165, "Arnau Morgado", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
+	CreateText(60, 180, "Jose Rodriguez", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
+
+	CreateText(240, 165, "Art and Music by", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
+	CreateText(240, 180, "NINTENDO", { 50, 50, 255, 255 }, App->fonts->default, CREDITSMENU, true);
+	
 
 	//CreateSlider(60, 60, { 400, 247, 12, 6 }, { 400, 253, 12, 50 }, MUSIC, MAINMENU, (j1Module*)App->audio, true);
 
@@ -392,6 +400,63 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 		break;
 	}
 
+	case CONTINUE:
+	{
+		App->pathfinding->active = true;
+		App->collision->active = true;
+		App->entitymodule->active = true;
+
+		App->pathfinding->Start();
+		App->collision->Start();
+		App->entitymodule->Start();
+
+		App->LoadGame();
+
+		p2List_item<GuiElement*>* item = elements.start;
+		while (item != NULL)
+		{
+			if (item->data->mtype != INGAMEMENU)
+			{
+				item->data->active = false;
+			}
+			else if (item->data->mtype == INGAMEMENU)
+			{
+				item->data->active = true;
+			}
+			item = item->next;
+		}
+
+		App->audio->PlayMusic("audio/main_music.ogg");
+
+		break;
+	}
+
+	case SAVEANDRESUME:
+	{
+		App->SaveGame();
+		App->audio->PlayFx(6);
+
+		App->pathfinding->active = true;
+		App->collision->active = true;
+		App->entitymodule->active = true;
+
+		p2List_item<GuiElement*>* item = elements.start;
+		while (item != NULL)
+		{
+			if (item->data->mtype != INGAMEMENU)
+			{
+				item->data->active = false;
+			}
+			else if (item->data->mtype == INGAMEMENU)
+			{
+				item->data->active = true;
+			}
+			item = item->next;
+		}
+
+		break;
+	}
+
 	case RESUME:
 	{
 		App->audio->PlayFx(6);
@@ -547,6 +612,12 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 		}
 	}
 
+		break;
+	}
+
+	case WEBSITE:
+	{
+		ShellExecute(NULL, "open", "https://albertllopart.github.io/SMW-Reborn/", NULL, NULL, SW_SHOWNORMAL);
 		break;
 	}
 

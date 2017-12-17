@@ -42,6 +42,7 @@ enum button_type
 	RESUME,
 	SAVEANDRESUME,
 	SAVEANDEXIT,
+	WEBSITE,
 	NONE
 };
 

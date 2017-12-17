@@ -253,10 +253,19 @@ bool j1Scene::GuiTrigger(GuiElement* element)
 	GuiButton* button = (GuiButton*)element;
 	switch (button->btype)
 	{
-		
+
 	case EXIT:
+	{
 		exit_from_gui = true;
 		break;
+	}
+
+	case SAVEANDEXIT:
+	{
+		exit_from_gui = true;
+		App->SaveGame();
+		break;
+	}
 	}
 	return true;
 }

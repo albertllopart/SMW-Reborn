@@ -54,7 +54,7 @@ public:
 
 	void DeleteElement(GuiElement* element);
 
-private:
+public:
 
 	SDL_Texture* atlas;
 	p2SString atlas_file_name;

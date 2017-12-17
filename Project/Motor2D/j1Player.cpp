@@ -10,6 +10,8 @@
 #include "j1FadeToBlack.h"
 #include "j1Scene.h"
 #include "j1EntityModule.h"
+#include "j1Pathfinding.h"
+#include "j1Gui.h"
 
 #include "Brofiler\Brofiler.h"
 
@@ -167,6 +169,29 @@ bool j1Player::PostUpdate()
 
 	player_quadrant_1.y = position.y / TILE_WIDTH;
 	player_quadrant_2.y = (position.y + MARIO_HIGHT) / TILE_WIDTH;
+
+	if (player_lives <= 0)
+	{
+		App->entitymodule->active = false;
+		App->pathfinding->active = false;
+		App->collision->active = false;
+
+		p2List_item<GuiElement*>* item = App->gui->elements.start;
+		while (item != NULL)
+		{
+			if (item->data->mtype != MAINMENU && item->data->mtype != OTHER)
+			{
+				item->data->active = false;
+			}
+			else if (item->data->mtype == MAINMENU || item->data->mtype == OTHER)
+			{
+				item->data->active = true;
+			}
+			item = item->next;
+		}
+
+		App->audio->PlayMusic("audio/title_theme.ogg");
+	}
 	
 	return true;
 }
