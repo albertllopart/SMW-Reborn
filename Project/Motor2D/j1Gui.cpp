@@ -402,17 +402,45 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 
 	case CONTINUE:
 	{
-		App->pathfinding->active = true;
-		App->collision->active = true;
-		App->entitymodule->active = true;
+		
 
-		App->pathfinding->Start();
-		App->collision->Start();
-		App->entitymodule->Start();
+		pugi::xml_document document;
+		pugi::xml_parse_result result = document.load_file("save_game.xml");;
 
-		App->LoadGame();
+		if (result)
+		{
+			App->pathfinding->active = true;
+			App->collision->active = true;
+			App->entitymodule->active = true;
 
-		p2List_item<GuiElement*>* item = elements.start;
+			App->pathfinding->Start();
+			App->collision->Start();
+			App->entitymodule->Start();
+
+			App->LoadGame();
+
+			p2List_item<GuiElement*>* item = elements.start;
+			while (item != NULL)
+			{
+				if (item->data->mtype != INGAMEMENU)
+				{
+					item->data->active = false;
+				}
+				else if (item->data->mtype == INGAMEMENU)
+				{
+					item->data->active = true;
+				}
+				item = item->next;
+			}
+
+			App->audio->PlayMusic("audio/main_music.ogg");
+		}
+		else
+		{
+			LOG("You don't have save_game.xml");
+		}
+		
+		/*p2List_item<GuiElement*>* item = elements.start;
 		while (item != NULL)
 		{
 			if (item->data->mtype != INGAMEMENU)
@@ -425,7 +453,7 @@ bool j1Gui::GuiTrigger(GuiElement* element)
 			}
 			item = item->next;
 		}
-
+		*/
 		App->audio->PlayMusic("audio/main_music.ogg");
 
 		break;
